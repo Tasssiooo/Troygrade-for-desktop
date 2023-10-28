@@ -60,6 +60,14 @@
       ],
       "macOS": {
         "minimumSystemVersion": "10.13"
+      },
+      "windows": {
+        "nsis": {
+          "license": "LICENSE"
+        },
+        "wix": {
+          "license": "LICENSE"
+        }
       }
     },
     "security": {

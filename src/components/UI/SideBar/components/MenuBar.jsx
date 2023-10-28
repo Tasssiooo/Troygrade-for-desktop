@@ -30,9 +30,12 @@ const MenuBar = () => {
             className="w-7 h-5 py-0.5 outline-2 outline-none outline-[#141a21]"
           />
         </div>
-        { toggleTooltip === "about" && <TooltipRight tip={"About"} /> }
+        {toggleTooltip === "about" && <TooltipRight tip={"About"} />}
       </button>
-      <button
+      <a
+        href="https://github.com/Tasssiooo/Troygrade-for-desktop/issues"
+        rel="noopener noreferrer"
+        target="_blank"
         className="relative z-10 bg-[#010a13] cursor-pointer border-none p-0 outline-none"
         aria-label="report a bug"
         id="bug"
@@ -47,15 +50,18 @@ const MenuBar = () => {
             className="w-7 h-5 py-0.5 outline-2 outline-none outline-[#141a21]"
           />
         </div>
-        { toggleTooltip === "bug" && <TooltipTop tip={"Report an issue"} /> }
-      </button>
+        {toggleTooltip === "bug" && <TooltipTop tip={"Report an issue"} />}
+      </a>
       <div
         className="flex-[1] overflow-hidden text-center whitespace-nowrap"
         id="app-version"
       >
         v0.0.1
       </div>
-      <button
+      <a
+        href="https://github.com/Tasssiooo/Troygrade-for-desktop"
+        rel="noopener noreferrer"
+        target="_blank"
         className="relative z-10 bg-[#010a13] cursor-pointer border-none p-0 outline-none"
         aria-label="Github repository"
         id="github"
@@ -70,8 +76,8 @@ const MenuBar = () => {
             className="w-7 h-5 py-0.5 outline-2 outline-none outline-[#141a21]"
           />
         </div>
-        { toggleTooltip === "github" && <TooltipTop tip={"Github repository"} /> }
-      </button>
+        {toggleTooltip === "github" && <TooltipTop tip={"Github repository"} />}
+      </a>
     </div>
   );
 };
