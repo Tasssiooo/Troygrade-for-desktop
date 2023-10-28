@@ -1,6 +1,13 @@
 import { useState } from "react";
 
-const PresetDropdown = () => {
+const PresetDropdown = ({
+  presets,
+  setPresets,
+  selectedPreset,
+  setSelectedPreset,
+  setFilePath,
+  setAssetsPath,
+}) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
   return (
     <div className="inline-block w-full" id="preset-dropdown">
@@ -18,7 +25,7 @@ const PresetDropdown = () => {
             className="w-full overflow-hidden text-ellipsis whitespace-nowrap py-0.5"
             id="ui-dropdown-current-content"
           >
-            Custom settings
+            {selectedPreset.preset}
           </div>
         </div>
         {toggleDropdown && (
@@ -33,12 +40,21 @@ const PresetDropdown = () => {
               className="list-none box-border min-w-full bg-[#010a13] h-full"
               id="dropdown-options"
             >
-              <li className="py-2.5 px-[5px] hover:bg-[#2e2e2e] hover:text-[#f3f0e6]">
-                Default settings
-              </li>
-              <li className="py-2.5 px-[5px] hover:bg-[#2e2e2e] hover:text-[#f3f0e6]">
-                Custom settings
-              </li>
+              {presets.map((obj) => (
+                <li
+                  role="button"
+                  key={`${obj.id}`}
+                  onClick={() => {
+                    setSelectedPreset(obj);
+                    setToggleDropdown(false);
+                    setAssetsPath(obj.paths.assets);
+                    setFilePath(obj.paths.file);
+                  }}
+                  className="py-2.5 px-[5px] hover:bg-[#2e2e2e] hover:text-[#f3f0e6]"
+                >
+                  {obj.preset}
+                </li>
+              ))}
               <li className="py-2.5 px-[5px] hover:bg-[#2e2e2e] hover:text-[#f3f0e6] text-center">
                 +
               </li>

@@ -1,4 +1,4 @@
-import troygradeIcon from "../../../assets/images/heimerdinger_passive.png";
+import troygradeIcon from "../../../../assets/images/troygrade-icon.png";
 
 const LogoFrame = () => {
   return (
@@ -6,9 +6,9 @@ const LogoFrame = () => {
       <div className="flex items-center min-h-[55px] py-5 pl-2 relative left-0 w-52">
         <img
           src={troygradeIcon}
-          width={38}
-          height={38}
-          className="absolute overflow-hidden rounded-[50%] border-2 border-transparent box-border left-[0.95rem] top-[0.95rem]"
+          width={42}
+          height={42}
+          className="absolute overflow-hidden rounded-[50%] border-2 border-transparent box-border left-[0.80rem] top-[0.75rem]"
           alt="troygrade icon"
         />
         <div

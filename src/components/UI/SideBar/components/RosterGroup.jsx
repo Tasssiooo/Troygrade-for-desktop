@@ -3,7 +3,7 @@ import RosterElement from "./RosterElement";
 import { StatesContext } from "../../../../App";
 
 const RosterGroup = ({ id, name }) => {
-  const { files, setActiveFile } = useContext(StatesContext);
+  const { files, search } = useContext(StatesContext);
   const [toggle, setToggle] = useState(false);
 
   const close = {
@@ -21,7 +21,8 @@ const RosterGroup = ({ id, name }) => {
   useEffect(() => {
     if (files.find((obj) => obj.type === id)) {
       setToggle(true);
-    } if(files.length === 0) {
+    }
+    if (files.length === 0) {
       setToggle(false);
     }
   }, [files]);
@@ -62,12 +63,18 @@ const RosterGroup = ({ id, name }) => {
         </div>
       </div>
       {toggle &&
-        files.map(
-          (obj, i) =>
-            obj?.type === id && (
-              <RosterElement key={obj.fileName + `${i}`} id={obj.id} file={obj} />
-            )
-        )}
+        files
+          .filter((obj) => obj.fileName.toLowerCase().includes(search))
+          .map(
+            (obj, i) =>
+              obj?.type === id && (
+                <RosterElement
+                  key={obj.fileName + `${i}`}
+                  id={obj.id}
+                  file={obj}
+                />
+              )
+          )}
     </div>
   );
 };

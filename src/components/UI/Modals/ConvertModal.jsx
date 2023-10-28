@@ -5,14 +5,14 @@ import { HandlersContext, StatesContext } from "../../../App";
 
 const ConvertModal = () => {
   const { handleChangeDialogAccept } = useContext(HandlersContext);
-  const { setDialogOpen, dialogOpen, setSelectedFiles } =
+  const { setShowModal, showModal, checkedFiles, activeFile } =
     useContext(StatesContext);
   return (
     <div
       className="fixed z-[999] flex items-center justify-center inset-0 invisible opacity-0 transition-opacity"
       style={{
-        opacity: dialogOpen && "1",
-        visibility: dialogOpen && "visible",
+        opacity: showModal === "Convert" && "1",
+        visibility: showModal === "Convert" && "visible",
       }}
     >
       <section
@@ -24,11 +24,14 @@ const ConvertModal = () => {
           <h1 className="block text-[#f0e6d2] text-lg tracking-[.05em] leading-[22px] uppercase">
             Convert files
           </h1>
-          <CloseDialogButton click={() => setDialogOpen(false)} />
+          <CloseDialogButton position={"left-[71%]"} />
         </header>
         <div className="flex flex-col gap-2 mx-2 py-4">
           <p>
-            You are about to convert 1 file.
+            You are about to convert{" "}
+            {checkedFiles.length > 0
+              ? checkedFiles.length + " files."
+              : [activeFile?.id].length + " file."}
             <br />
             You can use the default settings or set the settings yourself.
           </p>
@@ -39,7 +42,7 @@ const ConvertModal = () => {
             name={"Use default settings"}
             click={() => {
               handleChangeDialogAccept("convert_default");
-              setDialogOpen(false);
+              setShowModal("");
             }}
           />
           <DialogButton

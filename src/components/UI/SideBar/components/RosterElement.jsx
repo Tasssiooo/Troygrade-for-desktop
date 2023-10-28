@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import { StatesContext } from "../../../../App";
 import { IoCheckmarkCircle } from "react-icons/io5";
-import troyIcon from "../../../assets/images/heimerdinger_circle_old.png";
-import binIcon from "../../../assets/images/heimerdinger_circle_new.png";
+import troyIcon from "../../../../assets/images/heimerdinger_circle_old.png";
+import binIcon from "../../../../assets/images/heimerdinger_circle_new.png";
 
 const RosterElement = ({ id, file }) => {
   const { setActiveFile, activeFile, files, setEditorText, checkedFiles, setCheckedFiles } =

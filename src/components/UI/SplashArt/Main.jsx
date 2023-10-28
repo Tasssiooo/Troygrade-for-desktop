@@ -155,7 +155,7 @@ const getSplashArt = file => {
   };
 
   if (file === undefined) {
-    return KillerskinsLogo;
+    return undefined;
   }
 
   const index = file.besen;

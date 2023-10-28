@@ -1,3 +1,5 @@
+import { writeTextFile, BaseDirectory } from "@tauri-apps/api/fs";
+import { save, open } from "@tauri-apps/api/dialog";
 import ActionButton from "./ActionButton";
 import {
   IoOpenOutline,
@@ -6,41 +8,56 @@ import {
   IoBuild,
   IoTrashBin,
 } from "react-icons/io5";
-import { useContext } from "react";
-import { HandlersContext } from "@/App";
-import { BrowserWindow } from "@electron/remote";
-import { BrowserWindow as TypeWindow } from "electron";
-import { join } from "node:path";
+import { useContext, useState } from "react";
+import { HandlersContext, StatesContext } from "../../../App";
+
+import TooltipTop from "../Tooltip/Tooltip-t";
 
 const EditorActionsSection = () => {
-  const { handleConvertFiles } = useContext(HandlersContext);
+  const { handleOpenNewWindow, handleSaveChanges } =
+    useContext(HandlersContext);
+  const { files, checkedFiles, activeFile, setShowModal, setCheckedFiles } =
+    useContext(StatesContext);
+  const [toggleTooltip, setToggleTooltip] = useState("");
 
-  let convertWindow: TypeWindow | undefined;
-
-  function handleClick() {
-    const window: any = BrowserWindow.getFocusedWindow();
-    convertWindow = new BrowserWindow({
-      title: "Convert file(s)",
-      width: 1024,
-      height: 576,
-      resizable: false,
-      modal: true,
-      parent: window,
-      show: false,
-      webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false
-      },
-    });
-    convertWindow.loadFile(join(__dirname, "convertModal.html"));
-    convertWindow.once('ready-to-show', () => {
-      convertWindow?.show();
-    })
-  }
+  const saveFile = async () => {
+    const newFile = checkedFiles.length > 0 ? checkedFiles : activeFile;
+    if (Array.isArray(newFile)) {
+      const selectDir = await open({
+        directory: true,
+        title: `Select a directory to save the files`,
+      });
+      newFile.forEach(async (fileID, i) => {
+        let file = files.find((file) => file.id === fileID);
+        await writeTextFile(
+          `${selectDir}\\${file.fileName}.txt`,
+          file.content,
+          {
+            dir: BaseDirectory.Document,
+          }
+        );
+      });
+      setCheckedFiles([]);
+    } else {
+      const saveDialog = await save({
+        defaultPath: newFile?.fileName,
+        filters: [
+          {
+            name: "Text",
+            extensions: ["txt"],
+          },
+        ],
+        title: `Save ${newFile?.type} as text`,
+      });
+      await writeTextFile(saveDialog, newFile?.content, {
+        dir: BaseDirectory.Document,
+      });
+    }
+  };
 
   return (
-    <section className="w-full h-10 py-2.5" id="menu-editor-container">
-      <div className="flex flex-row-reverse justify-start gap-3 items-end w-[93%] h-full px-4">
+    <section className="w-full h-[15%] py-2.5" id="menu-editor-container">
+      <div className="flex flex-row-reverse justify-start gap-3 items-end w-[93%] h-full">
         <ActionButton
           icon={
             <IoOpenOutline
@@ -49,7 +66,9 @@ const EditorActionsSection = () => {
             />
           }
           ariaLabel={"Open code in a new tab"}
-          click={() => handleClick()}
+          click={handleOpenNewWindow}
+          val={"own"}
+          tooltipText={"Open code in a new tab"}
         />
         <ActionButton
           icon={
@@ -59,7 +78,8 @@ const EditorActionsSection = () => {
             />
           }
           ariaLabel={"Save changes"}
-          click={() => {}}
+          click={handleSaveChanges}
+          tooltipText={"Save changes"}
         />
         <ActionButton
           icon={
@@ -68,8 +88,9 @@ const EditorActionsSection = () => {
               className="w-7 h-5 py-0.5 outline-2 outline-none outline-[#141a21]"
             />
           }
-          ariaLabel={"Convert this file"}
-          click={() => {}}
+          ariaLabel={"Convert file(s)"}
+          click={() => setShowModal("Convert")}
+          tooltipText={"Convert file(s)"}
         />
         <ActionButton
           icon={
@@ -79,7 +100,8 @@ const EditorActionsSection = () => {
             />
           }
           ariaLabel={"Save this file"}
-          click={() => {}}
+          click={saveFile}
+          tooltipText={"Save this file"}
         />
         <ActionButton
           icon={
@@ -88,8 +110,9 @@ const EditorActionsSection = () => {
               className="w-7 h-5 py-0.5 outline-2 outline-none outline-[#141a21]"
             />
           }
-          ariaLabel={"Delete this file"}
-          click={() => {}}
+          ariaLabel={"Delete file(s)"}
+          click={() => setShowModal("Delete")}
+          tooltipText={"Delete file(s)"}
         />
       </div>
     </section>

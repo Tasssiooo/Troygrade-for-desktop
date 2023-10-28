@@ -1,6 +1,10 @@
 const HelpModal = () => {
   return (
-    <div>HelpModal</div>
+    <div className="border border-white fixed min-w-full">
+      <section role="contentinfo">
+        
+      </section>
+    </div>
   )
 }
 

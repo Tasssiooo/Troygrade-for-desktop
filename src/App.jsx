@@ -1,319 +1,85 @@
+import { WebviewWindow } from "@tauri-apps/api/window";
 import { useState, useEffect, createContext } from "react";
 import { v4 as uuid } from "uuid";
 
-import { SplashArtAmount } from "@/components/UI/SplashArt/Main";
+import { SplashArtAmount } from "./components/UI/SplashArt/Main";
 
 import TroybinConverter from "./components/TroybinConverter/Main";
 import MigrateConvertedTroybin from "./components/TroybinMigrationTool/Main";
-import BinFileReader from "./components/BinFileReader/Main";
 
-import EditorSection from "./components/UI/code-editor/EditorSection";
-import Sidebar from "./components/UI/sidebar/Sidebar";
+import WindowBar from "./components/UI/WindowBar/Main";
+import EditorSection from "./components/UI/CodeEditor/EditorSection";
+import Sidebar from "./components/UI/SideBar/Sidebar";
+import Popup from "./components/UI/Popup/Main";
 
-export const HandlersContext = createContext({});
-export const StatesContext = createContext({});
+import ConvertModal from "./components/UI/Modals/ConvertModal";
+import DeleteModal from "./components/UI/Modals/DeleteModal";
+import AboutModal from "./components/UI/Modals/AboutModal";
+import HelpModal from "./components/UI/Modals/HelpModal";
+import SettingsModal from "./components/UI/Modals/SettingsModal";
+
+export const HandlersContext = createContext(null);
+export const StatesContext = createContext(null);
 
 const App = () => {
   const [editorText, setEditorText] = useState("");
   const [activeFile, setActiveFile] = useState();
-  const [dialogOpen, setDialogOpen] = useState();
   const [failedConverts, setFailedConverts] = useState([]);
-  const [fileContentDirty, setFileContentDirty] = useState();
+  const [search, setSearch] = useState("");
   const [files, setFiles] = useState([]);
   const [fileSettings, setFileSettings] = useState([]);
-  const [filter, setFilter] = useState();
-  const [fixesToApply, setFixesToApply] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [search, setSearch] = useState("");
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [checkedFiles, setCheckedFiles] = useState([]);
   const [showEditor, setShowEditor] = useState(false);
-  const [showInfoModal, setShowInfoModal] = useState("");
-  const [showMenu, setShowMenu] = useState();
   const [showModal, setShowModal] = useState("");
 
+  //Disable context menu on right click
+  document.body.oncontextmenu = (e) => e.preventDefault();
+
   useEffect(() => {
-    if(selectedFiles.length > 0) {
+    if (selectedFiles.length > 0 || fileSettings.length > 0) {
       handleConvertFiles();
     }
-  }, [selectedFiles])
-  
+  }, [selectedFiles, fileSettings]);
 
-  /*const handleChangeDialogAccept = (action, value) => {
-    const { selectedFiles } = this.state;
-    this.setState({ dialogOpen: value }, () => {
-      const settings = [];
+  const handleChangeDialogAccept = (action) => {
+    const settings = [];
 
-      switch (action) {
-        case "convert":
-          this.setState({ showModal: "convert" });
-          break;
-        case "convert_default":
-          for (let i = 0; i < selectedFiles.length; i += 1) {
-            const setting = {
-              assetsPath: "Data/Particles",
-              filePath: "Data/Particles",
-              namesOnly: false,
-              settingsPreset: "Default",
-              updateFileTypes: true,
-            };
+    switch (action) {
+      case "convert":
+        setShowModal("ConvertSettings");
+        break;
+      case "convert_default":
+        const chosenFiles =
+          checkedFiles.length > 0 ? checkedFiles : [activeFile.id];
+        for (let i = 0; i < chosenFiles.length; i += 1) {
+          const setting = {
+            assetsPath:
+              "ASSETS/Characters/[character name]/Skins/[skin]/Particles",
+            filePath:
+              "Characters/[character name]/Skins/[skin number]/Particles",
+            namesOnly: false,
+            settingsPreset: "Default",
+            updateFileTypes: true,
+          };
 
-            settings.push(setting);
-          }
-
-          this.setState(
-            {
-              fileSettings: settings,
-            },
-            () => this.handleConvertFiles()
-          );
-          break;
-        case "download":
-          this.handleDownloadFiles();
-          break;
-        case "delete":
-          this.handleDeleteFiles();
-          break;
-        case "fix":
-          this.handleFixFiles();
-          break;
-        case "save":
-          this.handleSaveFile();
-          break;
-        default:
-          break;
-      }
-    });
-  };
-
-  const handleChangeDialogVisible = (value) => {
-    this.setState({ dialogOpen: value });
-    this.handleChangeShowMenu({ anchor: null, menu: "" });
-  };
-
-  const handleChangeDrawer = () => {
-    this.setState({ failedConverts: [] });
-  };
-
-  const handleChangeFileActive = (file) => {
-    this.setState({ activeFile: file, showEditor: false });
-  };
-
-  const handleChangeFilesSelected = (e, fileID, selectedFileIndex) => {
-    const { selectedFiles } = this.state;
-    const dataSource = [...selectedFiles];
-    const event = e || window.event;
-
-    if (event.stopPropagation) {
-      event.stopPropagation();
-    } else {
-      event.cancelBubble = true;
-    }
-
-    if (selectedFileIndex === -1) {
-      dataSource.push(fileID);
-    } else {
-      dataSource.splice(selectedFileIndex, 1);
-    }
-    this.setState({ selectedFiles: dataSource });
-  };
-
-  const handleChangeFilesSelectedAll = () => {
-    const { files, filter, search, selectedFiles } = this.state;
-    const filteredFiles = getDataSource(files, filter, search);
-
-    if (filteredFiles.length === selectedFiles.length) {
-      this.setState({ selectedFiles: [] });
-    } else {
-      const result = [];
-
-      for (let i = 0; i < filteredFiles.length; i += 1) {
-        result.push(filteredFiles[i].id);
-      }
-
-      this.setState({ selectedFiles: result });
-    }
-  };*/
-
-  const handleChangeFilter = (filter) => {
-    setFilter(filter);
-    setSelectedFiles([]);
-  };
-
-  /*const handleChangeLoading = (val) => {
-    this.setState({ loading: val });
-  };
-
-  const handleChangeSearch = (searchNew) => {
-    const { search } = this.state;
-
-    if (searchNew !== search) {
-      this.setState({ search: searchNew, selectedFiles: [] });
-    }
-  };
-
-  const handleChangeSelectedFix = (val) => {
-    this.setState({ fixesToApply: val });
-  };
-
-  const handleChangeShowInfoModal = (value) => {
-    this.setState({ showInfoModal: value });
-    this.handleChangeShowMenu({ anchor: null, menu: "" });
-  };*/
-
-  const handleChangeShowMenu = (event) => {
-    setShowMenu(event);
-  };
-
-  const handleChangeShowModal = (value) => {
-    setShowModal(value);
-  };
-
-  /*
-  const handleChangeTheme = () => {
-    const { handleChangeTheme } = this.props;
-
-    handleChangeTheme();
-    this.handleChangeShowMenu({ anchor: null, menu: "" });
-  };
-  */
-
-  const handleClickImage = (value) => {
-    if (activeFile) {
-      setFileContentDirty(activeFile.content);
-      setShowEditor(value);
-    }
-  };
-
-  const handleFixFiles = () => {
-    const oldSelectedFiles = selectedFiles;
-    const failedFiles = [];
-    const filesNew = [];
-    let activeFile;
-
-    for (let i = 0; i < files.length; i += 1) {
-      const file = files[i];
-
-      if (file.type === "CONV_BIN") {
-        let convertedEntry;
-
-        for (let j = 0; j < oldSelectedFiles.length; j += 1) {
-          if (file.id === oldSelectedFiles[j]) {
-            file.fileName = files[i].fileName
-              .replace("_Migrated", "")
-              .replace("_Fixed", "");
-
-            try {
-              let fileContent = file.content;
-
-              for (let k = 0; k < fixesToApply.length; k += 1) {
-                const updatedBin = BinFileReader(fixesToApply[k], fileContent);
-
-                fileContent = updatedBin.result;
-              }
-
-              convertedEntry = {
-                id: uuid(),
-                fileName: `${file.fileName}_Fixed`,
-                content: fileContent,
-                type: "CONV_BIN",
-                besen: file.besen,
-                originalFileID: file.id,
-              };
-
-              activeFile = convertedEntry;
-            } catch (err) {
-              console.log(err);
-              failedFiles.push({
-                id: file.id,
-                error: err,
-                fileName: files[i].fileName,
-                type: file.type,
-              });
-            }
-          }
+          settings.push(setting);
         }
-
-        if (convertedEntry !== undefined) {
-          filesNew.push(convertedEntry);
-        }
-      }
-
-      filesNew.push(file);
-    }
-
-    setFailedConverts(failedFiles);
-    setFiles(filesNew);
-    setSelectedFiles([]);
-    setShowModal("");
-    if (oldSelectedFiles.length === 1 && activeFile !== undefined) {
-      setActiveFile(activeFile);
-      setShowEditor(false);
+        setFileSettings(settings);
+        break;
     }
   };
 
-  const handleCombineFiles = () => {
-    /* const { files, selectedFiles } = this.state;
-    const oldSelectedFiles = selectedFiles;
-    const failedFiles = [];
-    const filesNew = [];
-    let activeFile;
-
-    for (let i = 0; i < files.length; i += 1) {
-      const file = files[i];
-
-      if (file.type === "CONV_BIN") {
-        let convertedEntry;
-
-        for (let j = 0; j < oldSelectedFiles.length; j += 1) {
-          if (file.id === oldSelectedFiles[j]) {
-            file.fileName = files[i].fileName.replace("_Migrated", "");
-
-            try {
-              const test = BinFileReader("listFix", file);
-              console.log(test);
-
-              if (fileContentCombined !== -1) {
-                convertedEntry = {
-                  id: uuid(),
-                  fileName: `${fileSettings.file.fileName}_Combined`,
-                  content: fileContentCombined,
-                  type: "CONV_BIN",
-                  besen: file.besen,
-                  originalFileID: file.id
-                };
-              }
-
-              activeFile = convertedEntry;
-            } catch (err) {
-              console.log(err);
-              failedFiles.push({
-                id: file.id,
-                error: err,
-                fileName: files[i].fileName,
-                type: file.type
-              });
-            }
-          }
-        }
-
-        if (convertedEntry !== undefined) {
-          filesNew.push(convertedEntry);
-        }
-      } else {
-        failedFiles.push({
-          id: file.id,
-          error:
-            "Target file must be a converted .bin file. Use ritobin to convert .bin files to .txt",
-          fileName: file.fileName,
-          type: file.type
-        });
-      }
-    } */
-    return selectedFiles;
-  };
+  const chosenFile = activeFile;
 
   const handleConvertFiles = () => {
-    const oldSelectedFiles = [...selectedFiles];
+    const oldSelectedFiles =
+      selectedFiles.length > 0
+        ? selectedFiles
+        : checkedFiles.length > 0
+        ? checkedFiles
+        : [chosenFile.id];
+
     const failedFiles = [];
     const filesNew = [];
 
@@ -329,7 +95,6 @@ const App = () => {
         if (file.id === oldSelectedFiles[j]) {
           if (file.type === "CONV_TROYBIN") {
             file.fileName = files[i].fileName.replace("_Converted", "");
-            console.log("I am here!")
             try {
               const fileContentConverted = MigrateConvertedTroybin(
                 fileSettings[j].assetsPath,
@@ -404,84 +169,45 @@ const App = () => {
       }
 
       if (convertedEntry !== undefined) {
-        filesNew.push(convertedEntry);   
+        filesNew.push(convertedEntry);
       }
     }
 
-    setFailedConverts(failedConverts);
+    setFailedConverts(failedFiles);
     setFiles(filesNew);
     setFileSettings([]);
-    setLoading(false);
     setSelectedFiles([]);
+    setCheckedFiles([]);
     setShowModal("");
     if (oldSelectedFiles.length === 1 && activeFile !== undefined) {
       setActiveFile(activeFile);
+      setEditorText(activeFile.content);
       setShowEditor(false);
     }
   };
 
   const handleDeleteFiles = () => {
-    const oldSelectedFiles = [...selectedFiles];
-    const newFiles = [];
-    let hasActiveFile = false;
+    const oldSelectedFiles =
+      checkedFiles.length > 0 ? checkedFiles : [chosenFile.id];
 
-    for (let i = 0; i < files.length; i += 1) {
+    let newFiles = [];
+
+    files.forEach((file) => {
       let deleteFile = false;
-
-      for (let j = 0; j < oldSelectedFiles.length; j += 1) {
-        if (files[i].id === oldSelectedFiles[j]) {
-          if (activeFile && files[i].id === activeFile.id) {
-            hasActiveFile = true;
-          }
-
+      oldSelectedFiles.forEach((f) => {
+        if (file.id === f) {
           deleteFile = true;
         }
-      }
-
+      });
       if (deleteFile === false) {
-        newFiles.push(files[i]);
+        newFiles.push(file);
       }
-    }
+    });
 
     setFiles(newFiles);
+    setActiveFile([]);
     setSelectedFiles([]);
-
-    if (hasActiveFile) {
-      setActiveFile(undefined);
-      setShowEditor(false);
-    }
-  };
-
-  const handleDownloadFiles = () => {
-    const oldSelectedFiles = [...selectedFiles];
-    const downloadFiles = [];
-
-    for (let i = 0; i < files.length; i += 1) {
-      for (let j = 0; j < oldSelectedFiles.length; j += 1) {
-        if (files[i].id === oldSelectedFiles[j]) {
-          const fileToDownload = files[i];
-
-          const blob = new Blob([fileToDownload.content], {
-            type: "text/plain",
-          });
-          const downloadLink = URL.createObjectURL(blob);
-
-          let link = document.createElement("a");
-          link.href = downloadLink;
-          link.download = `${fileToDownload.fileName}.${
-            fileToDownload.type === "TROYBIN" ? "troybin" : "txt"
-          }`;
-          link.target = "_blank";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          //link = null;
-
-          downloadFiles.push(files[i]);
-        }
-      }
-    }
-    setSelectedFiles([]);
+    setCheckedFiles([]);
   };
 
   const handleLoadFiles = (fileInput) => {
@@ -524,7 +250,7 @@ const App = () => {
         } else {
           fileName = input.name.replace(".troybin", "");
           type = "TROYBIN";
-          
+
           troybinFilesIDs.push(id);
         }
 
@@ -542,10 +268,8 @@ const App = () => {
           if (i === fileInput.length - 1 && troybinFilesIDs.length > 0) {
             setFiles(updatedFiles);
             setSelectedFiles(troybinFilesIDs);
-            
           } else {
             setFiles(updatedFiles);
-            handleChangeFilter(0);
           }
 
           if (fileInput.length === 1) {
@@ -559,63 +283,60 @@ const App = () => {
     }
   };
 
-  const handleSaveFile = () => {
-    const fileToUpdate = selectedFiles[0];
-    const filesNew = [];
-
-    let activeFile;
-
-    for (let i = 0; i < files.length; i += 1) {
-      const file = files[i];
-
-      if (file.id === fileToUpdate) {
-        let newFile = file;
-        newFile.content = fileContentDirty;
-        activeFile = newFile;
-
-        filesNew.push(newFile);
-      } else {
-        filesNew.push(file);
-      }
-    }
-
-    setActiveFile(activeFile);
-    setShowEditor(false);
-    setFiles(filesNew);
-    setLoading(false), setShowModal("");
+  const handleSaveChanges = () => {
+    const index = files.findIndex((obj) => obj.id === activeFile.id);
+    const toChange = files[index];
+    toChange.content = editorText;
   };
 
-  const handleSaveDirty = (event) => {
-    setFileContentDirty(event.target.value);
-  };
-
-  const handleStartConvert = (settings) => {
-    setFileSettings(settings);
-    setLoading(true);
-    handleConvertFiles();
-  };
-
-  const handleOpenNewTab = () => {
-    const fileIndex = files.findIndex((file) => file.id === selectedFiles[0]);
-    const fileContent = files[fileIndex].content;
-
-    if (fileIndex !== -1) {
-      const blob = new Blob([fileContent], { type: "text/plain" });
-      const downloadLink = URL.createObjectURL(blob);
-
-      window.open(downloadLink);
-    }
-
-    handleChangeShowMenu({ anchor: null, menu: "" });
+  const handleOpenNewWindow = () => {
+    const fileContent = activeFile?.content;
+    const blob = new Blob(
+      [`Particle: ${activeFile.fileName}\r\n\n\n${fileContent}`],
+      { type: "text/plain" }
+    );
+    const link = URL.createObjectURL(blob);
+    window.open(link);
   };
 
   return (
-    <HandlersContext.Provider value={{ handleLoadFiles, handleStartConvert, handleConvertFiles }}>
+    <HandlersContext.Provider
+      value={{
+        handleLoadFiles,
+        handleConvertFiles,
+        handleOpenNewWindow,
+        handleChangeDialogAccept,
+        handleSaveChanges,
+        handleDeleteFiles,
+      }}
+    >
       <StatesContext.Provider
-        value={{ files, editorText, activeFile, setEditorText, setActiveFile }}
+        value={{
+          files,
+          editorText,
+          activeFile,
+          showModal,
+          checkedFiles,
+          failedConverts,
+          search,
+          setEditorText,
+          setActiveFile,
+          setShowModal,
+          setSelectedFiles,
+          setCheckedFiles,
+          setFailedConverts,
+          setSearch,
+          setFileSettings
+        }}
       >
+        <WindowBar />
         <Sidebar />
         <EditorSection />
+        <ConvertModal />
+        <DeleteModal />
+        <AboutModal />
+        <SettingsModal />
+        <Popup />
       </StatesContext.Provider>
     </HandlersContext.Provider>
   );

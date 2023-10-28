@@ -1,9 +1,14 @@
-const CloseDialogButton = ({ click }) => {
+import { useContext } from "react";
+import { StatesContext } from "../../../../App";
+
+const CloseDialogButton = ({ position }) => {
+  const { setShowModal } = useContext(StatesContext);
+
   return (
     <button
-      className="block relative -top-[36px] left-80 z-[999]"
+      className={`block relative -top-[36px] ${position} z-[999]`}
       id="dialog-close-btn"
-      onClick={click}
+      onClick={() => setShowModal("")}
     >
       <div
         className="w-7 h-7 rounded-[50%] flex items-center justify-center bg-dialog-close hover:bg-dialog-close-hover relative top-[1px] z-[9999]"

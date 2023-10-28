@@ -2,7 +2,7 @@ const TooltipRight = ({ tip }) => {
   return (
     <div
       id="tooltip-wrapper"
-      className="relative bottom-[84px] w-full flex justify-center h-full z-[999999]"
+      className="relative -top-9 -right-16 w-full flex justify-center h-full z-[999]"
     >
       <div
         role="tooltip"
@@ -11,7 +11,7 @@ const TooltipRight = ({ tip }) => {
           borderImage:
             "linear-gradient(to top,#785b28 0%,#c89c3c 55%,#c8a355 71%,#c8aa6e 100%) 1 stretch",
         }}
-        id="tooltip-top"
+        id="tooltip-right"
       >
         <div className="relative -top-5 flex items-center justify-center box-border h-full text-sm">
           <p className="text-[#d8d8d8]">{tip}</p>

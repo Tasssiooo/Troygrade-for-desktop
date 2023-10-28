@@ -1,8 +1,7 @@
-import React from "react";
-import ActionsBar from "./ActionsBar";
-import ListSection from "./ListSection";
-import LogoFrame from "./LogoFrame";
-import MenuBar from "./MenuBar";
+import ActionsBar from "./components/ActionsBar";
+import ListSection from "./components/ListSection";
+import LogoFrame from "./components/LogoFrame";
+import MenuBar from "./components/MenuBar";
 
 const Sidebar = () => {
   return (

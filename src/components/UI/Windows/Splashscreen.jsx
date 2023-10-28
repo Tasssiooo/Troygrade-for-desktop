@@ -5,13 +5,14 @@ const Splashscreen = () => {
     <main>
       <div data-tauri-drag-region class="dragging-area"></div>
       <video
-        src={splashscreenVideo}
         width="1024"
         height="576"
         muted
-        autoplay
+        autoPlay
         loop
-      ></video>
+      >
+        <source src={splashscreenVideo} type="video/mp4" />
+      </video>
     </main>
   );
 };
