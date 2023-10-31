@@ -7,6 +7,8 @@ import TooltipRight from "../../Tooltip/Tooltip-r";
 const MenuBar = () => {
   const { setShowModal } = useContext(StatesContext);
   const [toggleTooltip, setToggleTooltip] = useState("");
+  const appVersion = "0.0.2";
+
   return (
     <div
       role="menubar"
@@ -56,7 +58,7 @@ const MenuBar = () => {
         className="flex-[1] overflow-hidden text-center whitespace-nowrap"
         id="app-version"
       >
-        v0.0.1
+        {appVersion}
       </div>
       <a
         href="https://github.com/Tasssiooo/Troygrade-for-desktop"

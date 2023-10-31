@@ -14,7 +14,7 @@ const TooltipTop = ({ tip }) => {
         id="tooltip-top"
       >
         <div className="relative -top-5 flex items-center justify-center box-border h-full text-sm">
-          <p className="text-[#d8d8d8]">{tip}</p>
+          <p className="text-[#d8d8d8] tracking-normal">{tip}</p>
         </div>
       </div>
     </div>

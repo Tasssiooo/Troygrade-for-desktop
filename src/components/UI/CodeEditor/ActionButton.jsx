@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TooltipTop from "../Tooltip/Tooltip-t";
 
-const ActionButton = ({ icon, ariaLabel, click, val, tooltipText }) => {
+const ActionButton = ({ icon, ariaLabel, click, val, tooltipText, disabled }) => {
   const [toggleTooltip, setToggleTooltip] = useState("");
   return (
     <button
@@ -9,6 +9,7 @@ const ActionButton = ({ icon, ariaLabel, click, val, tooltipText }) => {
       aria-label={ariaLabel}
       id="action-button"
       onClick={click}
+      disabled={disabled}
     >
       <div
         className="menu-bar-btn hover:border"

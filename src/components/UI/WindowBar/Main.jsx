@@ -10,7 +10,7 @@ const WindowBar = () => {
       minWidth: 640,
       minHeight: 420
     });
-    webview.once("tauri://error", function (e) {
+    helpWebview.once("tauri://error", function (e) {
       // an error occurred during webview window creation
       console.log(e);
     });

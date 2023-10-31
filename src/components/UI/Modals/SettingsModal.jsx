@@ -8,20 +8,21 @@ import SettingsSection from "./components/SettingsModal/SettingsSection";
 export const IndexContext = createContext(null);
 
 const SettingsModal = () => {
-  const { showModal, checkedFiles, activeFile, files } = useContext(StatesContext);
+  const { showModal, checkedFiles, activeFile, files } =
+    useContext(StatesContext);
   const [index, setIndex] = useState(0);
 
-  const selectedFiles = [];
-
-  checkedFiles.length > 0
-    ? files.forEach((obj) => {
-        checkedFiles.forEach((id) => {
-          if (obj.id === id) {
-            selectedFiles.push(obj);
-          }
-        });
-      })
-    : selectedFiles.push(activeFile);
+  const selectedFiles =
+    checkedFiles.length > 0 &&
+    checkedFiles.map((id) => {
+      let file;
+      files.forEach((obj) => {
+        if (obj.id === id) {
+          file = obj;
+        }
+      });
+      return file;
+    });
 
   return (
     <div

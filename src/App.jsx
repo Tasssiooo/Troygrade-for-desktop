@@ -1,4 +1,3 @@
-import { WebviewWindow } from "@tauri-apps/api/window";
 import { useState, useEffect, createContext } from "react";
 import { v4 as uuid } from "uuid";
 
@@ -15,11 +14,13 @@ import Popup from "./components/UI/Popup/Main";
 import ConvertModal from "./components/UI/Modals/ConvertModal";
 import DeleteModal from "./components/UI/Modals/DeleteModal";
 import AboutModal from "./components/UI/Modals/AboutModal";
-import HelpModal from "./components/UI/Modals/HelpModal";
 import SettingsModal from "./components/UI/Modals/SettingsModal";
 
 export const HandlersContext = createContext(null);
 export const StatesContext = createContext(null);
+
+//Disable context menu on right click
+document.body.oncontextmenu = (e) => e.preventDefault();
 
 const App = () => {
   const [editorText, setEditorText] = useState("");
@@ -30,17 +31,18 @@ const App = () => {
   const [fileSettings, setFileSettings] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [checkedFiles, setCheckedFiles] = useState([]);
-  const [showEditor, setShowEditor] = useState(false);
   const [showModal, setShowModal] = useState("");
-
-  //Disable context menu on right click
-  document.body.oncontextmenu = (e) => e.preventDefault();
 
   useEffect(() => {
     if (selectedFiles.length > 0 || fileSettings.length > 0) {
       handleConvertFiles();
     }
-  }, [selectedFiles, fileSettings]);
+    if (showModal && checkedFiles.length === 0) {
+      setCheckedFiles([activeFile?.id]);
+    }/*  else {
+      setCheckedFiles([]);
+    } */
+  }, [selectedFiles, fileSettings, showModal]);
 
   const handleChangeDialogAccept = (action) => {
     const settings = [];
@@ -50,9 +52,7 @@ const App = () => {
         setShowModal("ConvertSettings");
         break;
       case "convert_default":
-        const chosenFiles =
-          checkedFiles.length > 0 ? checkedFiles : [activeFile.id];
-        for (let i = 0; i < chosenFiles.length; i += 1) {
+        for (let i = 0; i < checkedFiles.length; i += 1) {
           const setting = {
             assetsPath:
               "ASSETS/Characters/[character name]/Skins/[skin]/Particles",
@@ -62,7 +62,6 @@ const App = () => {
             settingsPreset: "Default",
             updateFileTypes: true,
           };
-
           settings.push(setting);
         }
         setFileSettings(settings);
@@ -70,15 +69,9 @@ const App = () => {
     }
   };
 
-  const chosenFile = activeFile;
-
   const handleConvertFiles = () => {
     const oldSelectedFiles =
-      selectedFiles.length > 0
-        ? selectedFiles
-        : checkedFiles.length > 0
-        ? checkedFiles
-        : [chosenFile.id];
+      selectedFiles.length > 0 ? selectedFiles : checkedFiles;
 
     const failedFiles = [];
     const filesNew = [];
@@ -182,7 +175,6 @@ const App = () => {
     if (oldSelectedFiles.length === 1 && activeFile !== undefined) {
       setActiveFile(activeFile);
       setEditorText(activeFile.content);
-      setShowEditor(false);
     }
   };
 
@@ -274,7 +266,6 @@ const App = () => {
 
           if (fileInput.length === 1) {
             setActiveFile(file);
-            setShowEditor(false);
           }
         } else {
           console.log("File Type is unknown");
@@ -326,7 +317,7 @@ const App = () => {
           setCheckedFiles,
           setFailedConverts,
           setSearch,
-          setFileSettings
+          setFileSettings,
         }}
       >
         <WindowBar />

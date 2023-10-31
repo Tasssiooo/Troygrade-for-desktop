@@ -29,9 +29,9 @@ const ConvertModal = () => {
         <div className="flex flex-col gap-2 mx-2 py-4">
           <p>
             You are about to convert{" "}
-            {checkedFiles.length > 0
-              ? checkedFiles.length + " files."
-              : [activeFile?.id].length + " file."}
+            {checkedFiles.length === 1
+              ? checkedFiles.length + " file."
+              : checkedFiles.length + " files."}
             <br />
             You can use the default settings or set the settings yourself.
           </p>

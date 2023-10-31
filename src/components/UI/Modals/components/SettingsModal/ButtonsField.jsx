@@ -23,7 +23,6 @@ const ButtonsField = ({
   const { setFileSettings, checkedFiles } = useContext(StatesContext);
   const [newSettings, setNewSettings] = useState([]);
   const [warning, setWarning] = useState();
-  console.log(newSettings);
 
   const pushSettings = () => {
     const setting = {

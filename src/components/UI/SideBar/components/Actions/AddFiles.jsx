@@ -12,7 +12,7 @@ const AddFiles = ({ setToggleTooltip, files, handleLoadFiles }) => {
         Add files
       </label>
       <input
-        disabled={files.length === 20}
+        disabled={files?.length === 20}
         type="file"
         id="add-file"
         accept=".txt, .troybin"

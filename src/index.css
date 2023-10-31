@@ -197,26 +197,26 @@ a:visited {
   color: #c2c2c2;
 }
 
-#select-all {
+#select-all-wrapper #select-all {
   background: url(./assets/images/btn_icon.png);
   background-position: 0 0;
   background-size: 100%;
 }
-#select-all:hover {
+#select-all-wrapper:hover #select-all {
   background-position: 0 -20px;
 }
-#select-all:active {
+#select-all-wrapper:active #select-all {
   background-position: 0 -40px;
 }
-#select-all-on {
+#select-all-wrapper #select-all-on {
   background: url(./assets/images/btn_icon.png);
   background-position: 0 -80px;
   background-size: 100%;
 }
-#select-all-on:hover {
+#select-all-wrapper:hover #select-all-on {
   background-position: 0 -100px;
 }
-#select-all-on:active {
+#select-all-wrapper:active #select-all-on {
   background-position: 0 -120px;
 }
 
@@ -301,12 +301,30 @@ input[type="search"]::-webkit-search-cancel-button {
   content: "";
 }
 #ui-dropdown-current {
-  border-image: linear-gradient(to top, #695625 0%, #a9852d 23%, #b88d35 93%, #c8aa6e 100%) 1;
-          
+  border-image: linear-gradient(
+      to top,
+      #695625 0%,
+      #a9852d 23%,
+      #b88d35 93%,
+      #c8aa6e 100%
+    )
+    1;
 }
 #ui-dropdown-current:hover {
-  border-image: linear-gradient(to top, #c89c3c 0%, #dcc188 50%, #e1c998 71%, #f0e6d8 100%) 1;
-  background-image: linear-gradient(to bottom, #1e232a 0%, #1e232a 40%, rgba(118,97,51,0.8) 140%);
+  border-image: linear-gradient(
+      to top,
+      #c89c3c 0%,
+      #dcc188 50%,
+      #e1c998 71%,
+      #f0e6d8 100%
+    )
+    1;
+  background-image: linear-gradient(
+    to bottom,
+    #1e232a 0%,
+    #1e232a 40%,
+    rgba(118, 97, 51, 0.8) 140%
+  );
 }
 #ui-dropdown-current:hover #ui-dropdown-current-content {
   color: #f3f0e6;
@@ -317,6 +335,13 @@ input[type="search"]::-webkit-search-cancel-button {
   border border-solid border-b-[#6b5028] border-t-[#c7a86b] border-x-[#a07a30]
   hover:text-[#f0e6d2] hover:border-t-[#f0e5d1] hover:border-b-[#c99c3f] hover:border-b-[3px]
   active:border active:border-[#614920] active:bg-[#1e2328] active:text-[#785a28];
+}
+
+#batch-actions {
+  mask: url(./assets/images/sort_mask.png) no-repeat center;
+  mask-size: 19px;
+  -webkit-mask: url(./assets/images/sort_mask.png) no-repeat center;
+  -webkit-mask-size: 19px;
 }
 
 /* Width */

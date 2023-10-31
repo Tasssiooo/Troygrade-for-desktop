@@ -3,26 +3,37 @@ import { HandlersContext, StatesContext } from "../../../../App";
 
 import TooltipBottom from "../../Tooltip/Tooltip-b";
 import SearchBar from "./SearchBar";
+import SelectAll from "./Actions/SelectAll";
+import Search from "./Actions/Search";
+import AddFiles from "./Actions/AddFiles";
+import BatchActions from "./Actions/BatchActions";
+import ActionsList from "./Actions/ActionsList";
 
 const ActionsBar = () => {
   const [toggleSelectAll, setToggleSelectAll] = useState(false);
   const [toggleFilter, setToggleFilter] = useState(false);
   const [toggleTooltip, setToggleTooltip] = useState("");
+  const [toggleActionsList, setToggleActionsList] = useState(false);
 
   const { handleLoadFiles } = useContext(HandlersContext);
   const { files, setCheckedFiles, checkedFiles } = useContext(StatesContext);
 
-  const searchInput = document.getElementById("filter");
-
   useEffect(() => {
     if (toggleSelectAll) {
       const newCheckedFiles = files.map((obj) => obj.id);
-      /* files.forEach((file) => newCheckedFiles.push(file.id)); */
       setCheckedFiles(newCheckedFiles);
-    } else {
+    } else if (checkedFiles.length === files.length) {
       setCheckedFiles([]);
     }
   }, [toggleSelectAll]);
+
+  useEffect(() => {
+    if (checkedFiles.length === 0) {
+      setToggleSelectAll(false);
+    } else if (checkedFiles.length === files.length) {
+      setToggleSelectAll(true);
+    }
+  }, [checkedFiles]);
 
   return (
     <nav id="actions-container">
@@ -37,74 +48,42 @@ const ActionsBar = () => {
             id="buttons"
             style={{ display: toggleFilter ? "none" : "flex" }}
           >
-            <div
-              className="w-5 h-5 mr-1.5 flex-shrink-0 cursor-pointer"
-              role="checkbox"
-              id={
-                files.length > 0 && checkedFiles.length === files.length
-                  ? "select-all-on"
-                  : "select-all"
-              }
-              onClick={() => setToggleSelectAll((prev) => !prev)}
-            ></div>
-            <label
-              className="w-full text-sm cursor-pointer hover:text-[#dbdbdb]"
-              htmlFor={
-                checkedFiles.length === files.length
-                  ? "select-all-on"
-                  : "select-all"
-              }
-              id="select-label"
-              onClick={() => setToggleSelectAll((prev) => !prev)}
-            >
-              Select All
-            </label>
+            <SelectAll
+              checkedFiles={checkedFiles}
+              files={files}
+              setToggleSelectAll={setToggleSelectAll}
+            />
             <div
               className="flex justify-end items-center h-full list-none -mt-0.5 overflow-hidden relative w-full"
               id="actions"
               style={{ display: toggleFilter ? "none" : "flex" }}
             >
-              <div
-                className="bg-[#c8aa6e] hover:bg-[#f3e0bd] flex-shrink-0 h-full w-[30px] cursor-pointer filter-button"
-                role="button"
-                aria-label="Look for files in the list"
-                id="search-button"
-                onClick={() => {
-                  setToggleFilter(true);
-                  setTimeout(() => {
-                    searchInput.focus();
-                  }, 200);
-                }}
-                onMouseEnter={() => setToggleTooltip("search")}
-                onMouseLeave={() => setToggleTooltip("")}
-              ></div>
+              <BatchActions
+                setToggleTooltip={setToggleTooltip}
+                setToggleActionsList={setToggleActionsList}
+                checkedFiles={checkedFiles}
+              />
+              {toggleTooltip === "batch" && !toggleActionsList && (
+                <TooltipBottom tip={"Batch actions"} />
+              )}
+              <Search
+                setToggleFilter={setToggleFilter}
+                setToggleTooltip={setToggleTooltip}
+              />
               {toggleTooltip === "search" && <TooltipBottom tip={"Filter"} />}
-              <div
-                id="add"
-                onMouseEnter={() => setToggleTooltip("add")}
-                onMouseLeave={() => setToggleTooltip("")}
-              >
-                <label
-                  className="bg-[#c8aa6e] hover:bg-[#f3e0bd] flex-shrink-0 h-full w-[30px] block cursor-pointer add-button"
-                  htmlFor="add-file"
-                >
-                  Add files
-                </label>
-                <input
-                  disabled={files.length === 20}
-                  type="file"
-                  id="add-file"
-                  accept=".txt, .troybin"
-                  multiple
-                  onChange={(e) => handleLoadFiles(e.target.files)}
-                  hidden
-                />
-              </div>
+              <AddFiles
+                handleLoadFiles={handleLoadFiles}
+                files={files}
+                setToggleTooltip={setToggleTooltip}
+              />
               {toggleTooltip === "add" && <TooltipBottom tip={"Add files"} />}
             </div>
           </div>
         </div>
       </div>
+      {toggleActionsList && (
+        <ActionsList setToggleActionsList={setToggleActionsList} />
+      )}
     </nav>
   );
 };

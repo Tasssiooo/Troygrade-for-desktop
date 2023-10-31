@@ -5,8 +5,14 @@ import troyIcon from "../../../../assets/images/heimerdinger_circle_old.png";
 import binIcon from "../../../../assets/images/heimerdinger_circle_new.png";
 
 const RosterElement = ({ id, file }) => {
-  const { setActiveFile, activeFile, files, setEditorText, checkedFiles, setCheckedFiles } =
-    useContext(StatesContext);
+  const {
+    setActiveFile,
+    activeFile,
+    files,
+    setEditorText,
+    checkedFiles,
+    setCheckedFiles,
+  } = useContext(StatesContext);
   const [toggleCheckbox, setToggleCheckBox] = useState(false);
 
   useEffect(() => {
@@ -18,6 +24,12 @@ const RosterElement = ({ id, file }) => {
       setCheckedFiles(filtered);
     }
   }, [toggleCheckbox]);
+
+  useEffect(() => {
+    if (checkedFiles.length === 0) {
+      setToggleCheckBox(false);
+    }
+  }, [checkedFiles]);
 
   return (
     <div
@@ -36,7 +48,8 @@ const RosterElement = ({ id, file }) => {
           role="checkbox"
           onClick={() => setToggleCheckBox((prev) => !prev)}
         >
-          {toggleCheckbox && file.id === id && checkedFiles.length || checkedFiles.length === files.length ? (
+          {(toggleCheckbox && file.id === id && checkedFiles.length > 0) ||
+          checkedFiles.length === files.length ? (
             <IoCheckmarkCircle
               role="img"
               alt={file.type === "CONV_TROYBIN" ? "troybin icon" : "bin icon"}
