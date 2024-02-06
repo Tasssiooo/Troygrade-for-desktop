@@ -1,0 +1,16 @@
+button.controller {
+  @apply bg-button-foreground hover:bg-button-foreground-accent cursor-pointer size-[18px];
+}
+
+button.controller.help {
+  mask-image: url(../../assets/images/control-help.png);
+  mask-size: contain;
+}
+button.controller.hide {
+  mask-image: url(../../assets/images/control-hide.png);
+  mask-size: contain;
+}
+button.controller.close {
+  mask-image: url(../../assets/images/control-close.png);
+  mask-size: contain;
+}
