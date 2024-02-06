@@ -1,14 +1,7 @@
-# Troygrade for desktop
+# Tauri + React + Typescript
 
-This is a port for desktop of [Troygrade](https://github.com/Leischii/Leischii.github.io) made by [Leischii](https://github.com/Leischii), built with [Tauri](https://tauri.app/v1/guides/getting-started/setup/vite), [React](https://react.dev/learn) and [Vite](https://vitejs.dev/).
-Troygrade is a tool created to help custom skin creators with bin files. Supports migrating troybin files, fixing outdated bin files and more to come in the future.
+This template should help get you started developing with Tauri, React and Typescript in Vite.
 
-## Funcionalities
+## Recommended IDE Setup
 
-- Convert files (.troybin → .troy → .bin).
-- Check output.
-- Save formated bin as txt.
-
-## Screenshot
-
-![App screenshot](./src/assets/images/screenshots/app-screenshot.jpeg)
+- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)

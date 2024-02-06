@@ -1,14 +1,13 @@
 {
   "build": {
-    "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "bun run dev",
+    "beforeBuildCommand": "bun run build",
     "devPath": "http://localhost:1420",
-    "distDir": "../dist",
-    "withGlobalTauri": false
+    "distDir": "../dist"
   },
   "package": {
-    "productName": "Troygrade",
-    "version": "0.0.2"
+    "productName": ".",
+    "version": "0.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -16,70 +15,31 @@
       "shell": {
         "all": false,
         "open": true
-      },
-      "fs": {
-        "all": false,
-        "scope": ["$APP/*", "$DOCUMENT/*", "$DOWNLOAD/*"],
-        "writeFile": true
-      },
-      "dialog": {
-        "all": false,
-        "save": true,
-        "open": true
-      },
-      "window": {
-        "all": false,
-        "create": true,
-        "close": true,
-        "hide": true,
-        "show": true,
-        "maximize": true,
-        "minimize": true,
-        "unmaximize": true,
-        "unminimize": true,
-        "startDragging": true
       }
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "troygrade-desktop",
+        "width": 800,
+        "height": 600
+      }
+    ],
+    "security": {
+      "csp": null
     },
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.troygrade",
+      "identifier": "com.tauri.dev",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
         "icons/128x128@2x.png",
         "icons/icon.icns",
         "icons/icon.ico"
-      ],
-      "macOS": {
-        "minimumSystemVersion": "10.13"
-      }
-    },
-    "security": {
-      "csp": null
-    },
-    "windows": [
-      {
-        "decorations": false,
-        "fullscreen": false,
-        "resizable": false,
-        "visible": false,
-        "title": "Troygrade",
-        "width": 1024,
-        "height": 576,
-        "center": true
-      },
-      {
-        "width": 1024,
-        "height": 576,
-        "decorations": false,
-        "fullscreen": false,
-        "resizable": false,
-        "url": "#/splashscreen",
-        "label": "splashscreen",
-        "title": "Troygrade: Splashscreen",
-        "center": true
-      }
-    ]
+      ]
+    }
   }
 }
