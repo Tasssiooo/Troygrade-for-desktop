@@ -1,0 +1,42 @@
+:root {
+  --border-bottom: #6b5028;
+  --border-top: #c7a86b;
+  --border-x: #a07a30;
+
+  --border-bottom-accent: #c99c3f;
+  --border-top-accent: #f0e5d1;
+
+  --border-active: #614920;
+}
+
+.icon {
+  @apply min-w-[38px] min-h-8;
+}
+.icon > button {
+  @apply inline-flex justify-center items-center bg-button w-full h-full
+  text-button-foreground border border-b-[var(--border-bottom)] border-t-[var(--border-top)]
+  border-x-[var(--border-x)];
+}
+.icon:hover > button {
+  @apply text-button-foreground-accent border-b-[3px] border-b-[var(--border-bottom-accent)] 
+  border-t-[var(--border-top-accent)];
+}
+.icon:active > button {
+  @apply border border-[var(--border-active)] bg-button-active text-button-foreground-active;
+}
+
+.text {
+  @apply min-h-8;
+}
+.text > button {
+  @apply inline-flex justify-center items-center bg-button px-[3px] py-1
+  text-button-foreground border border-b-[var(--border-bottom)] border-t-[var(--border-top)]
+  border-x-[var(--border-x)];
+}
+.text:hover > button {
+  @apply text-button-foreground-accent border-b-[3px] border-b-[var(--border-bottom-accent)] 
+  border-t-[var(--border-top-accent)];
+}
+.text:active > button {
+  @apply border border-[var(--border-active)] bg-button-active text-button-foreground-active;
+}

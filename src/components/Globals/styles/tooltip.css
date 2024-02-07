@@ -1,0 +1,8 @@
+.TooltipContent {
+  @apply relative z-[90] bg-[#1a1c21] leading-[1] py-2 px-2.5 text-sm border
+  [border-image:linear-gradient(to_top,#785b28_0%,#c89c3c_55%,#c8a355_71%,#c8aa6e_100%)_1_stretch];
+}
+
+.TooltipArrow {
+  @apply fill-[#1a1c21] w-5 h-4;
+}

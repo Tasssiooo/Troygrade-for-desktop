@@ -1,0 +1,24 @@
+button.action {
+  @apply bg-button-foreground hover:bg-button-foreground-accent cursor-pointer size-[30px]
+  [mask-repeat:no-repeat] [mask-position:center];
+}
+
+button.action.list {
+  @apply [mask-image:url(../../../../assets/images/sort_mask.png)] [mask-size:contain];
+}
+button.action.search {
+  @apply [mask-image:url(../../../../assets/images/search_mask.png)] [mask-size:20px];
+}
+button.action.add {
+  @apply [mask-image:url(../../../../assets/images/icon_plus.png)] [mask-size:12px];
+}
+
+.toggleImage {
+  @apply size-5 shrink-0 bg-[url(../../../../assets/images/btn_icon.png)] bg-cover;
+}
+.toggleImage.off {
+  @apply bg-[0_0] group-hover:bg-[0_-20px] group-active:bg-[0_-40px];
+}
+.toggleImage.on {
+  @apply bg-[0_-80px] group-hover:bg-[0_-100px] group-active:bg-[0_-120px];
+}
