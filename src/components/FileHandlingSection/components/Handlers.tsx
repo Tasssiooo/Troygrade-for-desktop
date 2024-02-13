@@ -2,7 +2,7 @@ import DefaultButton from "@/components/Globals/DefaultButton";
 
 import { useAppDispatch } from "@/redux/hooks";
 
-import { newWindow } from "@/redux/reducers/handleSlice";
+import { codeWindow } from "@/redux/reducers/handleSlice";
 
 export default function Handlers() {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ export default function Handlers() {
         <DefaultButton tooltip="Save" size="icon">
           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V7zm2 16H5V5h11.17L19 7.83zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3s3-1.34 3-3s-1.34-3-3-3M6 6h9v4H6z"/></svg>
         </DefaultButton>
-        <DefaultButton tooltip="Open in a new window" size="icon" onClick={() => dispatch(newWindow())} >
+        <DefaultButton tooltip="Open in a new window" size="icon" onClick={() => dispatch(codeWindow())} >
           <svg xmlns="http://www.w3.org/2000/svg" aria-hidden width="1.2em" height="1.2em" viewBox="0 0 24 24"><path fill="currentColor" d="M14 3v2h3.59l-9.83 9.83l1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg>
         </DefaultButton>
       </div>

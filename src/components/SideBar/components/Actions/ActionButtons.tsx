@@ -15,6 +15,7 @@ export default function ActionButtons() {
       ],
       title: "Open .troybin file"
     });
+    console.log(selected);
   }
 
   return (
