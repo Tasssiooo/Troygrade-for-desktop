@@ -1,0 +1,83 @@
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgb(0 0 0 / 0.4);
+}
+
+.dialog-content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  z-index: 100;
+
+  background-color: #010a13;
+  border: 1px solid transparent;
+  border-image: linear-gradient(to top, #785a28 0, #463714 50%, #463714 100%) 1
+    stretch;
+
+  padding: 1rem;
+}
+
+.dialog-close {
+  position: absolute;
+  right: -22px;
+  top: -18px;
+
+  display: flex;
+  justify-content: center;
+
+  background-image: url(../../../assets/images/frame-button-close-top-down.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  width: 2.25rem;
+  height: 4rem;
+}
+.dialog-close > .close-border {
+  position: relative;
+  top: 0.25rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  z-index: 20;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+
+  background-image: linear-gradient(
+    to top,
+    #463714 4%,
+    #785a28 23%,
+    #c89b3c 90%,
+    #c8aa6e 100%
+  );
+}
+.dialog-close > .close-border:hover {
+  background-image: linear-gradient(to top, #c89b3c 0%, #f0e6d2 100%);
+}
+.dialog-close > .close-border > .inner-bg {
+  position: relative;
+  z-index: 30;
+
+  background-color: #1e282d;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+}
+.dialog-close > .close-border > .inner-bg > .x-icon {
+  background-color: #cdbe91;
+  width: 0.625rem;
+  height: 0.625rem;
+
+  translate: 7px 7px;
+
+  mask: url(../../../assets/images/x-icon.png);
+  mask-size: 10px;
+}
+.dialog-close > .close-border:hover .x-icon {
+  background-color: #f0e6d2;
+}
