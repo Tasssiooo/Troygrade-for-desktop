@@ -1,44 +1,40 @@
-import { MouseEventHandler, ReactNode } from "react";
+import { forwardRef } from "react";
 
-import Tooltip from "@/components/Globals/Tooltip";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-import "./styles/defaultButton.css";
+const buttonVariants = cva(
+  "inline-flex justify-center items-center bg-button py-[3px] px-0.5 text-button-foreground border border-b-[#6b5028] hover:border-b-[#c99c3f] border-t-[#c7a86b] hover:border-t-[#f0e5d1] border-x-[#a07a30] active:border-[#614920] hover:text-button-foreground-accent hover:border-b-[3px] active:bg-button-active active:text-button-foreground-active",
+  {
+    variants: {
+      size: {
+        default: "h-8",
+        icon: "min-w-9 h-8",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  }
+);
 
-interface Props {
-  children: ReactNode;
-  size?: "icon" | "text";
-  tooltip: string;
-  disabled?: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-}
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {}
 
-export default function DefaultButton({
-  children,
-  size = "text",
-  tooltip,
-  disabled = false,
-  onClick
-}: Props) {
-  if (size === "text") {
+export const DefaultButton = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, size, children, ...props }, ref) => {
     return (
-      <div className="text">
-        <button type="button" onClick={onClick} disabled={disabled}>
-          <span className="inline-flex justify-center items-center bg-button-inner px-2 py-1">
-            {children}
-          </span>
-        </button>
-      </div>
+      <button
+        className={cn(buttonVariants({ size, className }))}
+        ref={ref}
+        {...props}
+      >
+        <div className="inline-flex justify-center items-center bg-button-inner size-full px-1">
+          {children}
+        </div>
+      </button>
     );
   }
-  return (
-    <Tooltip tip={tooltip} orientation="top">
-      <div className="icon">
-        <button type="button" onClick={onClick} disabled={disabled}>
-          <span className="inline-flex justify-center items-center w-8 h-6 bg-button-inner">
-            {children}
-          </span>
-        </button>
-      </div>
-    </Tooltip>
-  );
-}
+);
+DefaultButton.displayName = "Button";

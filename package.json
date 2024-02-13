@@ -17,6 +17,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@reduxjs/toolkit": "^2.1.0",
     "@tauri-apps/api": "^1.5.2",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",

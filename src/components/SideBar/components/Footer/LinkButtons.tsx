@@ -1,10 +1,10 @@
-import DefaultButton from "@/components/Globals/DefaultButton";
+import {DefaultButton} from "@/components/Globals/DefaultButton";
 
 export default function LinkButtons() {
   return (
     <div className="flex flex-row space-x-1">
       <a href="https://github.com/Tasssiooo/Troygrade-for-desktop/issues" rel="external noopener noreferrer" target="_blank" className="inline-flex">
-        <DefaultButton tooltip="Report an issue" size="icon">
+        <DefaultButton size="icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
@@ -20,7 +20,7 @@ export default function LinkButtons() {
         </DefaultButton>
       </a>
       <a href="https://github.com/Tasssiooo/Troygrade-for-desktop" rel="external noopener noreferrer" target="_blank" className="inline-flex">
-        <DefaultButton tooltip="Github repository" size="icon">
+        <DefaultButton size="icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden
