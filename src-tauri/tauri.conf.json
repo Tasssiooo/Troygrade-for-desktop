@@ -16,9 +16,30 @@
         "all": false,
         "open": true
       },
+      "fs": {
+        "all": false,
+        "copyFile": false,
+        "createDir": false,
+        "exists": false,
+        "readDir": false,
+        "readFile": false,
+        "removeDir": false,
+        "removeFile": false,
+        "renameFile": false,
+        "scope": ["$APP/*", "$DOCUMENT/*", "$DOWNLOAD/*"],
+        "writeFile": true
+      },
+      "dialog": {
+        "all": false,
+        "ask": false,
+        "confirm": false,
+        "message": false,
+        "open": true,
+        "save": true
+      },
       "window": {
         "all": false,
-        "center": true,
+        "center": false,
         "close": true,
         "create": false,
         "hide": true,
