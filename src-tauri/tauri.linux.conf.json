@@ -41,7 +41,7 @@
         "all": false,
         "center": false,
         "close": true,
-        "create": false,
+        "create": true,
         "hide": true,
         "maximize": false,
         "minimize": true,

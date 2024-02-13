@@ -10,6 +10,7 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-toolbar": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
