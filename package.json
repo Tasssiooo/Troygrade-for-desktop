@@ -1,7 +1,7 @@
 {
   "name": "troygrade-desktop",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -22,12 +22,10 @@
     "clsx": "^2.1.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
-    "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.22.0",
-    "react-simple-code-editor": "^0.13.1",
     "redux": "^5.0.1",
     "sort-by": "^1.2.0",
     "tailwind-merge": "^2.2.1"
@@ -35,7 +33,6 @@
   "devDependencies": {
     "@tauri-apps/cli": "^1.5.8",
     "@types/node": "^20.11.16",
-    "@types/prismjs": "^1.26.3",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.2.1",
