@@ -41,7 +41,7 @@ export const ModalTitle = forwardRef<
   <Dialog.Title
     ref={ref}
     className={cn(
-      "text-xl font-bold leading-none tracking-tight",
+      "text-lg font-bold leading-none pointer-events-none tracking-tight border-b border-b-[#1e282d] h-9 mb-2 uppercase",
       className
     )}
     {...props}

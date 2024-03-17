@@ -157,3 +157,72 @@ export function TooltipArrow() {
     </svg>
   );
 }
+
+export function Check() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      aria-hidden
+    >
+      <path
+        fill="currentColor"
+        d="M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.59z"
+      />
+    </svg>
+  );
+}
+
+export function ChevronRight() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      aria-hidden
+    >
+      <path
+        fill="currentColor"
+        d="M8.59 16.58L13.17 12L8.59 7.41L10 6l6 6l-6 6z"
+      />
+    </svg>
+  );
+}
+
+export function Dot() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      aria-hidden
+    >
+      <path
+        fill="currentColor"
+        d="M12 10a2 2 0 0 0-2 2a2 2 0 0 0 2 2c1.11 0 2-.89 2-2a2 2 0 0 0-2-2"
+      />
+    </svg>
+  );
+}
+
+export function ThreeDotsVertical() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="15"
+      height="15"
+      viewBox="0 0 256 256"
+      aria-hidden
+      className="text-button-foreground hover:text-button-foreground-accent"
+    >
+      <path
+        fill="currentColor"
+        d="M156 128a28 28 0 1 1-28-28a28 28 0 0 1 28 28m-28-52a28 28 0 1 0-28-28a28 28 0 0 0 28 28m0 104a28 28 0 1 0 28 28a28 28 0 0 0-28-28"
+      />
+    </svg>
+  );
+}

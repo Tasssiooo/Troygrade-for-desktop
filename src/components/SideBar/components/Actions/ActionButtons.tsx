@@ -5,23 +5,31 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/Globals/Tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/Globals/DropdownMenu";
 
-import { open } from "@tauri-apps/api/dialog";
+import { handleLoadFiles } from "@/lib/handlers";
+import { cn } from "@/lib/utils";
+
+import { useAppSelector } from "@/redux/hooks";
+
+import { ThreeDotsVertical } from "@/components/Globals/Icons";
+import Delete from "./BatchActions/Delete";
+import { useEffect, useState } from "react";
 
 export default function ActionButtons() {
-  async function openExplorer() {
-    const selected = await open({
-      multiple: true,
-      filters: [
-        {
-          name: "Troybin",
-          extensions: ["troybin", "troy"],
-        },
-      ],
-      title: "Open .troybin file",
-    });
-    console.log(selected);
-  }
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const selected = useAppSelector((state) => state.app.selectedFiles);
+
+  useEffect(() => {
+    if (selected.length < 1) {
+      setOpenDropdown(false);
+    }
+  }, [selected])
 
   return (
     <div className="flex flex-row items-center">
@@ -41,11 +49,16 @@ export default function ActionButtons() {
         <Tooltip>
           <TooltipTrigger asChild>
             <Toolbar.Button asChild>
-              <button
-                type="button"
-                className="action add"
-                onClick={openExplorer}
-              ></button>
+              <label htmlFor="explorer" role="button" className="action add">
+                <input
+                  id="explorer"
+                  type="file"
+                  accept=".txt, .troybin"
+                  multiple
+                  hidden
+                  onChange={(e) => handleLoadFiles(e.target.files!)}
+                />
+              </label>
             </Toolbar.Button>
           </TooltipTrigger>
           <TooltipContent sideOffset={0} side="bottom">
@@ -53,6 +66,34 @@ export default function ActionButtons() {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+      <DropdownMenu open={openDropdown} onOpenChange={() => setOpenDropdown(prev => !prev)}>
+        <TooltipProvider delayDuration={0}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Toolbar.Button asChild>
+                <DropdownMenuTrigger
+                  className={cn(
+                    "mx-1.5",
+                    selected.length > 1 ? "block" : "hidden"
+                  )}
+                >
+                  <ThreeDotsVertical />
+                </DropdownMenuTrigger>
+              </Toolbar.Button>
+            </TooltipTrigger>
+            <TooltipContent sideOffset={0} side="bottom">
+              Batch actions
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <DropdownMenuContent>
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <Delete />
+          </DropdownMenuItem>
+          <DropdownMenuItem>Save</DropdownMenuItem>
+          <DropdownMenuItem>Fix</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 }

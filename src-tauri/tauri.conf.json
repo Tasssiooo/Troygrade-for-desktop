@@ -22,11 +22,11 @@
         "createDir": false,
         "exists": false,
         "readDir": false,
-        "readFile": false,
+        "readFile": true,
         "removeDir": false,
         "removeFile": false,
         "renameFile": false,
-        "scope": ["$APP/*", "$DOCUMENT/*", "$DOWNLOAD/*"],
+        "scope": ["*"],
         "writeFile": true
       },
       "dialog": {

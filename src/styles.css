@@ -22,6 +22,7 @@
     --foreground: 0, 0%, 100%, 0.87;
     --foreground-accent: 0 0% 96.1%;
     --foreground-muted: 0 0% 45.1%;
+    --foreground-highlight: 45 38% 69%;
 
     --button: 212 25% 10%;
     --button-active: 210 14% 14%;
@@ -43,7 +44,7 @@
   }
   html,
   body {
-    @apply w-screen h-screen overflow-hidden;
+    @apply w-screen h-screen overflow-hidden select-none;
   }
   body {
     @apply font-display font-bold antialiased text-foreground;

@@ -1,11 +1,10 @@
-import { DefaultButton } from "@/components/Globals/DefaultButton";
-import {
-  Download,
-  External,
-  FloppyDisk,
-  TrashBin,
-  Wrench,
-} from "@/components/Globals/Icons";
+import Delete from "./handlers/Delete";
+import SaveFile from "./handlers/SaveFile";
+import SaveChanges from "./handlers/SaveChanges";
+import Expand from "./handlers/Expand";
+import Fix from "./handlers/Fix";
+
+import { useAppSelector } from "@/redux/hooks";
 import {
   Tooltip,
   TooltipContent,
@@ -13,65 +12,28 @@ import {
   TooltipTrigger,
 } from "@/components/Globals/Tooltip";
 
-import { useAppDispatch } from "@/redux/hooks";
-
-import { codeWindow } from "@/redux/reducers/handleSlice";
-
 export default function Handlers() {
-  const dispatch = useAppDispatch();
+  const active = useAppSelector((state) => state.app.activeFile);
   return (
-    <div className="w-full h-[65px] px-4 pt-3.5">
+    <div className="flex flex-row items-center justify-between w-full h-[65px] px-4">
+      <TooltipProvider delayDuration={250}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div>
+              <span className="text-sm text-foreground-highlight relative top-1.5 truncate inline-block max-w-56">
+                {active?.name}
+              </span>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>{active?.name}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <div className="flex flex-row justify-end space-x-2.5 w-full">
-        <TooltipProvider delayDuration={0}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <DefaultButton size="icon">
-                <TrashBin />
-              </DefaultButton>
-            </TooltipTrigger>
-            <TooltipContent className="right-2.5">Delete</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider delayDuration={0}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <DefaultButton size="icon">
-                <Download />
-              </DefaultButton>
-            </TooltipTrigger>
-            <TooltipContent className="right-2.5">Download</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider delayDuration={0}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <DefaultButton size="icon">
-                <Wrench />
-              </DefaultButton>
-            </TooltipTrigger>
-            <TooltipContent className="right-2.5">Fix</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider delayDuration={0}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <DefaultButton size="icon">
-                <FloppyDisk />
-              </DefaultButton>
-            </TooltipTrigger>
-            <TooltipContent className="right-2.5">Save</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider delayDuration={0}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <DefaultButton size="icon" onClick={() => dispatch(codeWindow())}>
-                <External />
-              </DefaultButton>
-            </TooltipTrigger>
-            <TooltipContent className="right-2.5">About</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Delete />
+        <SaveFile />
+        <Fix />
+        <SaveChanges />
+        <Expand />
       </div>
     </div>
   );

@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import WindowBar from "./components/WindowBar";
 import "./styles.css";
 
+import { Toaster } from "./components/Globals/Toaster";
+
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 
@@ -20,6 +22,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route path="/" Component={App} />
           <Route path="/code" Component={Code} />
         </Routes>
+        <Toaster />
       </HashRouter>
     </Provider>
   </React.StrictMode>

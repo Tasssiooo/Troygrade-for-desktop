@@ -21,6 +21,7 @@ export default {
           DEFAULT: "hsla(var(--foreground))",
           accent: "hsl(var(--foreground-accent))",
           muted: "hsl(var(--foreground-muted))",
+          highlight: "hsl(var(--foreground-highlight))"
         },
         button: {
           DEFAULT: "hsl(var(--button))",

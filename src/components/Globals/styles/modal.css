@@ -17,7 +17,7 @@
   border-image: linear-gradient(to top, #785a28 0, #463714 50%, #463714 100%) 1
     stretch;
 
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .dialog-close {

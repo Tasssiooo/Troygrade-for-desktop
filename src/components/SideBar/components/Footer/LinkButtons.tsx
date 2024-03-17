@@ -10,7 +10,7 @@ import { GitHubIssues, GitHubLogo } from "@/components/Globals/Icons";
 export default function LinkButtons() {
   return (
     <div className="flex flex-row space-x-1">
-      <TooltipProvider delayDuration={0}>
+      <TooltipProvider delayDuration={250}>
         <Tooltip>
           <TooltipTrigger asChild>
             <a
@@ -27,7 +27,7 @@ export default function LinkButtons() {
           <TooltipContent>Report an issue</TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      <TooltipProvider delayDuration={0}>
+      <TooltipProvider delayDuration={250}>
         <Tooltip>
           <TooltipTrigger asChild>
             <a

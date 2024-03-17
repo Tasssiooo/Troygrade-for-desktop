@@ -15,7 +15,7 @@ export default function Footer() {
     <div className="flex flex-row w-full h-8">
       <LinkButtons />
       <AppVersion />
-      <TooltipProvider delayDuration={0}>
+      <TooltipProvider delayDuration={250}>
         <Tooltip>
           <TooltipTrigger asChild>
             <DefaultButton size="icon">

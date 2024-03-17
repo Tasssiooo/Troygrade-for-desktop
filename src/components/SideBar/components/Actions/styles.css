@@ -1,4 +1,4 @@
-button.action {
+label.action, button.action {
   @apply bg-button-foreground hover:bg-button-foreground-accent cursor-pointer size-[30px]
   [mask-repeat:no-repeat] [mask-position:center];
 }
@@ -9,7 +9,7 @@ button.action.list {
 button.action.search {
   @apply [mask-image:url(../../../../assets/images/search_mask.png)] [mask-size:20px];
 }
-button.action.add {
+label.action.add {
   @apply [mask-image:url(../../../../assets/images/icon_plus.png)] [mask-size:12px];
 }
 

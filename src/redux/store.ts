@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import handleReducer from "./reducers/handleSlice";
+import appReducer from "./reducers/appSlice";
 
 export const store = configureStore({
   reducer: {
-    handle: handleReducer,
+    app: appReducer,
   },
 });
 

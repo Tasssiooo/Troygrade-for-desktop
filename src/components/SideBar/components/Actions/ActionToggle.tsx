@@ -1,13 +1,27 @@
 import * as Toolbar from "@radix-ui/react-toolbar";
 
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { selectedFiles } from "@/redux/reducers/appSlice";
 
 export default function ActionToggle() {
-  const [isAllSelected, setisAllSelected] = useState(false);
+  const files = useAppSelector((state) => state.app.files);
+  const selected = useAppSelector((state) => state.app.selectedFiles);
+
+  const dispatch = useAppDispatch();
+
+  function handleSelectAll() {
+    if (selected.length !== files.length) {
+      const resolved = files.map((entry) => entry.id);
+      dispatch(selectedFiles(resolved));
+    } else {
+      dispatch(selectedFiles([]));
+    }
+  }
+
   return (
     <Toolbar.ToggleGroup
       type="single"
-      onValueChange={() => setisAllSelected((prev) => !prev)}
+      onValueChange={handleSelectAll}
       className="h-full"
     >
       <Toolbar.ToggleItem
@@ -15,7 +29,11 @@ export default function ActionToggle() {
         value="_"
       >
         <div
-          className={isAllSelected ? "toggleImage on" : "toggleImage off"}
+          className={
+            files.length > 0 && selected.length === files.length
+              ? "toggleImage on"
+              : "toggleImage off"
+          }
         ></div>
         Select all
       </Toolbar.ToggleItem>
