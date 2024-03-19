@@ -18,13 +18,15 @@ export default function SaveChanges() {
   const dispatch = useAppDispatch();
 
   function handleSaveChanges() {
-    const resolvedFiles = entries.map((entry) =>
-      entry.id === active?.id ? ({ ...entry, content: changes }) : entry
-    );
+    if (changes) {
+      const resolvedFiles = entries.map((entry) =>
+        entry.id === active?.id ? { ...entry, content: changes } : entry
+      );
 
-    localStorage.setItem("editor-code", changes);
+      localStorage.setItem("editor-code", changes);
 
-    dispatch(files(resolvedFiles));
+      dispatch(files(resolvedFiles));
+    }
   }
 
   return (
