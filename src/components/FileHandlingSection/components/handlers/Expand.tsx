@@ -37,7 +37,7 @@ export default function Expand() {
             <External />
           </DefaultButton>
         </TooltipTrigger>
-        <TooltipContent className="right-2.5">
+        <TooltipContent className="right-2.5 z-[99]">
           Expand code editor
         </TooltipContent>
       </Tooltip>
