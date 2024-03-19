@@ -82,7 +82,8 @@
         "title": "troygrade-desktop",
         "width": 1024,
         "height": 539,
-        "center": true
+        "center": true,
+        "visible": false
       }
     ],
     "security": {
