@@ -8,6 +8,7 @@ export interface States {
   activeFile?: Entry;
   selectedFiles: string[];
   editorChanges: string;
+  continueModal: boolean;
 }
 
 const initialState: States = {
@@ -25,6 +26,7 @@ const initialState: States = {
   activeFile: undefined,
   selectedFiles: [],
   editorChanges: "",
+  continueModal: false,
 };
 
 export const appSlice = createSlice({
@@ -71,6 +73,12 @@ export const appSlice = createSlice({
         editorChanges: action.payload,
       };
     },
+    continueModal: (state, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        continueModal: action.payload,
+      };
+    },
   },
 });
 
@@ -81,6 +89,7 @@ export const {
   activeFile,
   selectedFiles,
   editorChanges,
+  continueModal
 } = appSlice.actions;
 
 export default appSlice.reducer;
