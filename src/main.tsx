@@ -5,7 +5,7 @@ import "./styles.css";
 
 import { invoke } from "@tauri-apps/api/tauri";
 
-import { Toaster } from "./components/Globals/Toaster";
+import { Toaster } from "./components/Globals/Sonner";
 
 import { Provider } from "react-redux";
 import { store } from "./redux/store";

@@ -2,22 +2,23 @@ import SideBar from "./components/SideBar";
 import FileHandlingSection from "./components/FileHandlingSection";
 import ContinueModal from "./components/FileHandlingSection/components/handlers/Fix/ContinueModal";
 
-import { useToast } from "./components/Globals/use-toast";
+import { toast } from "sonner";
 
 import { useAppSelector } from "./redux/hooks";
 import { useEffect } from "react";
 
 export default function App() {
-  const { toast } = useToast();
-
   const failedFiles = useAppSelector((state) => state.app.failedFiles);
 
   useEffect(() => {
     if (failedFiles.length > 0) {
       failedFiles.forEach((entry) => {
-        toast({
-          title: `Error: ${entry.name} - ${entry.type}`,
+        toast(`Error: ${entry.name} - ${entry.type}`, {
           description: `${entry.error}`,
+          action: {
+            label: "Close",
+            onClick: () => console.log("Close"),
+          },
         });
       });
     }

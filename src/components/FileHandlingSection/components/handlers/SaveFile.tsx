@@ -12,11 +12,9 @@ import { useAppSelector } from "@/redux/hooks";
 import { save } from "@tauri-apps/api/dialog";
 import { readTextFile, writeTextFile, BaseDirectory } from "@tauri-apps/api/fs";
 
-import { useToast } from "@/components/Globals/use-toast";
+import { toast } from "sonner";
 
 export default function SaveFile() {
-  const { toast } = useToast();
-
   const active = useAppSelector((state) => state.app.activeFile);
 
   async function handleSaveFile() {
@@ -42,16 +40,22 @@ export default function SaveFile() {
         });
 
         if (isThereContent) {
-          toast({
-            title: `Done!`,
+          toast(`Done!`, {
             description: `The file "${active?.name}" has been created and written successfully!`,
+            action: {
+              label: "Close",
+              onClick: () => console.log("Close"),
+            },
           });
         }
       }
     } catch (error: any) {
-      toast({
-        title: `Something went wrong!`,
+      toast(`Something went wrong!`, {
         description: `Error: ${error.message}`,
+        action: {
+          label: "Close",
+          onClick: () => console.log("Close"),
+        },
       });
     }
   }

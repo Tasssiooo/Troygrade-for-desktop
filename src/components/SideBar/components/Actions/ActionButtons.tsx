@@ -19,14 +19,21 @@ import { handleLoadFiles } from "@/lib/handlers";
 import { cn } from "@/lib/utils";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { continueModal } from "@/redux/reducers/appSlice";
+import { continueModal, selectedFiles } from "@/redux/reducers/appSlice";
+
+import { open } from "@tauri-apps/api/dialog";
+import { writeTextFile, BaseDirectory, readTextFile } from "@tauri-apps/api/fs";
 
 import { useEffect, useState } from "react";
 
+import { toast } from "sonner";
+
 export default function ActionButtons() {
+
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const selected = useAppSelector((state) => state.app.selectedFiles);
+  const files = useAppSelector((state) => state.app.files);
 
   const dispatch = useAppDispatch();
 
@@ -35,6 +42,63 @@ export default function ActionButtons() {
       setOpenDropdown(false);
     }
   }, [selected]);
+
+  async function handleSaveBatch() {
+    try {
+      const selectDir = await open({
+        directory: true,
+        multiple: false,
+        title: `Select a directory to save the files`,
+      });
+
+      if (typeof selectDir === "string") {
+        selected.forEach(async (id) => {
+          try {
+            const file = files.find((entry) => entry.id === id);
+
+            await writeTextFile(`${selectDir}/${file?.name}.txt`, file?.content, {
+              dir: BaseDirectory.AppConfig,
+            });
+
+            const isThereContent = await readTextFile(
+              `${selectDir}/${file?.name}.txt`,
+              {
+                dir: BaseDirectory.AppConfig,
+              }
+            );
+
+            if (isThereContent) {
+              toast(`Done!`, {
+                description: `The file "${file?.name}" has been created and written successfully!`,
+                action: {
+                  label: "Close",
+                  onClick: () => console.log("Close"),
+                },
+              });
+            }
+          } catch (error: any) {
+            toast(`Something went wrong while writing some of the files!`, {
+              description: `Error: ${error.message}`,
+              action: {
+                label: "Close",
+                onClick: () => console.log("Close"),
+              },
+            });
+          }
+        });
+      }
+
+      dispatch(selectedFiles([]));
+    } catch (error: any) {
+      toast(`Something went wrong!`, {
+        description: `Error: ${error.message}`,
+        action: {
+          label: "Close",
+          onClick: () => console.log("Close"),
+        },
+      });
+    }
+  }
 
   return (
     <>
@@ -99,7 +163,7 @@ export default function ActionButtons() {
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
               <Delete />
             </DropdownMenuItem>
-            <DropdownMenuItem>Save</DropdownMenuItem>
+            <DropdownMenuItem onSelect={handleSaveBatch}>Save</DropdownMenuItem>
             <DropdownMenuItem
               onSelect={() =>
                 dispatch(continueModal({ show: true, method: "batch" }))
