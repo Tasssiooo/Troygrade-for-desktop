@@ -6,11 +6,32 @@ import {
   TooltipTrigger,
 } from "@/components/Globals/Tooltip";
 
+import { Settings } from "@/types/types";
+import { ChangeEvent } from "react";
+
 interface Props {
+  index: number;
   label: string;
+  value: string;
+  setSettings: (s: any) => void;
 }
 
-export default function PathInput({ label }: Props) {
+export default function PathInput({ index, label, value, setSettings }: Props) {
+  function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
+    setSettings((prev: Settings[]) => {
+      const arr = [...prev];
+      const obj = { ...arr[index] };
+
+      if (label === "Assets path") {
+        obj.assetsPath = e.target.value;
+      } else {
+        obj.filePath = e.target.value;
+      }
+
+      return arr.map((s, i) => (i === index ? obj : s));
+    });
+  }
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-row items-center space-x-1 mb-0.5">
@@ -65,7 +86,7 @@ export default function PathInput({ label }: Props) {
         </TooltipProvider>
       </div>
       <div className="flex flex-row space-x-1 items-center">
-        <Input type="text" id={label} />
+        <Input type="text" value={value} onChange={handleOnChange} id={label} />
         <label
           htmlFor={label}
           className="w-[20px] h-[20px] bg-contain bg-no-repeat bg-[url(./assets/images/icon-edit.png)]"

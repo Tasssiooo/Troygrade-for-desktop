@@ -14,8 +14,6 @@ import {
   ModalTrigger,
 } from "@/components/Globals/Modal";
 
-import ContinueModal from "./Fix/ContinueModal";
-
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { continueModal } from "@/redux/reducers/appSlice";
 
@@ -23,7 +21,7 @@ import { handleConvertFiles } from "@/lib/handlers";
 
 export default function Fix() {
   const active = useAppSelector((state) => state.app.activeFile);
-  
+
   const dispatch = useAppDispatch();
 
   function handleDefaultSettings() {
@@ -37,7 +35,12 @@ export default function Fix() {
           <Tooltip>
             <TooltipTrigger asChild>
               <ModalTrigger asChild>
-                <DefaultButton disabled={active ? false : true} size="icon">
+                <DefaultButton
+                  disabled={
+                    active && active.type === "CONV_TROYBIN" ? false : true
+                  }
+                  size="icon"
+                >
                   <Wrench />
                 </DefaultButton>
               </ModalTrigger>
@@ -62,12 +65,17 @@ export default function Fix() {
               </DefaultButton>
             </ModalClose>
             <ModalClose asChild>
-              <DefaultButton onClick={() => dispatch(continueModal(true))}>Continue</DefaultButton>
+              <DefaultButton
+                onClick={() =>
+                  dispatch(continueModal({ show: true, method: "single" }))
+                }
+              >
+                Continue
+              </DefaultButton>
             </ModalClose>
           </div>
         </ModalContent>
       </Modal>
-      <ContinueModal />
     </>
   );
 }

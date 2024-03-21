@@ -20,7 +20,7 @@ export default function Handlers() {
         <Tooltip>
           <TooltipTrigger asChild>
             <div>
-              <span className="text-sm text-foreground-highlight relative top-1.5 truncate inline-block max-w-56">
+              <span className="text-sm text-foreground-highlight relative top-1.5 truncate inline-block max-w-96">
                 {active?.name}
               </span>
             </div>

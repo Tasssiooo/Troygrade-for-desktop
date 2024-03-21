@@ -9,7 +9,6 @@ export interface Settings {
   assetsPath: string;
   filePath: string;
   namesOnly: boolean;
-  settingsPreset: "Default" | string;
   updateFileTypes: boolean;
 }
 

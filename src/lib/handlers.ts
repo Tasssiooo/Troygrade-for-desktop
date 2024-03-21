@@ -1,20 +1,26 @@
-import { FileType, Entry } from "@/types/types";
+import { FileType, Entry, Settings } from "@/types/types";
 
 import { v4 as uuid } from "uuid";
 
 import TroybinConverter from "./TroybinConverter/Main";
 import MigrateConvertedTroybin from "./TroybinMigrationTool/Main";
 
-import {
-  activeFile,
-  files,
-  failedFiles,
-} from "@/redux/reducers/appSlice";
+import { activeFile, files, failedFiles } from "@/redux/reducers/appSlice";
 import { store } from "@/redux/store";
 
-const fileSettings = store.getState().app.fileSettings;
+const defaultSettings = {
+  assetsPath: "ASSETS/Characters/[character name]/Skins/[skin]/Particles",
+  filePath: "Characters/[character name]/Skins/[skin number]/Particles",
+  namesOnly: false,
+  settingsPreset: "Default",
+  updateFileTypes: true,
+};
 
-export function handleConvertFiles(tbins: Entry[], tbinIDs: string[]) {
+export function handleConvertFiles(
+  tbins: Entry[],
+  tbinIDs: string[],
+  fileSettings: Settings[] = [defaultSettings]
+) {
   const screwedFiles = [...store.getState().app.failedFiles];
   const newFiles = [...store.getState().app.files];
 
@@ -51,9 +57,6 @@ export function handleConvertFiles(tbins: Entry[], tbinIDs: string[]) {
                 originalFileID: tbin.id,
               };
             }
-
-            if (tbinIDs.length === 1) {
-            }
           } catch (err: any) {
             console.log(err);
             screwedFiles.push({
@@ -75,8 +78,6 @@ export function handleConvertFiles(tbins: Entry[], tbinIDs: string[]) {
               originalFileID: tbin.id,
             };
 
-            if (tbinIDs.length === 1) {
-            }
           } catch (err: any) {
             console.log(err);
             screwedFiles.push({

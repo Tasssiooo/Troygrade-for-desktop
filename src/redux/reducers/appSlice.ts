@@ -1,32 +1,32 @@
-import { Entry, FailedFile, Settings } from "@/types/types";
+import { Entry, FailedFile } from "@/types/types";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+type Method = "single" | "batch";
+
+interface Config {
+  show: boolean;
+  method: Method;
+};
 
 export interface States {
   files: Entry[];
-  fileSettings: Settings[];
   failedFiles: FailedFile[];
   activeFile?: Entry;
   selectedFiles: string[];
   editorChanges: string;
-  continueModal: boolean;
+  continueModal: Config;
 }
 
 const initialState: States = {
   files: [],
-  fileSettings: [
-    {
-      assetsPath: "ASSETS/Characters/[character name]/Skins/[skin]/Particles",
-      filePath: "Characters/[character name]/Skins/[skin number]/Particles",
-      namesOnly: false,
-      settingsPreset: "Default",
-      updateFileTypes: true,
-    },
-  ],
   failedFiles: [],
   activeFile: undefined,
   selectedFiles: [],
   editorChanges: "",
-  continueModal: false,
+  continueModal: {
+    show: false,
+    method: "single",
+  },
 };
 
 export const appSlice = createSlice({
@@ -37,12 +37,6 @@ export const appSlice = createSlice({
       return {
         ...state,
         files: action.payload,
-      };
-    },
-    fileSettings: (state, action: PayloadAction<Settings[]>) => {
-      return {
-        ...state,
-        fileSettings: action.payload,
       };
     },
     failedFiles: (state, action: PayloadAction<FailedFile[]>) => {
@@ -73,7 +67,7 @@ export const appSlice = createSlice({
         editorChanges: action.payload,
       };
     },
-    continueModal: (state, action: PayloadAction<boolean>) => {
+    continueModal: (state, action: PayloadAction<Config>) => {
       return {
         ...state,
         continueModal: action.payload,
@@ -84,12 +78,11 @@ export const appSlice = createSlice({
 
 export const {
   files,
-  fileSettings,
   failedFiles,
   activeFile,
   selectedFiles,
   editorChanges,
-  continueModal
+  continueModal,
 } = appSlice.actions;
 
 export default appSlice.reducer;

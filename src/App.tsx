@@ -1,5 +1,6 @@
 import SideBar from "./components/SideBar";
 import FileHandlingSection from "./components/FileHandlingSection";
+import ContinueModal from "./components/FileHandlingSection/components/handlers/Fix/ContinueModal";
 
 import { useToast } from "./components/Globals/use-toast";
 
@@ -26,6 +27,7 @@ export default function App() {
     <>
       <SideBar />
       <FileHandlingSection />
+      <ContinueModal />
     </>
   );
 }
