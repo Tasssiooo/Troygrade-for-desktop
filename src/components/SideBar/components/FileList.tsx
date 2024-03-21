@@ -62,7 +62,7 @@ export default function FileList() {
   }, [files]);
 
   return (
-    <div className="w-full h-[calc(100%-9.2rem)]">
+    <div className="w-full h-[calc(100%-9.2rem)] overflow-x-hidden overflow-y-auto">
       <Roster
         type="multiple"
         value={activeRosterItems}

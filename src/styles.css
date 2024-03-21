@@ -54,3 +54,21 @@
     border border-t-[hsl(40,54%,41%)];
   }
 }
+
+/* Width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c99c3f;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #fdd27a;
+}
