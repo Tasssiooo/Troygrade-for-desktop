@@ -15,25 +15,21 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Code from "./windows/Code";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <HashRouter>
+        <WindowBar />
+        <Routes>
+          <Route path="/" Component={App} />
+          <Route path="/code" Component={Code} />
+        </Routes>
+        <Toaster />
+      </HashRouter>
+    </Provider>
+  </React.StrictMode>
 );
 
 document.addEventListener("DOMContentLoaded", () => {
-  root.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <HashRouter>
-          <WindowBar />
-          <Routes>
-            <Route path="/" Component={App} />
-            <Route path="/code" Component={Code} />
-          </Routes>
-          <Toaster />
-        </HashRouter>
-      </Provider>
-    </React.StrictMode>
-  );
-
   invoke("show_main_window");
 });
