@@ -44,7 +44,7 @@
   }
   html,
   body {
-    @apply w-screen h-screen overflow-hidden select-none;
+    @apply w-screen h-screen overflow-hidden select-none cursor-default;
   }
   body {
     @apply font-display font-bold antialiased text-foreground;
