@@ -1,8 +1,20 @@
-import { appWindow } from "@tauri-apps/api/window";
+import { WebviewWindow, appWindow } from "@tauri-apps/api/window";
 
 import "./index.css";
 
 export default function WindowBar() {
+
+  function handleOpenHelpWindow() {
+    new WebviewWindow("help", {
+      title: "Troygrade: how to use Troygrade",
+      minWidth: 512,
+      minHeight: 256,
+      decorations: false,
+      fullscreen: false,
+      url: "#/help",
+    });
+  }
+
   return (
     <div
       data-tauri-drag-region
@@ -13,7 +25,7 @@ export default function WindowBar() {
           <button
             className="controller help"
             aria-label="Help"
-            onClick={() => {}}
+            onClick={handleOpenHelpWindow}
           ></button>
           <button
             className="controller hide"

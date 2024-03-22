@@ -14,6 +14,11 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 
 import App from "./App";
 import Code from "./windows/Code";
+import Help from "./windows/Help";
+
+document.addEventListener("DOMContentLoaded", () => {
+  invoke("show_main_window");
+});
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -23,13 +28,10 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <Routes>
           <Route path="/" Component={App} />
           <Route path="/code" Component={Code} />
+          <Route path="/help" Component={Help} />
         </Routes>
         <Toaster />
       </HashRouter>
     </Provider>
   </React.StrictMode>
 );
-
-document.addEventListener("DOMContentLoaded", () => {
-  invoke("show_main_window");
-});
