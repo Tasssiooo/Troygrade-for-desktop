@@ -43,8 +43,7 @@ jobs:
         uses: oven-sh/setup-bun@v1
 
       - name: Install Rust (Stable)
-        run:
-          curl https://sh.rustup.rs -sSf | sh -s -- -y
+        run: curl https://sh.rustup.rs -sSf | sh -s -- -y
 
       - name: Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
@@ -55,7 +54,7 @@ jobs:
       - name: Install app dependencies from lockfile and build web (bun)
         if: matrix.platform != 'windows-latest'
         run: bun install
-      
+
       - name: Install app dependencies from lockfile and build web (npm)
         if: matrix.platform == 'windows-latest'
         run: npm install
@@ -66,6 +65,8 @@ jobs:
         # go to repository Settings => Action => General => Workflow permissions => Switch to Read and Write permisions
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
         with:
           # tauri-action replaces \_\_VERSION\_\_ with the app version
           tagName: ${{ github.ref_name }}
