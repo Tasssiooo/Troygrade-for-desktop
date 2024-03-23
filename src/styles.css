@@ -40,7 +40,7 @@
 
 @layer base {
   * {
-    @apply border-border box-border;
+    @apply border-border box-border cursor-default;
   }
   *::-webkit-scrollbar {
     @apply size-[3px];
@@ -56,7 +56,7 @@
   }
   html,
   body {
-    @apply w-screen h-screen overflow-hidden select-none cursor-default;
+    @apply w-screen h-screen overflow-hidden select-none;
   }
   body {
     @apply font-display font-bold antialiased text-foreground;
@@ -64,5 +64,10 @@
   #root {
     @apply min-h-full bg-[url(./assets/images/background.png)] bg-window-sm bg-center bg-no-repeat
     border border-t-[hsl(40,54%,41%)];
+  }
+  input,
+  textarea,
+  pre {
+    @apply cursor-text;
   }
 }
