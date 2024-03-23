@@ -1,30 +1,13 @@
-import { DefaultButton } from "@/components/Globals/DefaultButton";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/Globals/Tooltip";
-import { InfoSign } from "@/components/Globals/Icons";
-
 import LinkButtons from "./Footer/LinkButtons";
 import AppVersion from "./Footer/AppVersion";
+import About from "./Footer/About";
 
 export default function Footer() {
   return (
     <div className="flex flex-row w-full h-8">
       <LinkButtons />
       <AppVersion />
-      <TooltipProvider delayDuration={250}>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <DefaultButton size="icon">
-              <InfoSign />
-            </DefaultButton>
-          </TooltipTrigger>
-          <TooltipContent>About</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <About />
     </div>
   );
 }
