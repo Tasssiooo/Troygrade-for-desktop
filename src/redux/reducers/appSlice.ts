@@ -6,7 +6,12 @@ type Method = "single" | "batch";
 interface Config {
   show: boolean;
   method: Method;
-};
+}
+
+interface Filter {
+  show: boolean;
+  content: string;
+}
 
 export interface States {
   files: Entry[];
@@ -15,6 +20,7 @@ export interface States {
   selectedFiles: string[];
   editorChanges: string;
   continueModal: Config;
+  filter: Filter;
 }
 
 const initialState: States = {
@@ -26,6 +32,10 @@ const initialState: States = {
   continueModal: {
     show: false,
     method: "single",
+  },
+  filter: {
+    show: false,
+    content: "",
   },
 };
 
@@ -73,6 +83,12 @@ export const appSlice = createSlice({
         continueModal: action.payload,
       };
     },
+    filter: (state, action: PayloadAction<Filter>) => {
+      return {
+        ...state,
+        filter: action.payload,
+      };
+    },
   },
 });
 
@@ -83,6 +99,7 @@ export const {
   selectedFiles,
   editorChanges,
   continueModal,
+  filter,
 } = appSlice.actions;
 
 export default appSlice.reducer;

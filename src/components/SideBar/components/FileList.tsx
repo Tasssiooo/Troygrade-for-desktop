@@ -12,10 +12,7 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import {
-  selectedFiles,
-  activeFile,
-} from "@/redux/reducers/appSlice";
+import { selectedFiles, activeFile } from "@/redux/reducers/appSlice";
 
 import oldIcon from "@/assets/images/heimerdinger_circle_old.png";
 import newIcon from "@/assets/images/heimerdinger_circle_new.png";
@@ -24,8 +21,15 @@ export default function FileList() {
   const [activeRosterItems, setActiveRosterItems] = useState<string[]>([]);
 
   const files = useAppSelector((state) => state.app.files);
+  const filter = useAppSelector((state) => state.app.filter);
   const active = useAppSelector((state) => state.app.activeFile);
   const selected = useAppSelector((state) => state.app.selectedFiles);
+
+  const rosterElements = !filter.content
+    ? files
+    : files.filter((entry) =>
+        entry.name.toLowerCase().includes(filter.content.toLowerCase())
+      );
 
   const dispatch = useAppDispatch();
 
@@ -73,7 +77,7 @@ export default function FileList() {
           <RosterContent>
             <ul>
               {files?.length ? (
-                files.map(
+                rosterElements.map(
                   (entry) =>
                     entry.type === "CONV_TROYBIN" && (
                       <li
@@ -116,7 +120,8 @@ export default function FileList() {
                           <span
                             className={cn(
                               "text-foreground-muted truncate leading-5 tracking-[0.025em]",
-                              active?.id === entry.id && "text-foreground-highlight"
+                              active?.id === entry.id &&
+                                "text-foreground-highlight"
                             )}
                           >
                             {entry.name}
@@ -145,7 +150,7 @@ export default function FileList() {
           <RosterContent>
             <ul>
               {files?.length ? (
-                files.map(
+                rosterElements.map(
                   (entry) =>
                     entry.type === "MIG_BIN" && (
                       <li
@@ -188,7 +193,8 @@ export default function FileList() {
                           <span
                             className={cn(
                               "text-foreground-muted truncate leading-5 tracking-[0.025em]",
-                              active?.id === entry.id && "text-foreground-highlight"
+                              active?.id === entry.id &&
+                                "text-foreground-highlight"
                             )}
                           >
                             {entry.name}

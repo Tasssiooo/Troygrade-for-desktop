@@ -19,7 +19,11 @@ import { handleLoadFiles } from "@/lib/handlers";
 import { cn } from "@/lib/utils";
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { continueModal, selectedFiles } from "@/redux/reducers/appSlice";
+import {
+  continueModal,
+  filter,
+  selectedFiles,
+} from "@/redux/reducers/appSlice";
 
 import { open } from "@tauri-apps/api/dialog";
 import { writeTextFile, BaseDirectory, readTextFile } from "@tauri-apps/api/fs";
@@ -29,11 +33,11 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export default function ActionButtons() {
-
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const selected = useAppSelector((state) => state.app.selectedFiles);
   const files = useAppSelector((state) => state.app.files);
+  const filterState = useAppSelector((state) => state.app.filter);
 
   const dispatch = useAppDispatch();
 
@@ -42,6 +46,10 @@ export default function ActionButtons() {
       setOpenDropdown(false);
     }
   }, [selected]);
+
+  function handleFilter() {
+    dispatch(filter({ ...filterState, show: true }));
+  }
 
   async function handleSaveBatch() {
     try {
@@ -56,9 +64,13 @@ export default function ActionButtons() {
           try {
             const file = files.find((entry) => entry.id === id);
 
-            await writeTextFile(`${selectDir}/${file?.name}.txt`, file?.content, {
-              dir: BaseDirectory.AppConfig,
-            });
+            await writeTextFile(
+              `${selectDir}/${file?.name}.txt`,
+              file?.content,
+              {
+                dir: BaseDirectory.AppConfig,
+              }
+            );
 
             const isThereContent = await readTextFile(
               `${selectDir}/${file?.name}.txt`,
@@ -101,79 +113,81 @@ export default function ActionButtons() {
   }
 
   return (
-    <>
-      <div className="flex flex-row items-center">
+    <div className="flex flex-row items-center">
+      <TooltipProvider delayDuration={0}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Toolbar.Button asChild>
+              <button
+                type="button"
+                className="action search"
+                onClick={handleFilter}
+              ></button>
+            </Toolbar.Button>
+          </TooltipTrigger>
+          <TooltipContent sideOffset={0} side="bottom">
+            Filter
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      <TooltipProvider delayDuration={0}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Toolbar.Button asChild>
+              <label htmlFor="explorer" role="button" className="action add">
+                <input
+                  id="explorer"
+                  type="file"
+                  accept=".txt, .troybin"
+                  multiple
+                  hidden
+                  onChange={(e) => handleLoadFiles(e.target.files!)}
+                />
+              </label>
+            </Toolbar.Button>
+          </TooltipTrigger>
+          <TooltipContent sideOffset={0} side="bottom">
+            Add files
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+      <DropdownMenu
+        open={openDropdown}
+        onOpenChange={() => setOpenDropdown((prev) => !prev)}
+      >
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>
               <Toolbar.Button asChild>
-                <button type="button" className="action search"></button>
+                <DropdownMenuTrigger
+                  className={cn(
+                    "mx-1.5",
+                    selected.length > 1 ? "block" : "hidden"
+                  )}
+                >
+                  <ThreeDotsVertical />
+                </DropdownMenuTrigger>
               </Toolbar.Button>
             </TooltipTrigger>
             <TooltipContent sideOffset={0} side="bottom">
-              Filter
+              Batch actions
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-        <TooltipProvider delayDuration={0}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Toolbar.Button asChild>
-                <label htmlFor="explorer" role="button" className="action add">
-                  <input
-                    id="explorer"
-                    type="file"
-                    accept=".txt, .troybin"
-                    multiple
-                    hidden
-                    onChange={(e) => handleLoadFiles(e.target.files!)}
-                  />
-                </label>
-              </Toolbar.Button>
-            </TooltipTrigger>
-            <TooltipContent sideOffset={0} side="bottom">
-              Add files
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <DropdownMenu
-          open={openDropdown}
-          onOpenChange={() => setOpenDropdown((prev) => !prev)}
-        >
-          <TooltipProvider delayDuration={0}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Toolbar.Button asChild>
-                  <DropdownMenuTrigger
-                    className={cn(
-                      "mx-1.5",
-                      selected.length > 1 ? "block" : "hidden"
-                    )}
-                  >
-                    <ThreeDotsVertical />
-                  </DropdownMenuTrigger>
-                </Toolbar.Button>
-              </TooltipTrigger>
-              <TooltipContent sideOffset={0} side="bottom">
-                Batch actions
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <DropdownMenuContent>
-            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-              <Delete />
-            </DropdownMenuItem>
-            <DropdownMenuItem onSelect={handleSaveBatch}>Save</DropdownMenuItem>
-            <DropdownMenuItem
-              onSelect={() =>
-                dispatch(continueModal({ show: true, method: "batch" }))
-              }
-            >
-              Convert
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
-    </>
+        <DropdownMenuContent>
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <Delete />
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={handleSaveBatch}>Save</DropdownMenuItem>
+          <DropdownMenuItem
+            onSelect={() =>
+              dispatch(continueModal({ show: true, method: "batch" }))
+            }
+          >
+            Convert
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 }

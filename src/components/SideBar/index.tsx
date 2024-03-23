@@ -1,7 +1,8 @@
+import Header from "./components/Header";
 import Actions from "./components/Actions";
+import Filter from "./components/Filter";
 import FileList from "./components/FileList";
 import Footer from "./components/Footer";
-import Header from "./components/Header";
 
 export default function SideBar() {
   return (
@@ -9,6 +10,7 @@ export default function SideBar() {
       <div className="flex flex-col h-full w-full">
         <Header />
         <Actions />
+        <Filter />
         <FileList />
         <Footer />
       </div>
