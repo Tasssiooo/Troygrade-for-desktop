@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "beaufortforlolja";
+  font-weight: 400;
+  src: url(./assets/fonts/beaufortforlolja-regular.ttf);
+}
+
+@font-face {
+  font-family: "beaufortforlolja";
+  font-weight: 700;
+  src: url(./assets/fonts/beaufortforlolja-bold.ttf);
+}
+
+@layer base {
+  :root {
+    --background: 210 90% 4%;
+    --background-accent: 0 0% 41%;
+    --background-active: 0 0% 45%;
+    --foreground: 0, 0%, 100%, 0.87;
+    --foreground-accent: 0 0% 96.1%;
+    --foreground-muted: 0 0% 45.1%;
+    --foreground-highlight: 45 38% 69%;
+
+    --button: 212 25% 10%;
+    --button-active: 210 14% 14%;
+    --button-inner: 210 14% 14%;
+    --button-foreground: 45 38% 69%;
+    --button-foreground-accent: 40 50% 88%;
+    --button-foreground-active: 38 50% 31%;
+    --button-border-active: 38 50% 25%;
+
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --border: 200 20% 15%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border box-border;
+  }
+  *::-webkit-scrollbar {
+    @apply size-[3px];
+  }
+  *::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    @apply bg-button-border rounded;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    @apply bg-[hsl(38,45%,45%)];
+  }
+  html,
+  body {
+    @apply w-screen h-screen overflow-hidden select-none cursor-default;
+  }
+  body {
+    @apply font-display font-bold antialiased text-foreground;
+  }
+  #root {
+    @apply min-h-full bg-[url(./assets/images/background.png)] bg-window-sm bg-center bg-no-repeat
+    border border-t-[hsl(40,54%,41%)];
+  }
+}

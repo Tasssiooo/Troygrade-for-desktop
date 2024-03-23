@@ -1,10 +1,8 @@
 [package]
-name = "troygrade"
-version = "0.0.2"
+name = "troygrade-desktop"
+version = "0.0.3"
 description = "Troygrade version for desktop"
-authors = ["Tássio", "Leischii"]
-license-file = "LICENSE"
-repository = ""
+authors = ["Tasssiooo", "Leischii"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -13,7 +11,7 @@ edition = "2021"
 tauri-build = { version = "1.5", features = [] }
 
 [dependencies]
-tauri = { version = "1.5", features = [ "dialog-open", "window-show", "window-unmaximize", "window-unminimize", "window-minimize", "window-maximize", "window-hide", "window-start-dragging", "window-close", "dialog-save", "fs-write-file", "window-create", "shell-open"] }
+tauri = { version = "1.5", features = [ "updater", "fs-read-file", "window-create", "fs-write-file", "dialog-save", "dialog-open", "window-close", "window-hide", "window-show", "window-minimize", "window-start-dragging", "shell-open"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 

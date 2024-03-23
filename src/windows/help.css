@@ -1,0 +1,19 @@
+.Step h2 {
+  @apply text-left text-lg mb-2;
+}
+.Step .step-number {
+  @apply text-[#e2b151];
+}
+.Step figure {
+  @apply border-2 border-b-[#6b5028] border-t-[#c7a86b] border-x-[#a07a30]
+  w-max mx-5 transition-shadow hover:shadow hover:shadow-[#c7a86b];
+}
+.Step figure figcaption {
+  @apply w-full bg-[rgb(1,10,19)] p-2 border-b-2 border-b-[#a07a30] text-sm;
+}
+.Step figure figcaption ul {
+  @apply list-inside list-disc;
+}
+.Step .sub {
+  @apply ml-[52px];
+}

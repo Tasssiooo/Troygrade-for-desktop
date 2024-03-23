@@ -1,14 +1,13 @@
 {
   "build": {
-    "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "bun run dev",
+    "beforeBuildCommand": "bun run build",
     "devPath": "http://localhost:1420",
-    "distDir": "../dist",
-    "withGlobalTauri": false
+    "distDir": "../dist"
   },
   "package": {
-    "productName": "Troygrade",
-    "version": "0.0.2"
+    "productName": "Troygrade Desktop",
+    "version": "0.0.3"
   },
   "tauri": {
     "allowlist": {
@@ -19,67 +18,96 @@
       },
       "fs": {
         "all": false,
-        "scope": ["$APP/*", "$DOCUMENT/*", "$DOWNLOAD/*"],
+        "copyFile": false,
+        "createDir": false,
+        "exists": false,
+        "readDir": false,
+        "readFile": true,
+        "removeDir": false,
+        "removeFile": false,
+        "renameFile": false,
+        "scope": ["*"],
         "writeFile": true
       },
       "dialog": {
         "all": false,
-        "save": true,
-        "open": true
+        "ask": false,
+        "confirm": false,
+        "message": false,
+        "open": true,
+        "save": true
       },
       "window": {
         "all": false,
-        "create": true,
+        "center": false,
         "close": true,
+        "create": true,
         "hide": true,
-        "show": true,
-        "maximize": true,
+        "maximize": false,
         "minimize": true,
-        "unmaximize": true,
-        "unminimize": true,
-        "startDragging": true
+        "print": false,
+        "requestUserAttention": false,
+        "setAlwaysOnTop": false,
+        "setClosable": false,
+        "setContentProtected": false,
+        "setCursorGrab": false,
+        "setCursorIcon": false,
+        "setCursorPosition": false,
+        "setCursorVisible": false,
+        "setDecorations": false,
+        "setFocus": false,
+        "setFullscreen": false,
+        "setIcon": false,
+        "setIgnoreCursorEvents": false,
+        "setMaxSize": false,
+        "setMaximizable": false,
+        "setMinSize": false,
+        "setMinimizable": false,
+        "setPosition": false,
+        "setResizable": false,
+        "setSize": false,
+        "setSkipTaskbar": false,
+        "setTitle": false,
+        "show": true,
+        "startDragging": true,
+        "unmaximize": false,
+        "unminimize": false
       }
-    },
-    "bundle": {
-      "active": true,
-      "targets": "all",
-      "identifier": "com.tauri.troygrade",
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "macOS": {
-        "minimumSystemVersion": "10.13"
-      }
-    },
-    "security": {
-      "csp": null
     },
     "windows": [
       {
         "decorations": false,
         "fullscreen": false,
         "resizable": false,
-        "visible": false,
-        "title": "Troygrade",
+        "title": "troygrade-desktop",
         "width": 1024,
         "height": 576,
-        "center": true
-      },
-      {
-        "width": 1024,
-        "height": 576,
-        "decorations": false,
-        "fullscreen": false,
-        "resizable": false,
-        "url": "#/splashscreen",
-        "label": "splashscreen",
-        "title": "Troygrade: Splashscreen",
-        "center": true
+        "center": true,
+        "visible": false
       }
-    ]
+    ],
+    "security": {
+      "csp": null
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.tasssiooo.leischii.troygrade",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+    },
+    "updater": {
+      "active": true,
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEI4NDk0OTczMzZFMUI2NEYKUldSUHR1RTJjMGxKdU5QODRjUTVLZWN0VVhhaEMwMzk0MXlsN2h4K1Bmc3JSanRVT1Rwb1lzRHcK",
+      "endpoints": [
+        "https://gist.githubusercontent.com/Tasssiooo/48f6c4af1a2d4add2e7b176a4e3e6634/raw"
+      ]
+    }
   }
 }
