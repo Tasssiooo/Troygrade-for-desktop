@@ -53,7 +53,7 @@ jobs:
 
       - name: Install app dependencies from lockfile and build web (bun)
         if: matrix.platform != 'windows-latest'
-        run: bun install
+        run: bun install --frozen-lockfile
 
       - name: Install app dependencies from lockfile and build web (npm)
         if: matrix.platform == 'windows-latest'
