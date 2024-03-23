@@ -8,6 +8,7 @@ export default function WindowBar() {
     new WebviewWindow("help", {
       title: "Troygrade: how to use Troygrade",
       minWidth: 512,
+      width: 1024,
       minHeight: 256,
       decorations: false,
       fullscreen: false,
