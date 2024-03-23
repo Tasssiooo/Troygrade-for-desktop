@@ -12,7 +12,7 @@ import { store } from "./redux/store";
 
 import { HashRouter, Routes, Route } from "react-router-dom";
 
-import App from "./App";
+import App from "./windows/App";
 import Code from "./windows/Code";
 import Help from "./windows/Help";
 

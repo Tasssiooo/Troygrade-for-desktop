@@ -1,10 +1,10 @@
-import SideBar from "./components/SideBar";
-import FileHandlingSection from "./components/FileHandlingSection";
-import ContinueModal from "./components/FileHandlingSection/components/handlers/Fix/ContinueModal";
+import SideBar from "../components/SideBar";
+import FileHandlingSection from "../components/FileHandlingSection";
+import ContinueModal from "../components/FileHandlingSection/components/handlers/Fix/ContinueModal";
 
 import { toast } from "sonner";
 
-import { useAppSelector } from "./redux/hooks";
+import { useAppSelector } from "../redux/hooks";
 import { useEffect } from "react";
 
 export default function App() {
