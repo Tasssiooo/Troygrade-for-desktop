@@ -1,0 +1,27 @@
+{
+  "name": "troygrade-desktop",
+  "private": true,
+  "version": "0.0.4",
+  "type": "module",
+  "scripts": {
+    "prepare": "panda codegen",
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-shell": "^2",
+    "radix-vue": "^1.9.8",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@pandacss/dev": "^0.47.0",
+    "@tauri-apps/cli": "^2",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1",
+    "vue-tsc": "^2.0.22"
+  }
+}
