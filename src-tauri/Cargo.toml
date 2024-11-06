@@ -14,6 +14,16 @@ edition = "2021"
 name = "troygrade_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
+[profile.dev]
+incremental = true
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true
+
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
 
