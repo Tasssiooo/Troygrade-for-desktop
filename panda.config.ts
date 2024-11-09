@@ -40,7 +40,7 @@ export default defineConfig({
       w: "100vw",
       h: "100vh",
       overflow: "hidden",
-    backgroundImage: "url(./assets/images/background.png)",
+      backgroundImage: "url(./assets/images/background.png)",
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
