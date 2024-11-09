@@ -27,10 +27,20 @@ export const buttonRecipe = defineRecipe({
         },
         borderColor: { base: "#a07a30", _active: "#614920" },
         borderTopColor: { base: "#c7a86b", _hover: "#f0e5d1" },
-        minWidth: "38px",
-        h: "8",
+        minW: "38px",
+        minH: "8",
         color: { base: "#cdbe91", _hover: "#f0e6d2", _active: "#785a28" },
         bg: { base: "#1e2328", _active: "#1e2328" },
+        "> svg": {
+          w: "7",
+          h: "5",
+          py: "0.5",
+          fontSize: "xl",
+          outlineWidth: "2",
+          outlineStyle: "solid",
+          outlineColor: "#141a21",
+          outlineOffset: "-1"
+        }
       },
     },
     mask: {
