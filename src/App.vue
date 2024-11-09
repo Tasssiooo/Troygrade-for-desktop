@@ -4,6 +4,5 @@ import ControllersBar from "./ui/components/controllers-bar/index.vue";
 
 <template>
   <ControllersBar />
-  <main>
-  </main>
+  <main></main>
 </template>
