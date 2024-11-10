@@ -2,7 +2,7 @@
 import { DialogTitle } from "radix-vue";
 import { css } from "../../../../../styled-system/css";
 
-const dialog_title = css({
+const title = css({
   borderBottom: "1px solid #1e282d",
   h: "9",
   mb: "2",
@@ -15,7 +15,7 @@ const dialog_title = css({
 </script>
 
 <template>
-  <DialogTitle :class="dialog_title">
+  <DialogTitle :class="title">
     <slot></slot>
   </DialogTitle>
 </template>
