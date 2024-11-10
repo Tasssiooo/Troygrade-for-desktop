@@ -1,7 +1,7 @@
 import { css } from "../../../../../../styled-system/css";
 
 const header = css({
-  borderBottom: "1px solid",
+  borderBottom: "1px solid #1f292e",
   w: "full",
   minH: "14",
 });
