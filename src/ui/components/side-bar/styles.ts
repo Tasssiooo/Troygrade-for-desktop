@@ -15,7 +15,4 @@ const section_wrapper = css({
   h: "full",
 });
 
-export {
-  section,
-  section_wrapper,
-};
+export { section, section_wrapper };

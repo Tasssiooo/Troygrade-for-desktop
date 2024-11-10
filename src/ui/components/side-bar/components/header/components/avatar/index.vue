@@ -1,7 +1,7 @@
 <script setup lang="ts">
-  import { AvatarImage, AvatarRoot } from "radix-vue";
-  import { root, ring, image } from "./styles.ts";
-  import logo from "../../../../../../../assets/images/troygrade-icon.png"
+import { AvatarImage, AvatarRoot } from "radix-vue";
+import { root, ring, image } from "./styles.ts";
+import logo from "../../../../../../../assets/images/troygrade-icon.png";
 </script>
 
 <template>

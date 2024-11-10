@@ -10,23 +10,19 @@ const root = css({
 
 const ring = css({
   pos: "absolute",
-  backgroundImage: "url(assets/images/social_panel_level_ring.png)",
-  backgroundPosition: "center",
-  backgroundSize: "contain",
-  backgroundRepeat: "no-repeat",
   w: "70px",
   h: "70px",
+  backgroundPosition: "center",
+  backgroundImage: "url(assets/images/social_panel_level_ring.png)",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "contain",
 });
 
 const image = css({
-  w: "11",
-  h: "11",
   objectFit: "cover",
   rounded: "full",
+  w: "11",
+  h: "11",
 });
 
-export {
-  root,
-  ring,
-  image,
-};
+export { root, ring, image };

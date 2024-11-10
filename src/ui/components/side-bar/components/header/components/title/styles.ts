@@ -12,13 +12,13 @@ const anchor = css({
 
 const status_circle = css({
   display: "inline-block",
-  bg: "#1e825a",
+  border: "2px solid #36d987",
+  rounded: "50%",
   w: "2.5",
   h: "2.5",
-  rounded: "50%",
-  shadow: "sm",
   shadowColor: "#010a13",
-  border: "2px solid #36d987",
+  bg: "#1e825a",
+  shadow: "sm",
 });
 
 const author_name = css({
@@ -26,9 +26,4 @@ const author_name = css({
   fontSize: "xs",
 });
 
-export {
-  title,
-  anchor,
-  status_circle,
-  author_name
-};
+export { title, anchor, status_circle, author_name };
