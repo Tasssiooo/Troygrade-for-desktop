@@ -72,10 +72,8 @@ const x_icon = css({
   bg: "#cdbe91",
   maskImage: "url(assets/images/x-icon.png)",
   maskSize: "10px",
-  _hover: {
-    "&x-icon": {
-      bg: "#f0e6d2",
-    },
+  _groupHover: {
+    bg: "#f0e6d2",
   },
 });
 </script>
@@ -86,7 +84,7 @@ const x_icon = css({
     <DialogContent :class="content">
       <slot></slot>
       <DialogClose :class="close">
-        <div :class="close_border">
+        <div :class="close_border + ' group'">
           <div :class="inner_bg">
             <div :class="x_icon" />
           </div>
