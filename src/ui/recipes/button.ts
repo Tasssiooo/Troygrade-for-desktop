@@ -14,6 +14,8 @@ export const buttonRecipe = defineRecipe({
         h: "18px",
         bg: { base: "#cebf92", _hover: "#f0e6d1" },
         maskSize: "contain",
+        maskPosition: "center",
+        maskRepeat: "no-repeat"
       },
       square: {
         display: "flex",
@@ -52,6 +54,21 @@ export const buttonRecipe = defineRecipe({
       },
       hide: {
         maskImage: "url(assets/images/control-hide.png)",
+      },
+      add: {
+        w: "30px",
+        h: "30px",
+        maskImage: "url(assets/images/icon_plus.png)",
+        maskSize: "12px",
+      },
+      filter: {
+        w: "30px",
+        h: "30px",
+        maskImage: "url(assets/images/search_mask.png)",
+        maskSize: "20px",
+      },
+      batch: {
+        maskImage: "url(assets/images/sort_mask.png)",
       },
     },
   },
