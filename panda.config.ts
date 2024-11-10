@@ -1,5 +1,5 @@
 import { defineConfig } from "@pandacss/dev";
-import { buttonRecipe } from "./src/ui/recipes";
+import { buttonRecipe, toggleRecipe } from "./src/ui/recipes";
 
 export default defineConfig({
   // Whether to use css reset
@@ -16,6 +16,7 @@ export default defineConfig({
     extend: {
       recipes: {
         button: buttonRecipe,
+        toggle: toggleRecipe,
       },
     },
   },
