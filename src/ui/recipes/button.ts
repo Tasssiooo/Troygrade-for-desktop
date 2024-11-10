@@ -32,26 +32,26 @@ export const buttonRecipe = defineRecipe({
         color: { base: "#cdbe91", _hover: "#f0e6d2", _active: "#785a28" },
         bg: { base: "#1e2328", _active: "#1e2328" },
         "> svg": {
+          outlineOffset: "-1",
+          outlineWidth: "2",
           w: "7",
           h: "5",
           py: "0.5",
-          fontSize: "xl",
-          outlineWidth: "2",
-          outlineStyle: "solid",
           outlineColor: "#141a21",
-          outlineOffset: "-1"
-        }
+          fontSize: "20px",
+          outlineStyle: "solid",
+        },
       },
     },
     mask: {
       close: {
-        maskImage: "url(src/assets/images/control-close.png)",
+        maskImage: "url(assets/images/control-close.png)",
       },
       help: {
-        maskImage: "url(src/assets/images/control-help.png)",
+        maskImage: "url(assets/images/control-help.png)",
       },
       hide: {
-        maskImage: "url(src/assets/images/control-hide.png)",
+        maskImage: "url(assets/images/control-hide.png)",
       },
     },
   },

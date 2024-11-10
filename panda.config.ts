@@ -40,7 +40,7 @@ export default defineConfig({
       w: "100vw",
       h: "100vh",
       overflow: "hidden",
-      backgroundImage: "url(./assets/images/background.png)",
+      backgroundImage: "url(assets/images/background.png)",
       backgroundSize: "cover",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
@@ -51,13 +51,13 @@ export default defineConfig({
   globalFontface: {
     beaufortforlolja: [
       {
-        src: 'url(./src/assets/fonts/beaufortforlolja-regular.ttf) format("TrueType")',
+        src: 'url(assets/fonts/beaufortforlolja-regular.ttf) format("TrueType")',
         fontWeight: 400,
         fontStyle: "normal",
         fontDisplay: "swap",
       },
       {
-        src: 'url(./src/assets/fonts/beaufortforlolja-bold.ttf) format("TrueType")',
+        src: 'url(assets/fonts/beaufortforlolja-bold.ttf) format("TrueType")',
         fontWeight: 700,
         fontStyle: "normal",
         fontDisplay: "swap",
