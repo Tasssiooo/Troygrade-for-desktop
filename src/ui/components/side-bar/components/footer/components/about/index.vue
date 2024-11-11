@@ -7,7 +7,7 @@ import {
 } from "../../../../../modal";
 import MdiInformationSlabCircleOutline from "../../../../../icons/mdi-information-slab-circle-outline.vue";
 import { button } from "../../../../../../../../styled-system/recipes";
-import { about_text, anchor } from "./styles.ts";
+import { about_text, anchor, authors } from "./styles.ts";
 </script>
 
 <template>
@@ -57,6 +57,35 @@ import { about_text, anchor } from "./styles.ts";
           >
             lol-pytools</a
           >.
+        </p>
+      </div>
+      <div :class="authors">
+        <p>
+          <a
+            :class="anchor"
+            href="https://leischii.github.io/"
+            rel="noreferrer external"
+            target="_blank"
+            >Troygrade</a
+          >
+          by
+          <a
+            :class="anchor"
+            href="https://github.com/Leischii"
+            rel="noreferrer external"
+            target="_blank"
+            >Leischii</a
+          >
+        </p>
+        <p>
+          Desktop port by
+          <a
+            :class="anchor"
+            href="https://github.com/Tasssiooo/"
+            rel="noreferrer external"
+            target="_blank"
+            >Tasssiooo</a
+          >
         </p>
       </div>
     </ModalContent>

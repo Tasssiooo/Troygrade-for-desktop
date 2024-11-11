@@ -16,4 +16,11 @@ const anchor = css({
   },
 });
 
-export { about_text, anchor };
+const authors = css({
+  display: "flex",
+  flexDir: "row",
+  justifyContent: "space-between",
+  mt: "4",
+});
+
+export { about_text, anchor, authors };
