@@ -4,7 +4,7 @@ const section = css({
   pos: "relative",
   z: "50",
   w: "52",
-  h: "screen",
+  h: "full",
   bg: "#010a13",
 });
 
