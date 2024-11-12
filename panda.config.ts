@@ -48,6 +48,10 @@ export default defineConfig({
       border: "1px solid #1f292e",
       borderTopColor: "#a17b30",
     },
+    "#app, main": {
+      w: "full",
+      h: "full"
+    }
   },
   globalFontface: {
     beaufortforlolja: [
