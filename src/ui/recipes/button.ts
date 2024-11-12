@@ -13,9 +13,9 @@ export const buttonRecipe = defineRecipe({
         w: "18px",
         h: "18px",
         bg: { base: "#cebf92", _hover: "#f0e6d1" },
-        maskSize: "contain",
         maskPosition: "center",
-        maskRepeat: "no-repeat"
+        maskRepeat: "no-repeat",
+        maskSize: "contain",
       },
       square: {
         display: "flex",

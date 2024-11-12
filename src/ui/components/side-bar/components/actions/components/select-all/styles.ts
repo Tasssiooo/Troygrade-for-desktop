@@ -7,14 +7,14 @@ const group = css({
 const item = css({
   display: "inline-flex",
   flexDir: "row",
-  h: "full",
-  rowGap: "1",
   alignItems: "center",
-  fontSize: "sm",
+  rowGap: "1",
+  h: "full",
   color: {
     base: "#cebf92",
     _hover: "#f0e6d1",
   },
+  fontSize: "sm",
 });
 
 export { group, item };

@@ -22,12 +22,12 @@ const trigger = css({
 });
 
 const arrow = css({
+  rotate: "-90deg",
   border: "4px solid transparent",
   borderTopColor: "#ffffdd",
-  rotate: "-90deg",
   _groupExpanded: {
     rotate: "0deg",
-  }
+  },
 });
 
 export { header, trigger, arrow };

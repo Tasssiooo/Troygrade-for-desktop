@@ -4,10 +4,10 @@ export const toggleRecipe = defineRecipe({
   className: "toggle",
   description: "Styles for toggle buttons.",
   base: {
+    flexShrink: "0",
     w: "5",
     h: "5",
     mr: "1",
-    flexShrink: "0",
     backgroundImage: "url(assets/images/btn_icon.png)",
     backgroundSize: "cover",
   },

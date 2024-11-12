@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ToolbarRoot } from 'radix-vue';
+import { ToolbarRoot } from "radix-vue";
 import { actions_wrapper, buttons_wrapper } from "./styles.ts";
 
 import SelectAll from "./components/select-all/index.vue";

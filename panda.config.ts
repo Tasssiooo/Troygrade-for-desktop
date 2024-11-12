@@ -50,8 +50,8 @@ export default defineConfig({
     },
     "#app, main": {
       w: "full",
-      h: "full"
-    }
+      h: "full",
+    },
   },
   globalFontface: {
     beaufortforlolja: [
