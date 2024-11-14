@@ -82,7 +82,7 @@ const x_icon = css({
   <DialogPortal>
     <DialogOverlay :class="overlay" />
     <DialogContent :class="content">
-      <slot></slot>
+      <slot />
       <DialogClose :class="close">
         <div :class="close_border + ' group'">
           <div :class="inner_bg">
