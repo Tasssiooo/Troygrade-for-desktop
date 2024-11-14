@@ -1,9 +1,9 @@
-import { reactive } from "vue";
 import { Entry } from "../types";
+
+import { reactive } from "vue";
 
 interface appState {
   files: Entry[] | never;
-  failedFiles: Entry[] | never;
   activeFile: Entry | null;
   selectedFiles: Entry[] | never;
   editorChanges: string;
@@ -11,7 +11,6 @@ interface appState {
 
 const appState: appState = reactive({
   files: [],
-  failedFiles: [],
   activeFile: null,
   selectedFiles: [],
   editorChanges: "",

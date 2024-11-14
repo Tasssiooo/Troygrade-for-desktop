@@ -7,9 +7,8 @@ export type FileType =
 
 export interface Entry {
   id: string;
-  error?: string;
   name: string;
-  content?: ArrayBuffer | Uint8Array | string;
+  content: ArrayBuffer | Uint8Array | string;
   type: FileType;
 }
 
