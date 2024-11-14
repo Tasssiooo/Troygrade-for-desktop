@@ -7,6 +7,10 @@ interface appState {
   activeFile: Entry | null;
   selectedFiles: Entry[] | never;
   editorChanges: string;
+  filter: {
+    show: boolean;
+    value: string;
+  };
 }
 
 const appState: appState = reactive({
@@ -14,6 +18,10 @@ const appState: appState = reactive({
   activeFile: null,
   selectedFiles: [],
   editorChanges: "",
+  filter: {
+    show: false,
+    value: "",
+  },
 });
 
 export default appState;
