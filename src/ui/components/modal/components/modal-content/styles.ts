@@ -1,11 +1,4 @@
-<script setup lang="ts">
-import {
-  DialogContent,
-  DialogPortal,
-  DialogOverlay,
-  DialogClose,
-} from "radix-vue";
-import { css } from "../../../../../styled-system/css";
+import { css } from "../../../../../../styled-system/css";
 
 const overlay = css({
   pos: "fixed",
@@ -76,20 +69,5 @@ const x_icon = css({
     bg: "#f0e6d2",
   },
 });
-</script>
 
-<template>
-  <DialogPortal>
-    <DialogOverlay :class="overlay" />
-    <DialogContent :class="content">
-      <slot />
-      <DialogClose :class="close">
-        <div :class="close_border + ' group'">
-          <div :class="inner_bg">
-            <div :class="x_icon" />
-          </div>
-        </div>
-      </DialogClose>
-    </DialogContent>
-  </DialogPortal>
-</template>
+export { overlay, content, close, close_border, inner_bg, x_icon };
