@@ -2,10 +2,12 @@
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
   "description": "Capability for the main window",
-  "windows": ["main"],
+  "windows": [
+    "main"
+  ],
   "permissions": [
-    "core:default", 
-    "shell:allow-open", 
+    "core:default",
+    "shell:allow-open",
     "core:window:allow-close",
     "core:window:allow-hide",
     "core:window:allow-show",
@@ -13,6 +15,24 @@
     "core:window:allow-minimize",
     "core:window:allow-unmaximize",
     "core:window:allow-unminimize",
-    "core:window:allow-start-dragging"
+    "core:window:allow-start-dragging",
+    "core:path:allow-basename",
+    "dialog:default",
+    "dialog:deny-ask",
+    "dialog:deny-confirm",
+    "dialog:deny-message",
+    "dialog:allow-open",
+    "dialog:allow-save",
+    "fs:default",
+    "fs:allow-read",
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        { "path": "$APPDATA" }, 
+        { "path": "$APPDATA/**" }, 
+        { "path": "$HOME" },
+        { "path": "$HOME/**" }
+      ]
+    }
   ]
 }
