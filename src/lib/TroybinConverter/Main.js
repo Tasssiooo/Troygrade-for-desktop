@@ -533,7 +533,7 @@ function writeini(troybinParam) {
 }
 
 export default function TroybinConverter(troybin) {
-  let result = []; // eslint-disable-line
+  let result = ""; 
   buffer = troybin;
 
   const ibin = read();
