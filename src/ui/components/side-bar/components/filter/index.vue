@@ -19,7 +19,7 @@ onUpdated(() => {
       name="filter"
       placeholder="Filter"
       autocomplete="off"
-      :value="appState.filter.value"
+      v-model="appState.filter.value"
       :class="filter"
       @change="
         /* Delete this (e.target as HTMLTextAreaElement) and make typescript cry. */
