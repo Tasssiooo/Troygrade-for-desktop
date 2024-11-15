@@ -94,44 +94,45 @@ async function handleLoadFiles() {
         baseDir: BaseDirectory.Home,
       });
 
-      const fileext = await extname(path);
+      const ext = await extname(path);
 
-      let filename = await basename(path);
-      let filetype: FileType = "TROYBIN";
+      let name = await basename(path);
+      let type: FileType = "TROYBIN";
+      let content: ArrayBufferLike | string = file.buffer;
 
-      if (fileext !== "troybin") {
-        filename = filename.replace(fileext, "");
+      if (ext !== "troybin") {
+        name = name.replace(ext, "");
 
-        const text = new TextDecoder().decode(file.buffer);
+        content = new TextDecoder().decode(content);
 
-        switch (text[0]) {
+        switch (content[0]) {
           case "[":
-            filetype = "CONV_TROYBIN";
+            type = "CONV_TROYBIN";
             break;
           case '"':
-            filetype = "MIG_BIN";
+            type = "MIG_BIN";
             break;
           case "#":
-            filetype = "CONV_BIN";
+            type = "CONV_BIN";
             break;
           default:
-            filetype = "UNKNOWN_FILE_TYPE";
+            type = "UNKNOWN_FILE_TYPE";
             break;
         }
       } else {
-        filename = filename.replace(".troybin", "");
+        name = name.replace(".troybin", "");
       }
 
-      if (filetype !== "UNKNOWN_FILE_TYPE") {
+      if (type !== "UNKNOWN_FILE_TYPE") {
         handleConvertFile({
           id: uuid(),
-          name: filename,
-          content: file.buffer,
-          type: filetype,
+          name,
+          content,
+          type,
         });
       } else {
         toast.error("Error", {
-          description: `Unknown file type: ${filename + fileext}`,
+          description: `Unknown file type: ${name + ext}`,
         });
       }
     });
