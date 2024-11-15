@@ -17,14 +17,14 @@ export const toggleRecipe = defineRecipe({
         backgroundPosition: {
           base: "0px 0px",
           _groupHover: "0px -20px",
-          _groupActive: "0px -40px",
+          ".group:is(:active) &": "0px -40px",
         },
       },
       on: {
         backgroundPosition: {
           base: "0px -80px",
           _groupHover: "0px -100px",
-          _groupActive: "0px -120px",
+          ".group:is(:active) &": "0px -120px",
         },
       },
     },
