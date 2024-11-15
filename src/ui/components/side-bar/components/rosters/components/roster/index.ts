@@ -1,4 +1,5 @@
 import { AccordionItem, AccordionRoot } from "radix-vue";
+
 import RosterTrigger from "./components/roster-trigger/index.vue";
 import RosterContent from "./components/roster-content/index.vue";
 
