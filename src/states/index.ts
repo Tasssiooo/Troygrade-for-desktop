@@ -5,7 +5,7 @@ import { reactive } from "vue";
 interface appState {
   files: Entry[] | never;
   activeFile: Entry | null;
-  selectedFiles: Entry[] | never;
+  selectedFiles: string[] | never;
   editorChanges: string;
   filter: {
     show: boolean;
