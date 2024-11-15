@@ -52,6 +52,11 @@ export default defineConfig({
       w: "full",
       h: "full",
     },
+    main: {
+      display: "flex",
+      flexDir: "row",
+      alignItems: "center",
+    },
   },
   globalFontface: {
     beaufortforlolja: [
