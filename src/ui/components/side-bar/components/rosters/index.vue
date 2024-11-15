@@ -4,35 +4,55 @@ import {
   RosterItem,
   RosterTrigger,
   RosterContent,
-} from "./components/roster/";
+} from "./components/roster";
+
 import { roster_area } from "./styles";
 
-const rosterItems = [
-  {
-    title: "troybins",
-    content: "Yes. It adheres to the WAI-ARIA design pattern.",
-  },
-  {
-    title: "bins",
-    content:
-      "Yes. It's unstyled by default, giving you freedom over the look and feel.",
-  },
-];
+import { ref, watch } from "vue";
+
+import FileItem from "./components/file-item/index.vue";
+
+import appState from "../../../../../states";
+
+const model = ref<{ items: string[] }>({ items: [] });
+
+/* Watches the files state and opens the rosters automatically if there is any file */
+watch(appState.files, (newFiles) => {
+  const areThereTroys = newFiles.find((file) => file.type === "CONV_TROYBIN");
+  const areThereBins = newFiles.find((file) => file.type === "MIG_BIN");
+
+  if (areThereTroys) {
+    model.value.items = !model.value.items.includes("troybins")
+      ? [...model.value.items, "troybins"]
+      : model.value.items;
+  }
+  if (areThereBins) {
+    model.value.items = !model.value.items.includes("bins")
+      ? [...model.value.items, "bins"]
+      : model.value.items;
+  }
+});
 </script>
 
 <template>
   <div :class="roster_area">
-    <RosterRoot type="multiple">
-      <template v-for="item in rosterItems" :key="item.title">
-        <RosterItem :value="item.title">
-          <RosterTrigger>{{ item.title }}</RosterTrigger>
-          <RosterContent>
-            <div class="px-5 py-4">
-              {{ item.content }}
-            </div>
-          </RosterContent>
-        </RosterItem>
-      </template>
+    <RosterRoot
+      type="multiple"
+      v-model:modelValue="model.items"
+      :onUpdate:modelValue="(v) => (model.items = v as string[])"
+    >
+      <RosterItem value="troybins">
+        <RosterTrigger>Troybins</RosterTrigger>
+        <RosterContent>
+          <FileItem type="troybin" />
+        </RosterContent>
+      </RosterItem>
+      <RosterItem value="bins">
+        <RosterTrigger>Bins</RosterTrigger>
+        <RosterContent>
+          <FileItem type="bin" />
+        </RosterContent>
+      </RosterItem>
     </RosterRoot>
   </div>
 </template>
