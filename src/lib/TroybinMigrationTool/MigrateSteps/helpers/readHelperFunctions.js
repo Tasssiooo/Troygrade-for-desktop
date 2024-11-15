@@ -30,7 +30,7 @@ Converts string value into array with floats
 export function FormatNumber(values) {
   const formatedValue = [];
 
-  values.split(" ").forEach(value => {
+  values.split(" ").forEach((value) => {
     formatedValue.push(parseFloat(value));
   });
 
@@ -93,10 +93,10 @@ export function FormatValue(values, type, defaultAssetsPath, updateFileTypes) {
         formatedValue = invalidValue;
       }
 
-      if (formatedValue.find(value => value > 1) !== undefined) {
+      if (formatedValue.find((value) => value > 1) !== undefined) {
         const correctValues = [];
 
-        formatedValue.forEach(value => {
+        formatedValue.forEach((value) => {
           correctValues.push(value / 255);
         });
 
@@ -136,14 +136,22 @@ export function FormatValue(values, type, defaultAssetsPath, updateFileTypes) {
     case "BOOLEAN/INT":
       if (values === "4") {
         formatedValue = 4;
-      } else if (values === "\"NotWhenHigh\"" || values === "3") { // eslint-disable-line
+      } else if (values === '"NotWhenHigh"' || values === "3") {
+        // eslint-disable-line
         // TODO: Check if NotWhenHigh is actually 3
         formatedValue = 3;
-      } else if (values === "\"High\"" || values === "\"clamp\"" || values === "2") { // eslint-disable-line
+      } else if (
+        values === '"High"' ||
+        values === '"clamp"' ||
+        values === "2"
+      ) {
+        // eslint-disable-line
         formatedValue = 2;
-      } else if (values === "\"Medium\"" || values === "true" || values === "1") { // eslint-disable-line
+      } else if (values === '"Medium"' || values === "true" || values === "1") {
+        // eslint-disable-line
         formatedValue = 1;
-      } else if (values === "\"Low\"" || values === "0") { // eslint-disable-line
+      } else if (values === '"Low"' || values === "0") {
+        // eslint-disable-line
         formatedValue = 0;
       } else if (
         typeof parseInt(values, 10) === "number" ||
@@ -169,7 +177,7 @@ export function FormatValue(values, type, defaultAssetsPath, updateFileTypes) {
       }
       break;
     case "STRING_PATH":
-      formatedValue = `\"${defaultAssetsPath}/${values.replace("\"", "")}`; // eslint-disable-line
+      formatedValue = `\"${defaultAssetsPath}/${values.replace('"', "")}`; // eslint-disable-line
 
       if (updateFileTypes) {
         formatedValue = formatedValue.replace(".tga", ".dds");
@@ -228,7 +236,7 @@ export function FormatValue(values, type, defaultAssetsPath, updateFileTypes) {
         if (formatedValue.length === 1) {
           formatedValue = [
             parseFloat(formatedValue[0]),
-            parseFloat(formatedValue[0])
+            parseFloat(formatedValue[0]),
           ];
         } else {
           formatedValue = invalidValue;
@@ -298,7 +306,7 @@ export function GetStructureData(troybinArray) {
     entryAmount,
     entryStartIndices,
     systemIndex,
-    unknownIndex
+    unknownIndex,
   };
 
   return structureData;

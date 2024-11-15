@@ -8,14 +8,14 @@ const MigrateConvertedTroybin = (
   defaultFilePath,
   file,
   namesOnly,
-  updateFileTypes
+  updateFileTypes,
 ) => {
   const troybinStructure = ReadTroybin(
     defaultAssetsPath,
     namesOnly,
     file.content,
     file.name,
-    updateFileTypes
+    updateFileTypes,
   );
 
   const updatedEmitters = UpdateEmitters(troybinStructure.emitters);
@@ -23,7 +23,7 @@ const MigrateConvertedTroybin = (
     emitters: updatedEmitters,
     fileName: troybinStructure.fileName,
     system: troybinStructure.system,
-    unknown: troybinStructure.unknown
+    unknown: troybinStructure.unknown,
   };
 
   const binStructure = CreateBin(updatedTroybin, defaultFilePath);

@@ -28,7 +28,8 @@ function color(mods, args) {
   const result = args;
   let resultindex = args.length;
 
-  for (const arg in args) { // eslint-disable-line
+  for (const arg in args) {
+    // eslint-disable-line
     const argsEntry = args[arg];
 
     for (let j = 0; j < COLOR_VARS; j += 1) {
@@ -36,7 +37,8 @@ function color(mods, args) {
       resultindex += 1;
     }
 
-    for (const mod in mods) { // eslint-disable-line
+    for (const mod in mods) {
+      // eslint-disable-line
       const modEntry = mods[mod];
       result[resultindex] = `${argsEntry}${modEntry}P`;
       resultindex += 1;
@@ -55,7 +57,8 @@ function rand(mods, args) {
   const result = args;
   let resultindex = args.length;
 
-  for (const arg in args) { // eslint-disable-line
+  for (const arg in args) {
+    // eslint-disable-line
     const argsEntry = args[arg];
 
     for (let j = 0; j < RAND_VARS; j += 1) {
@@ -63,7 +66,8 @@ function rand(mods, args) {
       resultindex += 1;
     }
 
-    for (const mod in mods) { // eslint-disable-line
+    for (const mod in mods) {
+      // eslint-disable-line
       const modEntry = mods[mod];
       result[resultindex] = `${argsEntry}${modEntry}P`;
       resultindex += 1;
@@ -137,7 +141,8 @@ function flexRandVec3(args) {
   return randVec3(flexArgs);
 }
 
-function flexRandColor(args) { // eslint-disable-line
+function flexRandColor(args) {
+  // eslint-disable-line
   const flexArgs = flex(args);
 
   return randColor(flexArgs);
@@ -155,7 +160,7 @@ const materialNames = [
   "MaterialOverride%PLACEHOLDER%RenderingMode",
   "MaterialOverride%PLACEHOLDER%SubMesh",
   "MaterialOverride%PLACEHOLDER%Texture",
-  "MaterialOverride%PLACEHOLDER%UVScroll"
+  "MaterialOverride%PLACEHOLDER%UVScroll",
 ];
 
 const partFluidNames = ["fluid-params"];
@@ -165,7 +170,7 @@ const partFieldNames = [
   "field-attract-%PLACEHOLDER%",
   "field-drag-%PLACEHOLDER%",
   "field-noise-%PLACEHOLDER%",
-  "field-orbit-%PLACEHOLDER%"
+  "field-orbit-%PLACEHOLDER%",
 ];
 
 const systemNames = [
@@ -192,7 +197,7 @@ const systemNames = [
   "SoundPersistent",
   "SoundsPlayWhileOffScreen",
   "VoiceOverOnCreate",
-  "VoiceOverPersistent"
+  "VoiceOverPersistent",
 ];
 const groupNames = [
   "ExcludeAttachmentType",
@@ -321,7 +326,7 @@ const groupNames = [
   "p-childProb",
   "ChildParticleName%PLACEHOLDER%",
   "ChildSpawnAtBone%PLACEHOLDER%",
-  "ChildEmitOnDeath%PLACEHOLDER%"
+  "ChildEmitOnDeath%PLACEHOLDER%",
 ];
 const fluidNames = [
   "f-accel",
@@ -340,7 +345,7 @@ const fluidNames = [
   "f-jetdir%PLACEHOLDER%",
   "f-jetdirdiff%PLACEHOLDER%",
   "f-jetpos%PLACEHOLDER%",
-  "f-jetspeed%PLACEHOLDER%"
+  "f-jetspeed%PLACEHOLDER%",
 ];
 const fieldNames = ["f-localspace", "f-axisfrac"];
 
@@ -403,7 +408,7 @@ export default function getDictionaryEntries(nameArray) {
           randColor([
             "e-censor-modulate",
             "p-fresnel-color",
-            "p-reflection-fresnel-color"
+            "p-reflection-fresnel-color",
           ]),
           randFloat([
             "e-color-modulate",
@@ -415,14 +420,14 @@ export default function getDictionaryEntries(nameArray) {
             "p-scale",
             "p-xquadrot",
             "p-xscale",
-            "e-rate"
+            "e-rate",
           ]),
           randVec2([
             "e-ratebyvel",
             "e-uvoffset",
             "e-uvoffset-mult",
             "p-uvscroll-rgb",
-            "p-uvscroll-rgb-mult"
+            "p-uvscroll-rgb-mult",
           ]),
           randVec3([
             "Emitter-BirthRotationalAcceleration",
@@ -442,12 +447,12 @@ export default function getDictionaryEntries(nameArray) {
             "p-worldaccel",
             "p-xquadrot",
             "p-xrgba-beam-bind-distance",
-            "p-xscale"
+            "p-xscale",
           ]),
           randFloat(generateList(["e-rotation%PLACEHOLDER%"], 0, ROT_VARS)),
           ["e-rotation%PLACEHOLDER%-axis"],
           partFieldNames,
-          partFluidNames
+          partFluidNames,
         ],
         [
           0,
@@ -464,7 +469,7 @@ export default function getDictionaryEntries(nameArray) {
           undefined,
           0,
           1,
-          undefined
+          undefined,
         ],
         [
           10,
@@ -481,8 +486,8 @@ export default function getDictionaryEntries(nameArray) {
           undefined,
           ROT_VARS,
           FIELD_VARS,
-          undefined
-        ]
+          undefined,
+        ],
       );
       break;
     case "fieldNames":
@@ -496,12 +501,12 @@ export default function getDictionaryEntries(nameArray) {
             "f-frequency",
             "f-period",
             "f-radius",
-            "f-veldelta"
+            "f-veldelta",
           ]),
-          randVec3(["f-accel", "f-direction", "f-pos", "f-axisfrac"])
+          randVec3(["f-accel", "f-direction", "f-pos", "f-axisfrac"]),
         ],
         [undefined, undefined, undefined],
-        [undefined, undefined, undefined]
+        [undefined, undefined, undefined],
       );
       break;
     case "fluidNames":
@@ -511,7 +516,7 @@ export default function getDictionaryEntries(nameArray) {
       result = generateList(
         [systemNames, materialNames],
         [0, 0],
-        [GPART_VARS, MAT_VARS]
+        [GPART_VARS, MAT_VARS],
       );
       break;
     default:

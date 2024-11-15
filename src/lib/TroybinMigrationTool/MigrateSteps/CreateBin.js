@@ -5,19 +5,19 @@ const CreateBin = (troybin, defaultFilePath) => {
     name: binName,
     emitters: {
       complex: [],
-      simple: []
+      simple: [],
     },
     system: [],
-    unknowns: troybin.unknown
+    unknowns: troybin.unknown,
   };
 
-  troybin.emitters.forEach(emitter => {
+  troybin.emitters.forEach((emitter) => {
     const alreadyAdded = [];
     const binEmitters = [];
 
-    emitter.properties.forEach(property => {
+    emitter.properties.forEach((property) => {
       if (
-        alreadyAdded.filter(entry => entry === property.binGroup.name)
+        alreadyAdded.filter((entry) => entry === property.binGroup.name)
           .length === 0
       ) {
         const propertyGroup = property.binGroup.name;
@@ -25,7 +25,7 @@ const CreateBin = (troybin, defaultFilePath) => {
 
         if (property.binGroup.members.length > 0) {
           propertyParts = emitter.properties.filter(
-            props => props.binGroup.name === propertyGroup
+            (props) => props.binGroup.name === propertyGroup,
           );
         } else {
           propertyParts.push(property);
@@ -43,26 +43,28 @@ const CreateBin = (troybin, defaultFilePath) => {
           ) {
             const parentParentPropertyParts = [];
 
-            parentParent.members.forEach(parentMember => {
+            parentParent.members.forEach((parentMember) => {
               const parentMembers = emitter.properties.filter(
-                props =>
+                (props) =>
                   props.binGroup.parent !== undefined &&
                   props.binGroup.parent.name === parentMember &&
-                  props.binGroup.parent.parent.name === parentParent.name
+                  props.binGroup.parent.parent.name === parentParent.name,
               );
 
               if (parentMembers.length) {
                 const definitionGroups = [
                   ...new Set(
-                    parentMembers.map(par => par.binGroup.parent.definitionName)
-                  )
+                    parentMembers.map(
+                      (par) => par.binGroup.parent.definitionName,
+                    ),
+                  ),
                 ];
                 const troybinProperties = [];
 
-                definitionGroups.forEach(defGroup => {
+                definitionGroups.forEach((defGroup) => {
                   const propertiesMatchingGroupName = [];
 
-                  parentMembers.forEach(member => {
+                  parentMembers.forEach((member) => {
                     const editedMember = member;
 
                     if (
@@ -81,7 +83,7 @@ const CreateBin = (troybin, defaultFilePath) => {
                       const binProperty = {
                         name: editedMember.binGroup.name,
                         members: [editedMember],
-                        order: editedMember.binGroup.order
+                        order: editedMember.binGroup.order,
                       };
 
                       propertiesMatchingGroupName.push(binProperty);
@@ -91,7 +93,7 @@ const CreateBin = (troybin, defaultFilePath) => {
                   if (
                     parentMember === "fieldNoiseDefinitions" &&
                     propertiesMatchingGroupName.findIndex(
-                      binProperty => binProperty.name === "axisFraction"
+                      (binProperty) => binProperty.name === "axisFraction",
                     ) === -1
                   ) {
                     const binProperty = {
@@ -113,7 +115,7 @@ const CreateBin = (troybin, defaultFilePath) => {
                                   "radius",
                                   "frequency",
                                   "velocityDelta",
-                                  "axisFraction"
+                                  "axisFraction",
                                 ],
                                 structure: "fieldNoiseDefinitions",
                                 order: 24.4,
@@ -124,21 +126,21 @@ const CreateBin = (troybin, defaultFilePath) => {
                                     "fieldAttractionDefinitions",
                                     "fieldDragDefinitions",
                                     "fieldNoiseDefinitions",
-                                    "fieldOrbitalDefinitions"
+                                    "fieldOrbitalDefinitions",
                                   ],
                                   structure: "",
-                                  order: 24
-                                }
-                              }
-                            ]
+                                  order: 24,
+                                },
+                              },
+                            ],
                           },
                           binGroupType: "vec3",
                           binPropertyName: "",
                           binPropertyType: "",
-                          value: [1, 1, 1]
-                        }
+                          value: [1, 1, 1],
+                        },
                       ],
-                      order: 24.5
+                      order: 24.5,
                     };
 
                     propertiesMatchingGroupName.push(binProperty);
@@ -154,7 +156,7 @@ const CreateBin = (troybin, defaultFilePath) => {
                 const parentPropertyPart = {
                   name: parentMembers[0].binGroup.parent.name,
                   members: troybinProperties,
-                  order: parentMembers[0].binGroup.parent.order
+                  order: parentMembers[0].binGroup.parent.order,
                 };
 
                 parentParentPropertyParts.push(parentPropertyPart);
@@ -164,7 +166,7 @@ const CreateBin = (troybin, defaultFilePath) => {
             finalProperty = {
               name: parentParent.name,
               members: parentParentPropertyParts,
-              order: parentParent.order
+              order: parentParent.order,
             };
           } else {
             let parent;
@@ -173,11 +175,11 @@ const CreateBin = (troybin, defaultFilePath) => {
             if (Array.isArray(property.binGroup.parent)) {
               if (property.binGroup.parent[0].name.includes("primitive")) {
                 const primitive = emitter.properties.filter(
-                  props => props.troybinName === "p-type"
+                  (props) => props.troybinName === "p-type",
                 );
 
                 const correctPrimitive = property.binGroup.parent.filter(
-                  props => props.name === primitive[0].value
+                  (props) => props.name === primitive[0].value,
                 )[0];
 
                 parent = correctPrimitive;
@@ -189,20 +191,20 @@ const CreateBin = (troybin, defaultFilePath) => {
             if (parent.members.length > 0) {
               const parentPropertyParts = [];
 
-              parent.members.forEach(parentMember => {
+              parent.members.forEach((parentMember) => {
                 const members = emitter.properties.filter(
-                  props => props.binGroup.name === parentMember
+                  (props) => props.binGroup.name === parentMember,
                 );
 
                 if (members.length) {
-                  members.forEach(member => {
+                  members.forEach((member) => {
                     alreadyAdded.push(member.binGroup.name);
                   });
 
                   const parentPropertyPart = {
                     name: members[0].binGroup.name,
                     members,
-                    order: members[0].binGroup.order
+                    order: members[0].binGroup.order,
                   };
 
                   parentPropertyParts.push(parentPropertyPart);
@@ -216,13 +218,13 @@ const CreateBin = (troybin, defaultFilePath) => {
               finalProperty = {
                 name: parent.name,
                 members: parentPropertyParts,
-                order: parent.order
+                order: parent.order,
               };
             } else {
               finalProperty = {
                 name: parent.name,
                 members: propertyParts,
-                order: parent.order
+                order: parent.order,
               };
             }
           }
@@ -232,7 +234,7 @@ const CreateBin = (troybin, defaultFilePath) => {
           finalProperty = {
             name: propertyGroup,
             members: propertyParts,
-            order: property.binGroup.order
+            order: property.binGroup.order,
           };
 
           binEmitters.push(finalProperty);
@@ -264,14 +266,14 @@ const CreateBin = (troybin, defaultFilePath) => {
             name: "particleName",
             members: [],
             structure: "SimpleProperty",
-            order: 302
+            order: 302,
           },
           binGroupType: "string",
           binPropertyName: "",
           binPropertyType: "",
-          value: `\"${binName}\"` // eslint-disable-line
-        }
-      ]
+          value: `\"${binName}\"`, // eslint-disable-line
+        },
+      ],
     },
     {
       name: "particlePath",
@@ -283,27 +285,27 @@ const CreateBin = (troybin, defaultFilePath) => {
             name: "particlePath",
             members: [],
             structure: "SimpleProperty",
-            order: 303
+            order: 303,
           },
           binGroupType: "string",
           binPropertyName: "",
           binPropertyType: "",
-          value: `\"${defaultFilePath}/${binName}\"` // eslint-disable-line
-        }
-      ]
-    }
+          value: `\"${defaultFilePath}/${binName}\"`, // eslint-disable-line
+        },
+      ],
+    },
   ];
 
   const flagsBitValue = [1, 0, 0, 0, 0, 1, 0, 0];
 
-  troybin.system.forEach(property => {
+  troybin.system.forEach((property) => {
     if (property.binGroup) {
       if (property.binGroup.name === "flags") {
         flagsBitValue[property.binPropertyName] = property.value;
       } else {
         const finalProperty = {
           name: property.binGroup.name,
-          members: [property]
+          members: [property],
         };
 
         binSystemProperties.push(finalProperty);
@@ -322,15 +324,15 @@ const CreateBin = (troybin, defaultFilePath) => {
           name: "flags",
           members: [],
           structure: "SimpleProperty",
-          order: 307
+          order: 307,
         },
         binGroupType: "u16",
         binPropertyName: "",
         binPropertyType: "",
         defaultValue: 196,
-        value: flagsFinalValue
-      }
-    ]
+        value: flagsFinalValue,
+      },
+    ],
   };
 
   binSystemProperties.push(flags);

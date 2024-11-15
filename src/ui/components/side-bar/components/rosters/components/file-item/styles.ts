@@ -44,8 +44,8 @@ const info_container = css({
 });
 
 const icon = css({
+  color: "#c99c3f",
   fontSize: "4xl",
-  color: "#c99c3f"
 });
 
 const heimer_img = css({

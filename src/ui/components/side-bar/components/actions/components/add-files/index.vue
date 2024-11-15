@@ -7,5 +7,8 @@ import { handleLoadFiles } from "../../../../../../../lib/handlers";
 </script>
 
 <template>
-  <ToolbarButton :class="button({ visual: 'mask', mask: 'add' })" @click="handleLoadFiles" />
+  <ToolbarButton
+    :class="button({ visual: 'mask', mask: 'add' })"
+    @click="handleLoadFiles"
+  />
 </template>

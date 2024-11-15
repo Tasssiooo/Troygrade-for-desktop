@@ -11,14 +11,19 @@ const NAN_VALUE = parseFloat("nan");
 const RE_INT = /^[-+]?\d+$/;
 const RE_DECIMAL = /^[+-]?\d*\.?\d+(?:[Ee][+-]?\d+)?$/;
 const RE_INT_VEC = /^(?:[-+]?\d+\s+)+(?:[-+]?\d+)*$/;
-const RE_DECIMAL_VEC = /^(?:[+-]?(?:\d+\.\d*|\d*\.\d+|\d+)(?:[Ee][+-]?\d+)?\s+)+([+-]?(?:\d+\.\d*|\d*\.\d+|\d+)(?:[Ee][+-]?\d+)?)$/;
+const RE_DECIMAL_VEC =
+  /^(?:[+-]?(?:\d+\.\d*|\d*\.\d+|\d+)(?:[Ee][+-]?\d+)?\s+)+([+-]?(?:\d+\.\d*|\d*\.\d+|\d+)(?:[Ee][+-]?\d+)?)$/;
 
 function ihash(value, retParam = 0) {
   let ret = retParam;
 
   for (let i = 0; i < value.length; i += 1) {
     ret =
-      ((value[i].toLowerCase().codePointAt(0) + ((65599 * ret) & 0xffffffff) >>> 0) & 0xffffffff) >>> 0; // eslint-disable-line
+      (((value[i].toLowerCase().codePointAt(0) +
+        ((65599 * ret) & 0xffffffff)) >>>
+        0) &
+        0xffffffff) >>>
+      0; // eslint-disable-line
   }
 
   return ret;
@@ -40,7 +45,7 @@ function aIhash(sections, names) {
         const entry = {
           section: sections[i],
           nameEntry,
-          ret
+          ret,
         };
 
         result[resultIndex] = entry;
@@ -76,7 +81,7 @@ function sanitizeStr(data) {
     data
       .replace("\t", " ")
       .split(" ")
-      .forEach(dataPart => {
+      .forEach((dataPart) => {
         if (dataPart) result1.push(parseFloat(dataPart));
       });
 
@@ -87,7 +92,7 @@ function sanitizeStr(data) {
     data
       .replace("\t", " ")
       .split(" ")
-      .forEach(dataPart => {
+      .forEach((dataPart) => {
         if (dataPart) result1.push(parseFloat(dataPart));
       });
 
@@ -134,7 +139,7 @@ function readOld() {
 
     result.push({
       hash: offsetIndex,
-      value: sanitizeStr(t)
+      value: sanitizeStr(t),
     });
   }
 
@@ -165,7 +170,7 @@ function readNew() {
     for (let j = 0; j < num; j += 1) {
       result[j] = {
         hash: keys[j],
-        value: + Boolean((bools[Math.trunc(j / 8)] >> (j % 8)) & 1) // eslint-disable-line
+        value: +Boolean((bools[Math.trunc(j / 8)] >> j % 8) & 1), // eslint-disable-line
       };
     }
 
@@ -219,7 +224,7 @@ function readNew() {
 
       result[i] = {
         hash: offset.hash,
-        value: sanitizeStr(t)
+        value: sanitizeStr(t),
       };
     }
 
@@ -248,42 +253,49 @@ function readNew() {
     ["<B", 4, 0.1],
     ["<f", 4, 1],
     [stringsLength, 0],
-    ["<i", 1, 1]
+    ["<i", 1, 1],
   ];
 
-  if (flags & (1 << 13)) { // eslint-disable-line
+  if (flags & (1 << 13)) {
+    // eslint-disable-line
     console.log("Found long long!");
   }
 
-  if (Boolean(flags & (1 << 14))) { // eslint-disable-line
+  if (Boolean(flags & (1 << 14))) {
+    // eslint-disable-line
     console.log("Error! 14 doesnt exist");
   }
 
-  if (Boolean(flags & (1 << 15))) { // eslint-disable-line
+  if (Boolean(flags & (1 << 15))) {
+    // eslint-disable-line
     console.log("Error! 15 doesnt exist");
   }
 
   for (let i = 0; i < 16; i += 1) {
-    if (flags & (1 << i)) { // eslint-disable-line
+    if (flags & (1 << i)) {
+      // eslint-disable-line
       if (i < readConf.length) {
         const conf = readConf[i];
 
         if (conf.length === 0) {
           const result = readBools();
 
-          for (let property in result) { // eslint-disable-line
+          for (let property in result) {
+            // eslint-disable-line
             target.push(result[property]);
           }
         } else if (conf.length === 2) {
           const result = readStrings(conf[0], conf[1]);
 
-          for (let property in result) { // eslint-disable-line
+          for (let property in result) {
+            // eslint-disable-line
             target.push(result[property]);
           }
         } else {
           const result = readNumbers(conf[0], conf[1], conf[2]);
 
-          for (let property in result) { // eslint-disable-line
+          for (let property in result) {
+            // eslint-disable-line
             target.push(result[property]);
           }
         }
@@ -302,7 +314,7 @@ function read(newResult = undefined) {
   if (result === undefined) {
     result = {
       values: [],
-      unknownHashes: []
+      unknownHashes: [],
     };
   } else {
     if (result.values === undefined) {
@@ -331,7 +343,7 @@ function read(newResult = undefined) {
 function getValues(tbinParam, sections, names) {
   const tbin = {
     values: tbinParam.values,
-    unknownHashes: tbinParam.unknownHashes
+    unknownHashes: tbinParam.unknownHashes,
   };
 
   const result = [];
@@ -342,7 +354,7 @@ function getValues(tbinParam, sections, names) {
     const ret = h[i].ret; // eslint-disable-line
 
     const unknIndex = tbin.unknownHashes.findIndex(
-      element => element.hash === ret
+      (element) => element.hash === ret,
     );
 
     if (unknIndex !== -1) {
@@ -368,17 +380,17 @@ function getFixdict(troybin) {
   const groups = getValues(
     tbin,
     ["System"],
-    getDictionaryEntries("partGroupNames")
+    getDictionaryEntries("partGroupNames"),
   );
   const fields = getValues(
     tbin,
     groups,
-    getDictionaryEntries("partFieldNames")
+    getDictionaryEntries("partFieldNames"),
   );
   const fluids = getValues(
     tbin,
     groups,
-    getDictionaryEntries("partFluidNames")
+    getDictionaryEntries("partFluidNames"),
   );
 
   const result = [];
@@ -388,7 +400,7 @@ function getFixdict(troybin) {
     { sections: groups, names: getDictionaryEntries("groupNames") },
     { sections: fields, names: getDictionaryEntries("fieldNames") },
     { sections: fluids, names: getDictionaryEntries("fluidNames") },
-    { sections: ["System"], names: getDictionaryEntries("systemNames") }
+    { sections: ["System"], names: getDictionaryEntries("systemNames") },
   ];
 
   for (let i = 0; i < dictonary.length; i += 1) {
@@ -398,7 +410,7 @@ function getFixdict(troybin) {
       result[resultIndex] = {
         section: dicEntry[j].section,
         nameEntry: dicEntry[j].nameEntry,
-        ret: dicEntry[j].ret
+        ret: dicEntry[j].ret,
       };
       resultIndex += 1;
     }
@@ -412,7 +424,7 @@ function fix(tbin) {
 
   const result = {
     unknownHashes: [],
-    values: []
+    values: [],
   };
 
   const unks = tbin.unknownHashes;
@@ -422,22 +434,22 @@ function fix(tbin) {
   for (let i = 0; i < fixd.length; i += 1) {
     const fixDicEntry = fixd[i];
     const unknIndex = unks.findIndex(
-      element => element.hash === fixDicEntry.ret
+      (element) => element.hash === fixDicEntry.ret,
     );
 
     if (unknIndex !== -1 && !valuesFound.includes(fixDicEntry.ret)) {
       const valIndex = result.values.findIndex(
-        element => element.groupName === fixDicEntry.section
+        (element) => element.groupName === fixDicEntry.section,
       );
       const property = {
         propertyName: fixDicEntry.nameEntry,
-        value: unks[unknIndex].value
+        value: unks[unknIndex].value,
       };
 
       if (valIndex === -1) {
         const group = {
           groupName: fixDicEntry.section,
-          properties: [property]
+          properties: [property],
         };
 
         result.values[groupIndex] = group;
@@ -472,7 +484,8 @@ function writeini(troybinParam) {
   function writeValue(propertyName, value) {
     let formatedValue = `${propertyName}=${value}\r\n`;
 
-    if (typeof value === "string" && isNaN(value)) { // eslint-disable-line
+    if (typeof value === "string" && isNaN(value)) {
+      // eslint-disable-line
       formatedValue = `${propertyName}="${value}"\r\n`;
     } else if (
       typeof value === "string" ||
@@ -497,9 +510,9 @@ function writeini(troybinParam) {
   let output = "";
   const troybin = {
     values: troybinParam.values.sort((a, b) =>
-      a.groupName.localeCompare(b.groupName, "en", { numeric: true })
+      a.groupName.localeCompare(b.groupName, "en", { numeric: true }),
     ),
-    unknownHashes: troybinParam.unknownHashes
+    unknownHashes: troybinParam.unknownHashes,
   };
 
   for (let i = 0; i < troybin.values.length; i += 1) {
@@ -507,7 +520,7 @@ function writeini(troybinParam) {
     output += `[${emitter.groupName}]\r\n`;
 
     const properties = emitter.properties.sort((a, b) =>
-      a.propertyName.localeCompare(b.propertyName, "en", { numeric: true })
+      a.propertyName.localeCompare(b.propertyName, "en", { numeric: true }),
     );
 
     for (let j = 0; j < properties.length; j += 1) {
@@ -533,7 +546,7 @@ function writeini(troybinParam) {
 }
 
 export default function TroybinConverter(troybin) {
-  let result = ""; 
+  let result = "";
   buffer = troybin;
 
   const ibin = read();

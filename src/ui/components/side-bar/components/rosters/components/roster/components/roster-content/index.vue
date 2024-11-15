@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { AccordionContent } from 'radix-vue';
+import { AccordionContent } from "radix-vue";
 
-import { content } from './styles';
+import { content } from "./styles";
 </script>
 
 <template>

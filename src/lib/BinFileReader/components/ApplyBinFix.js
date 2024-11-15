@@ -2,108 +2,108 @@ const listFix = [
   {
     type: "StaticMaterialDef",
     oldString: "samplerValues: list[embed]",
-    newString: "samplerValues: list2[embed]"
+    newString: "samplerValues: list2[embed]",
   },
   {
     type: "StaticMaterialDef",
     oldString: "paramValues: list[embed]",
-    newString: "paramValues: list2[embed]"
+    newString: "paramValues: list2[embed]",
   },
   {
     type: "StaticMaterialDef",
     oldString: "switches: list[embed]",
-    newString: "switches: list2[embed]"
-  }
+    newString: "switches: list2[embed]",
+  },
 ];
 
 const mutedAudioFix = [
   {
     type: "SkinCharacterDataProperties",
     oldString: "bankUnits: list[embed]",
-    newString: "bankUnits: list2[embed]"
-  }
+    newString: "bankUnits: list2[embed]",
+  },
 ];
 
 const fileRenames131Fix = [
   {
     type: "VfxSystemDefinitionData",
     oldString: "3026_Glow_Bright.TFT_Set7.dds",
-    newString: "3026_Glow_Bright.PIE_C_12_22.dds"
+    newString: "3026_Glow_Bright.PIE_C_12_22.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "Base_SmokeErode.TFT_Set7.dds",
-    newString: "Base_SmokeErode.SRT_Preseason13_Chemtech.dds"
+    newString: "Base_SmokeErode.SRT_Preseason13_Chemtech.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "ball32_01.TFT_Set7.dds",
-    newString: "ball32_01.TFT_Set8.dds"
+    newString: "ball32_01.TFT_Set8.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "bigglow02.TFT_Set7.dds",
-    newString: "bigglow02.TFT_Set8_Carousel.dds"
+    newString: "bigglow02.TFT_Set8_Carousel.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "color-hold.UltBook_Ults_12_13_Future.dds",
-    newString: "color-hold.PIE_C_12_23.DDS"
+    newString: "color-hold.PIE_C_12_23.DDS",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "common_color-hold.TFT_Set7.dds",
-    newString: "common_color-hold.TFT_Booms_Set8.dds"
+    newString: "common_color-hold.TFT_Booms_Set8.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "common_color-rampdown32.dds",
-    newString: "common_color-rampdown32.SRT_Preseason13_Chemtech.dds"
+    newString: "common_color-rampdown32.SRT_Preseason13_Chemtech.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "common_distort-soft-shockwave.TFT_Booms_Vi.dds",
-    newString: "common_distort-soft-shockwave.dds"
+    newString: "common_distort-soft-shockwave.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "color-rampdown.TFT_Set7.dds",
-    newString: "color-rampdown.PIE_C_13_1.dds"
+    newString: "color-rampdown.PIE_C_13_1.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "color-rampdown32_03.TFT_Set7.dds",
-    newString: "color-rampdown32_03.TFT_Set8.dds"
+    newString: "color-rampdown32_03.TFT_Set8.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "disc32.PIE_C_12_19",
-    newString: "disc32.PIE_C_12_21"
+    newString: "disc32.PIE_C_12_21",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "Flame_trail_gradient.TFT_Set7.dds",
-    newString: "Flame_trail_gradient.TFT_Booms_Set8.dds"
+    newString: "Flame_trail_gradient.TFT_Booms_Set8.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "FN_Universal_Praxis_Red_001.dds",
-    newString: "FN_Universal_Praxis_Red_001.TFT_Set8.dds"
+    newString: "FN_Universal_Praxis_Red_001.TFT_Set8.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "Ground_Glow.TFT_Set7.dds",
-    newString: "Ground_Glow.TFT_Set8.dds"
+    newString: "Ground_Glow.TFT_Set8.dds",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "TFT_Glb_Gradient.TFT_Set7_Stage2",
-    newString: "TFT_Glb_Gradient.TFT_Set8"
+    newString: "TFT_Glb_Gradient.TFT_Set8",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "wind_streaks.dds",
-    newString: "wind_streaks.TFT_Set8.dds"
+    newString: "wind_streaks.TFT_Set8.dds",
   },
   {
     type: "VfxSystemDefinitionData",
@@ -114,62 +114,62 @@ const fileRenames131Fix = [
       {
         oldString:
           "ASSETS/Shared/Particles/ball32_02.Season2022_SRT_Preseason.dds",
-        newString: "ASSETS/Shared/Particles/ball32_02.TFT_Set8.dds"
+        newString: "ASSETS/Shared/Particles/ball32_02.TFT_Set8.dds",
       },
       {
         oldString:
           "ASSETS/Characters/SRU_Dragon_ChemTech/skins/base/Particles/sru_dragon_chemtech_Base_Icon_Remake_02.Season2022_SRT_Preseason.dds",
         newString:
-          "ASSETS/Maps/Particles/SR/Chemtech_Environemnt_DragonRune_02.SRT_Preseason13_Chemtech.dds"
-      }
-    ]
+          "ASSETS/Maps/Particles/SR/Chemtech_Environemnt_DragonRune_02.SRT_Preseason13_Chemtech.dds",
+      },
+    ],
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: ".Season2022_SRT_Preseason_FirstStrike.",
     newString: ".",
-    ignoreStringIncluded: true
+    ignoreStringIncluded: true,
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: ".Structure_Assetization.",
     newString: ".",
-    ignoreStringIncluded: true
+    ignoreStringIncluded: true,
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: ".SummonersRiftTeam_Season2022_AprilFools.",
     newString: ".",
-    ignoreStringIncluded: true
+    ignoreStringIncluded: true,
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: ".TFT_Set6.",
     newString: ".",
-    ignoreStringIncluded: true
-  }
+    ignoreStringIncluded: true,
+  },
 ];
 
 const particleChanges131Fix = [
   {
     type: "VfxSystemDefinitionData",
     oldString: "flags: u8",
-    newString: "flags: u16"
+    newString: "flags: u16",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "particleUVScrollRateMult: embed = IntegratedValueVector2",
-    newString: "0x22c3cf3e: embed = IntegratedValueVector2"
+    newString: "0x22c3cf3e: embed = IntegratedValueVector2",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "particleUVRotateRateMult: embed = IntegratedValueFloat",
-    newString: "0xdd36a38c: embed = IntegratedValueFloat"
+    newString: "0xdd36a38c: embed = IntegratedValueFloat",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: "0x3bb0bd85",
-    newString: "0x38123c47"
+    newString: "0x38123c47",
   },
   {
     type: "VfxSystemDefinitionData",
@@ -193,17 +193,17 @@ const particleChanges131Fix = [
       "birthUvRotateRateMult: embed = ValueFloat {",
       "0x3bb0bd85",
       "0x38123c47",
-      "emitterUvScrollRateMult"
+      "emitterUvScrollRateMult",
     ],
-    newString: "textureMult: pointer = 0xb097c1bd"
+    newString: "textureMult: pointer = 0xb097c1bd",
   },
   {
     type: "VfxSystemDefinitionData",
     oldString: [
       "scaleBirthScaleByBoundObjectSize",
-      "scaleEmitOffsetByBoundObjectSize"
+      "scaleEmitOffsetByBoundObjectSize",
     ],
-    newString: "0x4ffce322: pointer = 0xb13097f0"
+    newString: "0x4ffce322: pointer = 0xb13097f0",
   },
   {
     type: "VfxSystemDefinitionData",
@@ -211,76 +211,76 @@ const particleChanges131Fix = [
       "keywordsExcluded: list[string] = {",
       "keywordsIncluded: list[string] = {",
       "keywordsRequired: list[string] = {",
-      "spectatorPolicy"
+      "spectatorPolicy",
     ],
-    newString: "0xf50b1a41: pointer = 0xf4e37e07"
-  }
+    newString: "0xf50b1a41: pointer = 0xf4e37e07",
+  },
 ];
 
 const updaterTypeFix = [
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u8 = 0",
-    newString: ""
+    newString: "",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u32 = 0",
-    newString: ""
+    newString: "",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u8 = 4",
-    newString: "0x16860572: pointer = 0x3c38f0fa {}"
+    newString: "0x16860572: pointer = 0x3c38f0fa {}",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u32 = 4",
-    newString: "0x16860572: pointer = 0x3c38f0fa {}"
+    newString: "0x16860572: pointer = 0x3c38f0fa {}",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u8 = 5",
-    newString: "0x16860572: pointer = 0x6c816d62 {}"
+    newString: "0x16860572: pointer = 0x6c816d62 {}",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u32 = 5",
-    newString: "0x16860572: pointer = 0x6c816d62 {}"
+    newString: "0x16860572: pointer = 0x6c816d62 {}",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u8 = 6",
-    newString: "0x16860572: pointer = 0xee405aca {}"
+    newString: "0x16860572: pointer = 0xee405aca {}",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u32 = 6",
-    newString: "0x16860572: pointer = 0xee405aca {}"
+    newString: "0x16860572: pointer = 0xee405aca {}",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u8 = 16",
-    newString: "0x16860572: pointer = 0xbd71ac00 {}"
+    newString: "0x16860572: pointer = 0xbd71ac00 {}",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u32 = 16",
-    newString: "0x16860572: pointer = 0xbd71ac00 {}"
+    newString: "0x16860572: pointer = 0xbd71ac00 {}",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u8 = 22",
-    newString: "0x16860572: pointer = 0x4ccbdd5b {}"
+    newString: "0x16860572: pointer = 0x4ccbdd5b {}",
   },
   {
     type: "animationGraphData",
     oldString: "mUpdaterType: u32 = 22",
-    newString: "0x16860572: pointer = 0x4ccbdd5b {}"
-  }
+    newString: "0x16860572: pointer = 0x4ccbdd5b {}",
+  },
 ];
 
-const getChangesEntries = value => {
+const getChangesEntries = (value) => {
   switch (value) {
     case "listFix":
       return listFix;
@@ -321,7 +321,7 @@ const ApplyBinFix = (changesProps, content, metadata) => {
   }
 
   const changes = getChangesEntries(changesProps);
-  const changesTypes = [...new Set(changes.map(change => change.type))];
+  const changesTypes = [...new Set(changes.map((change) => change.type))];
 
   // Iterate bin entries
   for (let i = 0; i < metadata.length; i += 1) {
@@ -367,7 +367,7 @@ const ApplyBinFix = (changesProps, content, metadata) => {
           for (let o = 0; o < structureChange.oldString.length; o += 1) {
             const entry = {
               parent: structureChange.newString,
-              property: structureChange.oldString[o]
+              property: structureChange.oldString[o],
             };
 
             propertiesToCheck.push(entry);
@@ -383,11 +383,11 @@ const ApplyBinFix = (changesProps, content, metadata) => {
             // Get string indicating the end of the emitter (with correct spacing)
             const emitterEndIndicator = currentRow.replace(
               "VfxEmitterDefinitionData {",
-              "}"
+              "}",
             );
             const currentSpacing = currentRow.replace(
               "VfxEmitterDefinitionData {",
-              ""
+              "",
             );
 
             let skipNextLine = false;
@@ -432,10 +432,11 @@ const ApplyBinFix = (changesProps, content, metadata) => {
                     // Skip content of already existing entry
                     // Missing content will be added to it in a later step
                     skipNextLine = true;
-                    writeNextLineStopIndicator = currentEmitterContentRow.replace(
-                      `${currentProperty.parent} {`,
-                      "}"
-                    );
+                    writeNextLineStopIndicator =
+                      currentEmitterContentRow.replace(
+                        `${currentProperty.parent} {`,
+                        "}",
+                      );
 
                     break;
                   } else if (
@@ -448,18 +449,16 @@ const ApplyBinFix = (changesProps, content, metadata) => {
                       ] === "{"
                     ) {
                       changedProperties[currentProperty.parent].push(
-                        currentEmitterContentRow
+                        currentEmitterContentRow,
                       );
 
                       // Save parent and end indicator for writing next lines
                       writeNextLine = currentProperty.parent;
-                      writeNextLineStopIndicator = currentEmitterContentRow.replace(
-                        propertyToCheck,
-                        "}"
-                      );
+                      writeNextLineStopIndicator =
+                        currentEmitterContentRow.replace(propertyToCheck, "}");
                     } else {
                       changedProperties[currentProperty.parent].push(
-                        currentEmitterContentRow
+                        currentEmitterContentRow,
                       );
                     }
 
@@ -528,16 +527,17 @@ const ApplyBinFix = (changesProps, content, metadata) => {
                     ) {
                       // Write property group start
                       contentWithChangedStructure.push(
-                        currentEmitterContentRow
+                        currentEmitterContentRow,
                       );
 
                       // Save info to write rest of the property group
                       propertyFound = true;
                       writeNextLine = currentPropertyGroup;
-                      writeNextLineStopIndicator = currentEmitterContentRow.replace(
-                        `${currentPropertyGroup} {`,
-                        "}"
-                      );
+                      writeNextLineStopIndicator =
+                        currentEmitterContentRow.replace(
+                          `${currentPropertyGroup} {`,
+                          "}",
+                        );
 
                       break;
                     } else {
@@ -560,25 +560,26 @@ const ApplyBinFix = (changesProps, content, metadata) => {
                               currentPropertyToAdd.length - 1
                             ] === "{"
                           ) {
-                            const propertyEntryMatchingCurrentProperty = propertiesToCheck.find(
-                              currentEntry =>
+                            const propertyEntryMatchingCurrentProperty =
+                              propertiesToCheck.find((currentEntry) =>
                                 currentPropertyToAdd.includes(
-                                  currentEntry.property
-                                )
-                            );
+                                  currentEntry.property,
+                                ),
+                              );
 
                             // Skip next entries because part of object
                             skipNextPropertyToAdd = true;
-                            writeNextLineStopIndicator = currentPropertyToAdd.replace(
-                              propertyEntryMatchingCurrentProperty.property,
-                              "}"
-                            );
+                            writeNextLineStopIndicator =
+                              currentPropertyToAdd.replace(
+                                propertyEntryMatchingCurrentProperty.property,
+                                "}",
+                              );
                           }
 
                           // Check if current row is property to move
                           if (
                             currentEmitterContentRow.includes(
-                              currentPropertyToAdd
+                              currentPropertyToAdd,
                             )
                           ) {
                             propertyFound = true;
@@ -588,17 +589,17 @@ const ApplyBinFix = (changesProps, content, metadata) => {
                             // Write group with new structure here if new structure doesn't already exist
                             if (
                               !propertyGroupsAdded.includes(
-                                currentPropertyGroup
+                                currentPropertyGroup,
                               ) &&
                               !newStructuresAlreadyPresent.includes(
-                                newStructurePresentIndicator
+                                newStructurePresentIndicator,
                               )
                             ) {
                               const changedPropertiesGroup =
                                 changedProperties[currentPropertyGroup];
 
                               contentWithChangedStructure.push(
-                                newStructurePresentIndicator
+                                newStructurePresentIndicator,
                               );
 
                               for (
@@ -609,12 +610,12 @@ const ApplyBinFix = (changesProps, content, metadata) => {
                                 const changeToAdd = changedPropertiesGroup[q];
 
                                 contentWithChangedStructure.push(
-                                  `    ${changeToAdd}`
+                                  `    ${changeToAdd}`,
                                 );
                               }
 
                               contentWithChangedStructure.push(
-                                `    ${currentSpacing}}`
+                                `    ${currentSpacing}}`,
                               );
 
                               propertyGroupsAdded.push(currentPropertyGroup);
@@ -626,18 +627,19 @@ const ApplyBinFix = (changesProps, content, metadata) => {
                                 currentEmitterContentRow.length - 1
                               ] === "{"
                             ) {
-                              const propertyEntryMatchingCurrentProperty = propertiesToCheck.find(
-                                currentEntry =>
+                              const propertyEntryMatchingCurrentProperty =
+                                propertiesToCheck.find((currentEntry) =>
                                   currentEmitterContentRow.includes(
-                                    currentEntry.property
-                                  )
-                              );
+                                    currentEntry.property,
+                                  ),
+                                );
 
                               skipNextLine = true;
-                              writeNextLineStopIndicator = currentEmitterContentRow.replace(
-                                propertyEntryMatchingCurrentProperty.property,
-                                "}"
-                              );
+                              writeNextLineStopIndicator =
+                                currentEmitterContentRow.replace(
+                                  propertyEntryMatchingCurrentProperty.property,
+                                  "}",
+                                );
                             }
 
                             break;
@@ -700,7 +702,7 @@ const ApplyBinFix = (changesProps, content, metadata) => {
               currentRow,
               currentChange.oldString,
               currentChange.newString,
-              ignoreStringIncluded
+              ignoreStringIncluded,
             )
           ) {
             let isException = false;
@@ -715,14 +717,14 @@ const ApplyBinFix = (changesProps, content, metadata) => {
                     currentRow,
                     currentException.oldString,
                     currentException.newString,
-                    ignoreStringIncluded
+                    ignoreStringIncluded,
                   )
                 ) {
                   isException = true;
 
                   currentRow = currentRow.replace(
                     currentException.oldString,
-                    currentException.newString
+                    currentException.newString,
                   );
 
                   break;
@@ -733,7 +735,7 @@ const ApplyBinFix = (changesProps, content, metadata) => {
             if (!isException) {
               currentRow = currentRow.replace(
                 currentChange.oldString,
-                currentChange.newString
+                currentChange.newString,
               );
             }
 

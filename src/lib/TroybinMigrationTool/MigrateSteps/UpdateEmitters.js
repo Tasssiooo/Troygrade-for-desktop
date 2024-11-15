@@ -1,4 +1,4 @@
-const CheckValueType = value => {
+const CheckValueType = (value) => {
   let valueType = "";
 
   switch (value.length) {
@@ -25,7 +25,7 @@ const CheckValueType = value => {
   return valueType;
 };
 
-const UpdateEmitters = data => {
+const UpdateEmitters = (data) => {
   function getMultiName(nameProp) {
     let hasNumber;
 
@@ -36,7 +36,7 @@ const UpdateEmitters = data => {
     if (hasNumber) {
       return {
         emitterName: nameProp.slice(0, -1),
-        number: hasNumber + 1
+        number: hasNumber + 1,
       };
     }
 
@@ -46,7 +46,7 @@ const UpdateEmitters = data => {
   function getNewProperties(properties, emitterName) {
     const newProperties = properties;
     const groupNamePropertyIndex = properties.findIndex(
-      element => element.binGroup.name === "emitterName"
+      (element) => element.binGroup.name === "emitterName",
     );
 
     newProperties[groupNamePropertyIndex].value = emitterName;
@@ -60,7 +60,7 @@ const UpdateEmitters = data => {
   const emitters = [];
   const emittersToRemove = [];
 
-  troybinData.forEach(emit => {
+  troybinData.forEach((emit) => {
     // Needed since values get lost for some reason otherwise
     const emitter = JSON.parse(JSON.stringify(emit));
 
@@ -70,19 +70,19 @@ const UpdateEmitters = data => {
       name: emitter.name,
       properties: [],
       order: emitter.order,
-      isSimple: emitter.isSimple
+      isSimple: emitter.isSimple,
     };
 
     let hasLinger = false;
 
-    emitter.properties.forEach(prop => {
+    emitter.properties.forEach((prop) => {
       // Needed since values get lost for some reason otherwise
       const property = JSON.parse(JSON.stringify(prop));
 
       if (property.binGroup.name === "lifetime" && property.value === -1) {
         const hasTableEntries =
-          emitter.properties.findIndex(currProp =>
-            currProp.troybinName.includes("p-lifeP")
+          emitter.properties.findIndex((currProp) =>
+            currProp.troybinName.includes("p-lifeP"),
           ) !== -1;
 
         propertiesToRemove.push("e-life");
@@ -100,7 +100,7 @@ const UpdateEmitters = data => {
         for (let j = 1; j < 10; j += 1) {
           const timesTableName = `${property.troybinName}${j}`;
           const timesTableEntryIndex = emitter.properties.findIndex(
-            propS => propS.troybinName === timesTableName
+            (propS) => propS.troybinName === timesTableName,
           );
 
           if (timesTableEntryIndex !== -1) {
@@ -109,7 +109,7 @@ const UpdateEmitters = data => {
             const timesTableEntry = emitter.properties[timesTableEntryIndex];
             const newTimesTableEntryValue = [
               timesTableEntry.value[0],
-              timesTableEntry.value[1] * property.value
+              timesTableEntry.value[1] * property.value,
             ];
 
             const newTimesTableEntry = timesTableEntry;
@@ -128,7 +128,7 @@ const UpdateEmitters = data => {
         let axisEntry;
         const axisName = `${property.troybinName}-axis`;
         const axisIndex = emitter.properties.findIndex(
-          propS => propS.troybinName === axisName
+          (propS) => propS.troybinName === axisName,
         );
 
         if (axisIndex !== -1) {
@@ -138,7 +138,7 @@ const UpdateEmitters = data => {
           axisEntry = emitter.properties[axisIndex];
 
           // RoatationAxis has this instead of just 1
-          axisEntry.value.forEach(val => {
+          axisEntry.value.forEach((val) => {
             newValue.push(val === 1 ? 1.00000012 : val);
           });
 
@@ -152,7 +152,7 @@ const UpdateEmitters = data => {
               members: [
                 "e-rotation1-axis",
                 "e-rotation2-axis",
-                "e-rotation3-axis"
+                "e-rotation3-axis",
               ],
               structure: "SimpleObjectProperty",
               order: 50.4,
@@ -162,16 +162,16 @@ const UpdateEmitters = data => {
                   "birthTranslation",
                   "emitOffset",
                   "emitRotationAngles",
-                  "emitRotationAxes"
+                  "emitRotationAxes",
                 ],
                 structure: "",
-                order: 50
-              }
+                order: 50,
+              },
             },
             binGroupType: "list[vec3]",
             binPropertyName: "",
             binPropertyType: "",
-            value: [0, 1.00000012, 0]
+            value: [0, 1.00000012, 0],
           };
         }
 
@@ -203,7 +203,7 @@ const UpdateEmitters = data => {
           for (let j = 1; j < 21; j += 1) {
             const propertyName = `${property.troybinName}${j}`;
             const timesTableEntryIndex = emitter.properties.findIndex(
-              propS => propS.troybinName === propertyName
+              (propS) => propS.troybinName === propertyName,
             );
 
             if (timesTableEntryIndex !== -1) {
@@ -214,7 +214,7 @@ const UpdateEmitters = data => {
 
               for (let k = 1; k < 5; k += 1) {
                 newTimesTableEntryValue.push(
-                  timesTableEntry.value[k] * property.value[k - 1]
+                  timesTableEntry.value[k] * property.value[k - 1],
                 );
               }
 
@@ -244,16 +244,16 @@ const UpdateEmitters = data => {
         // DeepClone as this was bugged otherwise
         const originalEmitter = JSON.parse(JSON.stringify(emit));
         const materialProps = originalEmitter.properties.filter(
-          materialProp =>
+          (materialProp) =>
             materialProp.binGroup.parent &&
             materialProp.binGroup.parent.length &&
             materialProp.binGroup.parent[0].name ===
               property.binGroup.parent[0].name &&
             (!materialProp.definitionId ||
-              materialProp.definitionId === property.definitionId)
+              materialProp.definitionId === property.definitionId),
         );
 
-        materialProps.forEach(materialProp => {
+        materialProps.forEach((materialProp) => {
           const materialPropNew = materialProp;
 
           propertiesToRemove.push(materialPropNew.troybinName);
@@ -275,16 +275,16 @@ const UpdateEmitters = data => {
 
       if (property.binGroup.name.includes("field")) {
         const fieldEmitterIndex = troybinData.findIndex(
-          selectedEmit =>
+          (selectedEmit) =>
             `"${selectedEmit.name}"` === property.value ||
-            `"${selectedEmit.name}"` === `'${property.value}`
+            `"${selectedEmit.name}"` === `'${property.value}`,
         );
 
         if (fieldEmitterIndex !== -1) {
           const fieldEmitter = troybinData[fieldEmitterIndex];
 
           if (!property.definitionId) {
-            fieldEmitter.properties.forEach(fieldProp => {
+            fieldEmitter.properties.forEach((fieldProp) => {
               const fieldProperty = fieldProp;
 
               if (
@@ -301,7 +301,7 @@ const UpdateEmitters = data => {
                 Array.isArray(fieldProperty.binGroup.parent)
               ) {
                 const correctParent = fieldProperty.binGroup.parent.filter(
-                  parentEntry => parentEntry.name === property.binGroup.name
+                  (parentEntry) => parentEntry.name === property.binGroup.name,
                 )[0];
 
                 fieldProperty.binGroup.parent = correctParent;
@@ -314,7 +314,7 @@ const UpdateEmitters = data => {
 
           if (
             emittersToRemove.findIndex(
-              emitterToRemove => emitterToRemove === fieldEmitter.name
+              (emitterToRemove) => emitterToRemove === fieldEmitter.name,
             ) === -1
           ) {
             emittersToRemove.push(fieldEmitter.name);
@@ -337,10 +337,10 @@ const UpdateEmitters = data => {
           const lifetimeHasBothTables =
             isLifetime &&
             emitter.properties.findIndex(
-              currProp => currProp.troybinName === "p-lifeP1"
+              (currProp) => currProp.troybinName === "p-lifeP1",
             ) !== -1 &&
             emitter.properties.findIndex(
-              currProp => currProp.troybinName === "p-life1"
+              (currProp) => currProp.troybinName === "p-life1",
             ) !== -1;
 
           if (!isLifetime || lifetimeHasBothTables) {
@@ -397,7 +397,7 @@ const UpdateEmitters = data => {
                 binGroupType: property.binGroupType,
                 binPropertyName: property.binPropertyName,
                 binPropertyType: nBinType,
-                value: nValue
+                value: nValue,
               };
               simpleProperty = {
                 troybinName: property.troybinName,
@@ -409,7 +409,7 @@ const UpdateEmitters = data => {
                     ? ""
                     : property.binPropertyName,
                 binPropertyType: sBinType,
-                value: sValue
+                value: sValue,
               };
             } else {
               let complexValue = property.value;
@@ -423,7 +423,7 @@ const UpdateEmitters = data => {
                   property.value[0],
                   property.value[1],
                   property.value[1],
-                  property.value[1]
+                  property.value[1],
                 ];
               }
 
@@ -436,7 +436,7 @@ const UpdateEmitters = data => {
                 binPropertyType: property.simpleValue[4].includes("timesTable")
                   ? property.binPropertyType
                   : property.simpleValue[2],
-                value: complexValue
+                value: complexValue,
               };
 
               if (property.binGroup.name !== property.simpleValue[3].name) {
@@ -446,18 +446,18 @@ const UpdateEmitters = data => {
                 ) {
                   let constValueName = property.troybinName.slice(
                     0,
-                    property.troybinName.length - 1
+                    property.troybinName.length - 1,
                   );
 
                   if (constValueName[constValueName.length] === "P") {
                     constValueName = constValueName.slice(
                       0,
-                      property.troybinName.length - 1
+                      property.troybinName.length - 1,
                     );
                   }
 
                   const constValuePropertyIndex = emitter.properties.findIndex(
-                    currProp => currProp.troybinName === constValueName
+                    (currProp) => currProp.troybinName === constValueName,
                   );
 
                   if (constValuePropertyIndex !== -1) {
@@ -466,7 +466,7 @@ const UpdateEmitters = data => {
 
                     simpleValue = [
                       property.value[0],
-                      property.value[1] * constValueProperty.value
+                      property.value[1] * constValueProperty.value,
                     ];
                   }
                 }
@@ -478,7 +478,7 @@ const UpdateEmitters = data => {
                   binGroupType: property.simpleValue[1],
                   binPropertyName: property.simpleValue[4],
                   binPropertyType: property.simpleValue[2],
-                  value: simpleValue
+                  value: simpleValue,
                 };
               } else {
                 simpleProperty = undefined;
@@ -494,7 +494,7 @@ const UpdateEmitters = data => {
                 "birthRotationalVelocity",
                 "particleBind",
                 "scaleBias",
-                "orientation"
+                "orientation",
               ];
 
               if (
@@ -520,7 +520,7 @@ const UpdateEmitters = data => {
           "p-xquadrot",
           "p-xscale",
           "Particle-Velocity",
-          "Particle-Drag"
+          "Particle-Drag",
         ];
 
         if (propertiesToCheckForTableEntries.includes(property.troybinName)) {
@@ -538,7 +538,7 @@ const UpdateEmitters = data => {
             for (let j = 1; j < 10; j += 1) {
               const propertyName = `${property.troybinName}${j}`;
               const timesTableEntryIndex = emitter.properties.findIndex(
-                propS => propS.troybinName === propertyName
+                (propS) => propS.troybinName === propertyName,
               );
 
               if (timesTableEntryIndex !== -1) {
@@ -550,7 +550,7 @@ const UpdateEmitters = data => {
 
                 for (let k = 1; k < 4; k += 1) {
                   newTimesTableEntryValue.push(
-                    timesTableEntry.value[k] * property.value[k - 1]
+                    timesTableEntry.value[k] * property.value[k - 1],
                   );
                 }
 
@@ -569,7 +569,7 @@ const UpdateEmitters = data => {
     // Simple Emitters are also an exception to this rule
     if (!hasLinger && !emitter.isSimple) {
       const pIndex = emitter.properties.findIndex(
-        property => property.troybinName === "p-life"
+        (property) => property.troybinName === "p-life",
       );
       const plifetimeVal = pIndex === -1 ? 0 : emitter.properties[pIndex].value;
 
@@ -581,12 +581,12 @@ const UpdateEmitters = data => {
           name: "particleLinger",
           members: [],
           structure: "SimpleObjectProperty",
-          order: 15
+          order: 15,
         },
         binGroupType: "option[f32]",
         binPropertyName: "constantValue",
         binPropertyType: "",
-        value: 10 + plifetimeVal
+        value: 10 + plifetimeVal,
       };
 
       propertiesToAdd.push(lingerProperty);
@@ -601,12 +601,12 @@ const UpdateEmitters = data => {
             name: "particleLinger",
             members: [],
             structure: "SimpleObjectProperty",
-            order: 15
+            order: 15,
           },
           binGroupType: "option[f32]",
           binPropertyName: "constantValue",
           binPropertyType: "",
-          value: 10
+          value: 10,
         };
 
         propertiesToAdd.push(lingerProperty);
@@ -619,28 +619,29 @@ const UpdateEmitters = data => {
           name: "meshRenderFlags",
           members: [],
           structure: "SimpleProperty",
-          order: 57
+          order: 57,
         },
         binGroupType: "u8",
         binPropertyName: "",
         binPropertyType: "",
-        value: 0
+        value: 0,
       };
 
       propertiesToAdd.push(meshRenderFlagsProperty);
     }
 
-    emitter.properties.forEach(property => {
+    emitter.properties.forEach((property) => {
       const keepEntry =
-        propertiesToRemove.find(element => element === property.troybinName) ===
-        undefined;
+        propertiesToRemove.find(
+          (element) => element === property.troybinName,
+        ) === undefined;
 
       if (keepEntry) {
         updatedEmitter.properties.push(property);
       }
     });
 
-    propertiesToAdd.forEach(addProperty => {
+    propertiesToAdd.forEach((addProperty) => {
       updatedEmitter.properties.push(addProperty);
     });
 
@@ -655,13 +656,13 @@ const UpdateEmitters = data => {
         const newEmitterName = `"${emitterName + emitterNameNumber}"`;
         const updatedProperties = getNewProperties(
           updatedEmitter.properties,
-          newEmitterName
+          newEmitterName,
         );
 
         const multiEmitter = {
           name: newEmitterName,
           properties: updatedProperties,
-          order: emitter.isMultiUseEntry[i]
+          order: emitter.isMultiUseEntry[i],
         };
 
         emitters.push(multiEmitter);
@@ -678,7 +679,8 @@ const UpdateEmitters = data => {
     const emitter = emitters[i];
 
     const keepEmitter =
-      emittersToRemove.find(element => element === emitter.name) === undefined;
+      emittersToRemove.find((element) => element === emitter.name) ===
+      undefined;
 
     if (keepEmitter) {
       emittersNoField.push(emitter);

@@ -1,4 +1,4 @@
-const getCurrentSpacing = currentSpacing => {
+const getCurrentSpacing = (currentSpacing) => {
   const spacing = "    ";
   let spacingPart = "";
 
@@ -29,13 +29,13 @@ const readObject = (content, currentPosition, objectSpacing) => {
     name: entryName,
     start: currentPosition,
     type: entryType,
-    end: newPosition
+    end: newPosition,
   };
 
   return { entryObject: entry, newIndex: newPosition };
 };
 
-const ReadBin = data => {
+const ReadBin = (data) => {
   let fileContent = data.split("\r\n");
 
   // If formating is done differently
@@ -73,7 +73,7 @@ const ReadBin = data => {
       const { entryObject, newIndex } = readObject(
         content,
         i,
-        getCurrentSpacing(currentSpacing)
+        getCurrentSpacing(currentSpacing),
       );
 
       i = newIndex;

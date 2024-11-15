@@ -36,13 +36,13 @@ function writeConstantValue(
   property,
   spacingAmount,
   isMult = true,
-  valueOnly = false
+  valueOnly = false,
 ) {
   const members = isMult ? property.members : property;
   const result = [];
   let returnConst;
 
-  members.forEach(member => {
+  members.forEach((member) => {
     const constValue = getValue(member);
 
     if (member === members[0]) {
@@ -56,7 +56,7 @@ function writeConstantValue(
         result.push(
           `${getSpacing(spacingAmount)}${member.binPropertyName}: ${
             member.binPropertyType
-          } = ${constValue}\r\n`
+          } = ${constValue}\r\n`,
         );
       }
     }
@@ -75,7 +75,7 @@ function writeDynamics(
   spacingAmount,
   timesTable,
   timesSimpleTable,
-  writeEmptyEntries = true
+  writeEmptyEntries = true,
 ) {
   const result = [];
 
@@ -86,35 +86,37 @@ function writeDynamics(
     probTableA.length
   ) {
     result.push(
-      `${getSpacing(spacingAmount)}dynamics: ${probTableX[0]?.binGroupType ||
+      `${getSpacing(spacingAmount)}dynamics: ${
+        probTableX[0]?.binGroupType ||
         probTableY[0]?.binGroupType ||
         probTableZ[0]?.binGroupType ||
-        probTableA[0]?.binGroupType} {\r\n`,
-      `${getSpacing(spacingAmount + 1)}probabilityTables: list[pointer] = {\r\n`
+        probTableA[0]?.binGroupType
+      } {\r\n`,
+      `${getSpacing(spacingAmount + 1)}probabilityTables: list[pointer] = {\r\n`,
     );
 
     const canHaveA =
-      property.members[0].binGroup.members.findIndex(emit =>
-        emit.includes("probTableA")
+      property.members[0].binGroup.members.findIndex((emit) =>
+        emit.includes("probTableA"),
       ) !== -1;
     const canHaveY =
-      property.members[0].binGroup.members.findIndex(emit =>
-        emit.includes("probTableY")
+      property.members[0].binGroup.members.findIndex((emit) =>
+        emit.includes("probTableY"),
       ) !== -1;
     const canHaveZ =
-      property.members[0].binGroup.members.findIndex(emit =>
-        emit.includes("probTableZ")
+      property.members[0].binGroup.members.findIndex((emit) =>
+        emit.includes("probTableZ"),
       ) !== -1;
 
     if (probTableX.length) {
       result.push(
         `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {\r\n`,
-        `${getSpacing(spacingAmount + 3)}keyTimes: list[f32] = {\r\n`
+        `${getSpacing(spacingAmount + 3)}keyTimes: list[f32] = {\r\n`,
       );
 
-      probTableX.forEach(probTable => {
+      probTableX.forEach((probTable) => {
         result.push(
-          `${getSpacing(spacingAmount + 4)}${probTable.value[0]}\r\n`
+          `${getSpacing(spacingAmount + 4)}${probTable.value[0]}\r\n`,
         );
       });
 
@@ -122,10 +124,10 @@ function writeDynamics(
         `${getSpacing(spacingAmount + 3)}}\r\n`,
         `${getSpacing(spacingAmount + 3)}keyValues: list[${
           probTableX[0].binPropertyType
-        }] = {\r\n`
+        }] = {\r\n`,
       );
 
-      probTableX.forEach(probTable => {
+      probTableX.forEach((probTable) => {
         let value = probTable.value[1];
 
         if (probTable.value.length === 3) {
@@ -141,23 +143,23 @@ function writeDynamics(
 
       result.push(
         `${getSpacing(spacingAmount + 3)}}\r\n`,
-        `${getSpacing(spacingAmount + 2)}}\r\n`
+        `${getSpacing(spacingAmount + 2)}}\r\n`,
       );
     } else if (writeEmptyEntries) {
       result.push(
-        `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {}\r\n`
+        `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {}\r\n`,
       );
     }
 
     if (probTableY.length) {
       result.push(
         `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {\r\n`,
-        `${getSpacing(spacingAmount + 3)}keyTimes: list[f32] = {\r\n`
+        `${getSpacing(spacingAmount + 3)}keyTimes: list[f32] = {\r\n`,
       );
 
-      probTableY.forEach(probTable => {
+      probTableY.forEach((probTable) => {
         result.push(
-          `${getSpacing(spacingAmount + 4)}${probTable.value[0]}\r\n`
+          `${getSpacing(spacingAmount + 4)}${probTable.value[0]}\r\n`,
         );
       });
 
@@ -165,10 +167,10 @@ function writeDynamics(
         `${getSpacing(spacingAmount + 3)}}\r\n`,
         `${getSpacing(spacingAmount + 3)}keyValues: list[${
           probTableY[0].binPropertyType
-        }] = {\r\n`
+        }] = {\r\n`,
       );
 
-      probTableY.forEach(probTable => {
+      probTableY.forEach((probTable) => {
         let value = probTable.value[1];
 
         if (probTable.value.length === 3) {
@@ -184,23 +186,23 @@ function writeDynamics(
 
       result.push(
         `${getSpacing(spacingAmount + 3)}}\r\n`,
-        `${getSpacing(spacingAmount + 2)}}\r\n`
+        `${getSpacing(spacingAmount + 2)}}\r\n`,
       );
     } else if (canHaveY && writeEmptyEntries) {
       result.push(
-        `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {}\r\n`
+        `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {}\r\n`,
       );
     }
 
     if (probTableZ.length) {
       result.push(
         `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {\r\n`,
-        `${getSpacing(spacingAmount + 3)}keyTimes: list[f32] = {\r\n`
+        `${getSpacing(spacingAmount + 3)}keyTimes: list[f32] = {\r\n`,
       );
 
-      probTableZ.forEach(probTable => {
+      probTableZ.forEach((probTable) => {
         result.push(
-          `${getSpacing(spacingAmount + 4)}${probTable.value[0]}\r\n`
+          `${getSpacing(spacingAmount + 4)}${probTable.value[0]}\r\n`,
         );
       });
 
@@ -208,10 +210,10 @@ function writeDynamics(
         `${getSpacing(spacingAmount + 3)}}\r\n`,
         `${getSpacing(spacingAmount + 3)}keyValues: list[${
           probTableZ[0].binPropertyType
-        }] = {\r\n`
+        }] = {\r\n`,
       );
 
-      probTableZ.forEach(probTable => {
+      probTableZ.forEach((probTable) => {
         let value = probTable.value[1];
 
         if (probTable.value.length === 3) {
@@ -227,23 +229,23 @@ function writeDynamics(
 
       result.push(
         `${getSpacing(spacingAmount + 3)}}\r\n`,
-        `${getSpacing(spacingAmount + 2)}}\r\n`
+        `${getSpacing(spacingAmount + 2)}}\r\n`,
       );
     } else if (canHaveZ && writeEmptyEntries) {
       result.push(
-        `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {}\r\n`
+        `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {}\r\n`,
       );
     }
 
     if (probTableA.length) {
       result.push(
         `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {\r\n`,
-        `${getSpacing(spacingAmount + 3)}keyTimes: list[f32] = {\r\n`
+        `${getSpacing(spacingAmount + 3)}keyTimes: list[f32] = {\r\n`,
       );
 
-      probTableA.forEach(probTable => {
+      probTableA.forEach((probTable) => {
         result.push(
-          `${getSpacing(spacingAmount + 4)}${probTable.value[0]}\r\n`
+          `${getSpacing(spacingAmount + 4)}${probTable.value[0]}\r\n`,
         );
       });
 
@@ -251,10 +253,10 @@ function writeDynamics(
         `${getSpacing(spacingAmount + 3)}}\r\n`,
         `${getSpacing(spacingAmount + 3)}keyValues: list[${
           probTableA[0].binPropertyType
-        }] = {\r\n`
+        }] = {\r\n`,
       );
 
-      probTableA.forEach(probTable => {
+      probTableA.forEach((probTable) => {
         let value = probTable.value[1];
 
         if (probTable.value.length === 3) {
@@ -270,11 +272,11 @@ function writeDynamics(
 
       result.push(
         `${getSpacing(spacingAmount + 3)}}\r\n`,
-        `${getSpacing(spacingAmount + 2)}}\r\n`
+        `${getSpacing(spacingAmount + 2)}}\r\n`,
       );
     } else if (canHaveA && writeEmptyEntries) {
       result.push(
-        `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {}\r\n`
+        `${getSpacing(spacingAmount + 2)}VfxProbabilityTableData {}\r\n`,
       );
     }
 
@@ -288,7 +290,7 @@ function writeDynamics(
     result.push(
       `${getSpacing(spacingAmount)}dynamics: ${
         timesTable[0] !== undefined ? timesTable[0].binGroupType : binGroupType
-      } {\r\n`
+      } {\r\n`,
     );
   }
 
@@ -297,7 +299,7 @@ function writeDynamics(
   if (timesTable.length || timesSimpleTable.length) {
     const timesTableEntries = timesTable.length ? timesTable : timesSimpleTable;
 
-    timesTableEntries.forEach(table => {
+    timesTableEntries.forEach((table) => {
       result.push(`${getSpacing(spacingAmount + 2)}${table.value[0]}\r\n`);
     });
 
@@ -305,10 +307,10 @@ function writeDynamics(
       `${getSpacing(spacingAmount + 1)}}\r\n`,
       `${getSpacing(spacingAmount + 1)}values: list[${
         timesTableEntries[0].binPropertyType
-      }] = {\r\n`
+      }] = {\r\n`,
     );
 
-    timesTableEntries.forEach(table => {
+    timesTableEntries.forEach((table) => {
       let value = table.value[1];
 
       if (table.value.length === 3) {
@@ -328,11 +330,11 @@ function writeDynamics(
 
     result.push(
       `${getSpacing(spacingAmount + 1)}}\r\n`,
-      `${getSpacing(spacingAmount + 0)}}\r\n`
+      `${getSpacing(spacingAmount + 0)}}\r\n`,
     );
   } else {
     const constValueEntry = property.members.find(
-      memb => memb.binPropertyName === "constantValue"
+      (memb) => memb.binPropertyName === "constantValue",
     );
 
     result.push(
@@ -345,7 +347,7 @@ function writeDynamics(
       }] = {\r\n`,
       `${getSpacing(spacingAmount + 2)}${constValue}\r\n`,
       `${getSpacing(spacingAmount + 1)}}\r\n`,
-      `${getSpacing(spacingAmount)}}\r\n`
+      `${getSpacing(spacingAmount)}}\r\n`,
     );
   }
 
@@ -372,7 +374,7 @@ function WriteProperty(property, spacingAmount) {
   const timesTableEntriesX = [];
   const timesTableEntriesY = [];
 
-  property.members.forEach(member => {
+  property.members.forEach((member) => {
     const type = member.binPropertyName;
 
     if (type === "constantValue") {
@@ -409,7 +411,7 @@ function WriteProperty(property, spacingAmount) {
           property.members[0].binGroupType
         } {\r\n`,
         `${getSpacing(
-          spacingAmount + 1
+          spacingAmount + 1,
         )}childrenIdentifiers: list[embed] = {\r\n`,
         `${getSpacing(spacingAmount + 2)}VfxChildIdentifier {\r\n`,
         `${getSpacing(spacingAmount + 3)}${
@@ -417,7 +419,7 @@ function WriteProperty(property, spacingAmount) {
         }: ${property.members[0].binPropertyType} = ${constValueWritten}\r\n`,
         `${getSpacing(spacingAmount + 2)}}\r\n`,
         `${getSpacing(spacingAmount + 1)}}\r\n`,
-        `${getSpacing(spacingAmount)}}\r\n`
+        `${getSpacing(spacingAmount)}}\r\n`,
       );
 
       break;
@@ -430,7 +432,7 @@ function WriteProperty(property, spacingAmount) {
               : property.name
           }${property.members[0].value[0]}: ${
             property.members[0].binGroupType
-          } = ${property.members[0].value[1]}\r\n`
+          } = ${property.members[0].value[1]}\r\n`,
         );
       }
 
@@ -439,12 +441,12 @@ function WriteProperty(property, spacingAmount) {
       formatedProperty.push(
         `${getSpacing(spacingAmount)}${property.name}: ${
           property.members[0].binGroupType
-        } {\r\n`
+        } {\r\n`,
       );
 
       constValueWritten = writeConstantValue(property, spacingAmount + 1);
 
-      constValueWritten.result.forEach(entry => {
+      constValueWritten.result.forEach((entry) => {
         formatedProperty.push(entry);
       });
 
@@ -460,7 +462,7 @@ function WriteProperty(property, spacingAmount) {
             property.members[0].binPropertyName !== ""
               ? property.members[0].binPropertyName
               : property.name
-          }: ${property.members[0].binGroupType} = ${constValueWritten}\r\n`
+          }: ${property.members[0].binGroupType} = ${constValueWritten}\r\n`,
         );
       }
 
@@ -470,24 +472,24 @@ function WriteProperty(property, spacingAmount) {
         formatedProperty.push(
           `${getSpacing(spacingAmount)}${property.name}: ${
             property.members[0].binGroupType
-          } = {\r\n`
+          } = {\r\n`,
         );
 
         const isStringArray =
           property.members[0].troybinType === "STRINGS_NO_PATH";
 
         if (isStringArray) {
-          property.members[0].value.forEach(valuePart => {
+          property.members[0].value.forEach((valuePart) => {
             formatedProperty.push(
-              `${getSpacing(spacingAmount + 1)}"${valuePart}"\r\n`
+              `${getSpacing(spacingAmount + 1)}"${valuePart}"\r\n`,
             );
           });
         } else if (property.members[0].binGroup.name === "emitRotationAxes") {
-          property.members.forEach(memberPart => {
+          property.members.forEach((memberPart) => {
             const value = `{ ${memberPart.value[0]}, ${memberPart.value[1]}, ${memberPart.value[2]} }`;
 
             formatedProperty.push(
-              `${getSpacing(spacingAmount + 1)}${value}\r\n`
+              `${getSpacing(spacingAmount + 1)}${value}\r\n`,
             );
           });
         } else {
@@ -495,10 +497,10 @@ function WriteProperty(property, spacingAmount) {
             property,
             spacingAmount + 1,
             true,
-            true
+            true,
           );
 
-          constValueWritten.result.forEach(entry => {
+          constValueWritten.result.forEach((entry) => {
             formatedProperty.push(entry);
           });
         }
@@ -511,7 +513,7 @@ function WriteProperty(property, spacingAmount) {
       constValueWritten = writeConstantValue(
         constantValues,
         spacingAmount + 1,
-        false
+        false,
       );
 
       if (
@@ -527,10 +529,10 @@ function WriteProperty(property, spacingAmount) {
         formatedProperty.push(
           `${getSpacing(spacingAmount)}${property.name}: embed = ${
             property.members[0].binGroup.propertyType
-          } {\r\n`
+          } {\r\n`,
         );
 
-        constValueWritten.result.forEach(entry => {
+        constValueWritten.result.forEach((entry) => {
           formatedProperty.push(entry);
         });
 
@@ -552,8 +554,8 @@ function WriteProperty(property, spacingAmount) {
             probTableA,
             spacingAmount + 1,
             timesTable,
-            timesSimpleTable
-          ).forEach(entry => {
+            timesSimpleTable,
+          ).forEach((entry) => {
             formatedProperty.push(entry);
           });
         }
@@ -566,7 +568,7 @@ function WriteProperty(property, spacingAmount) {
       formatedProperty.push(
         `${getSpacing(spacingAmount)}${property.name}: ${
           property.members[0].binGroupType
-        } {\r\n`
+        } {\r\n`,
       );
 
       if (timesTable.length) {
@@ -583,7 +585,7 @@ function WriteProperty(property, spacingAmount) {
 
       // eslint-disable-next-line
       const constantX = constantValues.filter(
-        constant => constant.troybinName === "e-rotation1"
+        (constant) => constant.troybinName === "e-rotation1",
       )[0];
 
       if (
@@ -592,16 +594,16 @@ function WriteProperty(property, spacingAmount) {
         constantX !== undefined
       ) {
         formatedProperty.push(
-          `${getSpacing(spacingAmount + 1)}ValueFloat {\r\n`
+          `${getSpacing(spacingAmount + 1)}ValueFloat {\r\n`,
         );
 
         constValueWritten = writeConstantValue(
           [constantX],
           spacingAmount + 2,
-          false
+          false,
         );
 
-        constValueWritten.result.forEach(entry => {
+        constValueWritten.result.forEach((entry) => {
           formatedProperty.push(entry);
         });
 
@@ -616,8 +618,8 @@ function WriteProperty(property, spacingAmount) {
             spacingAmount + 2,
             timesTableEntriesX,
             timesSimpleTable,
-            false
-          ).forEach(entry => {
+            false,
+          ).forEach((entry) => {
             formatedProperty.push(entry);
           });
         }
@@ -625,13 +627,13 @@ function WriteProperty(property, spacingAmount) {
         formatedProperty.push(`${getSpacing(spacingAmount + 1)}}\r\n`);
       } else {
         formatedProperty.push(
-          `${getSpacing(spacingAmount + 1)}ValueFloat {}\r\n`
+          `${getSpacing(spacingAmount + 1)}ValueFloat {}\r\n`,
         );
       }
 
       // eslint-disable-next-line
       const constantY = constantValues.filter(
-        constant => constant.troybinName === "e-rotation2"
+        (constant) => constant.troybinName === "e-rotation2",
       )[0];
 
       if (
@@ -640,16 +642,16 @@ function WriteProperty(property, spacingAmount) {
         constantY !== undefined
       ) {
         formatedProperty.push(
-          `${getSpacing(spacingAmount + 1)}ValueFloat {\r\n`
+          `${getSpacing(spacingAmount + 1)}ValueFloat {\r\n`,
         );
 
         constValueWritten = writeConstantValue(
           [constantY],
           spacingAmount + 2,
-          false
+          false,
         );
 
-        constValueWritten.result.forEach(entry => {
+        constValueWritten.result.forEach((entry) => {
           formatedProperty.push(entry);
         });
 
@@ -664,8 +666,8 @@ function WriteProperty(property, spacingAmount) {
             spacingAmount + 2,
             timesTableEntriesY,
             timesSimpleTable,
-            false
-          ).forEach(entry => {
+            false,
+          ).forEach((entry) => {
             formatedProperty.push(entry);
           });
         }
@@ -688,32 +690,32 @@ const WriteBin = (bin, defaultFilePath) => {
     const result = [];
 
     result.push(
-      `${getSpacing(spacing + 1)}${typeString}: list[pointer] = {\r\n`
+      `${getSpacing(spacing + 1)}${typeString}: list[pointer] = {\r\n`,
     );
 
-    emitters.forEach(emitter => {
+    emitters.forEach((emitter) => {
       const propertiesWritten = [];
 
-      emitter.forEach(property => {
+      emitter.forEach((property) => {
         let entry;
 
         if (property.name === "shape") {
           const writenLines = [];
 
-          property.members.forEach(member => {
+          property.members.forEach((member) => {
             entry = WriteProperty(member, spacing + 4);
 
-            entry.forEach(e => {
+            entry.forEach((e) => {
               writenLines.push(e);
             });
           });
 
           if (writenLines.length) {
             propertiesWritten.push(
-              `${getSpacing(spacing + 3)}shape: embed = VfxShape {\r\n`
+              `${getSpacing(spacing + 3)}shape: embed = VfxShape {\r\n`,
             );
 
-            writenLines.forEach(line => {
+            writenLines.forEach((line) => {
               propertiesWritten.push(line);
             });
 
@@ -733,8 +735,8 @@ const WriteBin = (bin, defaultFilePath) => {
               case "primitiveArbitraryQuad":
                 propertiesWritten.push(
                   `${getSpacing(
-                    spacing + 3
-                  )}primitive: pointer = VfxPrimitiveArbitraryQuad {}\r\n`
+                    spacing + 3,
+                  )}primitive: pointer = VfxPrimitiveArbitraryQuad {}\r\n`,
                 );
                 break;
               // 2 ?
@@ -743,11 +745,11 @@ const WriteBin = (bin, defaultFilePath) => {
 
                 propertiesWritten.push(
                   `${getSpacing(
-                    spacing + 3
+                    spacing + 3,
                   )}primitive: pointer = VfxPrimitiveArbitraryTrail {\r\n`,
                   `${getSpacing(
-                    spacing + 4
-                  )}mTrail: embed = VfxTrailDefinitionData {\r\n`
+                    spacing + 4,
+                  )}mTrail: embed = VfxTrailDefinitionData {\r\n`,
                 );
                 break;
               // 3
@@ -756,11 +758,11 @@ const WriteBin = (bin, defaultFilePath) => {
 
                 propertiesWritten.push(
                   `${getSpacing(
-                    spacing + 3
+                    spacing + 3,
                   )}primitive: pointer = VfxPrimitiveMesh {\r\n`,
                   `${getSpacing(
-                    spacing + 4
-                  )}mMesh: embed = VfxMeshDefinitionData {\r\n`
+                    spacing + 4,
+                  )}mMesh: embed = VfxMeshDefinitionData {\r\n`,
                 );
                 break;
               // 4 ?
@@ -769,11 +771,11 @@ const WriteBin = (bin, defaultFilePath) => {
 
                 propertiesWritten.push(
                   `${getSpacing(
-                    spacing + 3
+                    spacing + 3,
                   )}primitive: pointer = VfxPrimitiveAttachedMesh {\r\n`,
                   `${getSpacing(
-                    spacing + 4
-                  )}mMesh: embed = VfxMeshDefinitionData {\r\n`
+                    spacing + 4,
+                  )}mMesh: embed = VfxMeshDefinitionData {\r\n`,
                 );
                 break;
               // 5
@@ -782,11 +784,11 @@ const WriteBin = (bin, defaultFilePath) => {
 
                 propertiesWritten.push(
                   `${getSpacing(
-                    spacing + 3
+                    spacing + 3,
                   )}primitive: pointer = VfxPrimitiveCameraTrail {\r\n`,
                   `${getSpacing(
-                    spacing + 4
-                  )}mTrail: embed = VfxTrailDefinitionData {\r\n`
+                    spacing + 4,
+                  )}mTrail: embed = VfxTrailDefinitionData {\r\n`,
                 );
                 break;
               // 6
@@ -795,8 +797,8 @@ const WriteBin = (bin, defaultFilePath) => {
 
                 propertiesWritten.push(
                   `${getSpacing(
-                    spacing + 3
-                  )}primitive: pointer = VfxPrimitiveBeam {\r\n`
+                    spacing + 3,
+                  )}primitive: pointer = VfxPrimitiveBeam {\r\n`,
                 );
 
                 for (let i = 0; i < property.members.length; i += 1) {
@@ -812,14 +814,14 @@ const WriteBin = (bin, defaultFilePath) => {
                 if (meshEntries.length) {
                   propertiesWritten.push(
                     `${getSpacing(
-                      spacing + 4
-                    )}mMesh: embed = VfxMeshDefinitionData {\r\n`
+                      spacing + 4,
+                    )}mMesh: embed = VfxMeshDefinitionData {\r\n`,
                   );
 
-                  meshEntries.forEach(member => {
+                  meshEntries.forEach((member) => {
                     const meshEntry = WriteProperty(member, spacing + 5);
 
-                    meshEntry.forEach(e => {
+                    meshEntry.forEach((e) => {
                       propertiesWritten.push(e);
                     });
                   });
@@ -830,14 +832,14 @@ const WriteBin = (bin, defaultFilePath) => {
                 if (beamEntries.length) {
                   propertiesWritten.push(
                     `${getSpacing(
-                      spacing + 4
-                    )}mBeam: embed = VfxBeamDefinitionData {\r\n`
+                      spacing + 4,
+                    )}mBeam: embed = VfxBeamDefinitionData {\r\n`,
                   );
 
-                  beamEntries.forEach(member => {
+                  beamEntries.forEach((member) => {
                     const beamEntry = WriteProperty(member, spacing + 5);
 
-                    beamEntry.forEach(e => {
+                    beamEntry.forEach((e) => {
                       propertiesWritten.push(e);
                     });
                   });
@@ -854,19 +856,19 @@ const WriteBin = (bin, defaultFilePath) => {
 
                 propertiesWritten.push(
                   `${getSpacing(
-                    spacing + 3
+                    spacing + 3,
                   )}primitive: pointer = VfxPrimitivePlanarProjection {\r\n`,
                   `${getSpacing(
-                    spacing + 4
-                  )}mProjection: embed = VfxProjectionDefinitionData {\r\n`
+                    spacing + 4,
+                  )}mProjection: embed = VfxProjectionDefinitionData {\r\n`,
                 );
                 break;
               // 8 ?
               case "primitiveRay":
                 propertiesWritten.push(
                   `${getSpacing(
-                    spacing + 3
-                  )}primitive: pointer = VfxPrimitiveRay {}\r\n`
+                    spacing + 3,
+                  )}primitive: pointer = VfxPrimitiveRay {}\r\n`,
                 );
                 break;
               default:
@@ -878,31 +880,31 @@ const WriteBin = (bin, defaultFilePath) => {
               property.members.length &&
               property.name !== "primitiveBeam"
             ) {
-              property.members.forEach(member => {
+              property.members.forEach((member) => {
                 entry = WriteProperty(member, spacing + 5);
 
-                entry.forEach(e => {
+                entry.forEach((e) => {
                   propertiesWritten.push(e);
                 });
               });
 
               propertiesWritten.push(
                 `${getSpacing(spacing + 4)}}\r\n`,
-                `${getSpacing(spacing + 3)}}\r\n`
+                `${getSpacing(spacing + 3)}}\r\n`,
               );
             }
           }
         } else if (property.name === "distortionDefinition") {
           propertiesWritten.push(
             `${getSpacing(
-              spacing + 3
-            )}distortionDefinition: pointer = VfxDistortionDefinitionData {\r\n`
+              spacing + 3,
+            )}distortionDefinition: pointer = VfxDistortionDefinitionData {\r\n`,
           );
 
-          property.members.forEach(member => {
+          property.members.forEach((member) => {
             entry = WriteProperty(member, spacing + 4);
 
-            entry.forEach(e => {
+            entry.forEach((e) => {
               propertiesWritten.push(e);
             });
           });
@@ -911,7 +913,7 @@ const WriteBin = (bin, defaultFilePath) => {
         } else if (property.name === "fieldCollectionDefinition") {
           const writenLines = [];
 
-          property.members.forEach(member => {
+          property.members.forEach((member) => {
             let fieldType;
 
             switch (member.name) {
@@ -936,21 +938,21 @@ const WriteBin = (bin, defaultFilePath) => {
 
             writenLines.push(
               `${getSpacing(
-                spacing + 4
-              )}field${fieldType}Definitions: list[embed] = {\r\n`
+                spacing + 4,
+              )}field${fieldType}Definitions: list[embed] = {\r\n`,
             );
 
-            member.members.forEach(definitionGroup => {
+            member.members.forEach((definitionGroup) => {
               writenLines.push(
                 `${getSpacing(
-                  spacing + 5
-                )}VfxField${fieldType}DefinitionData {\r\n`
+                  spacing + 5,
+                )}VfxField${fieldType}DefinitionData {\r\n`,
               );
 
-              definitionGroup.forEach(memb => {
+              definitionGroup.forEach((memb) => {
                 entry = WriteProperty(memb, spacing + 6);
 
-                entry.forEach(e => {
+                entry.forEach((e) => {
                   writenLines.push(e);
                 });
               });
@@ -964,11 +966,11 @@ const WriteBin = (bin, defaultFilePath) => {
           if (writenLines.length) {
             propertiesWritten.push(
               `${getSpacing(
-                spacing + 3
-              )}fieldCollectionDefinition: pointer = VfxFieldCollectionDefinitionData {\r\n`
+                spacing + 3,
+              )}fieldCollectionDefinition: pointer = VfxFieldCollectionDefinitionData {\r\n`,
             );
 
-            writenLines.forEach(line => {
+            writenLines.forEach((line) => {
               propertiesWritten.push(line);
             });
 
@@ -977,15 +979,15 @@ const WriteBin = (bin, defaultFilePath) => {
         } else if (property.name === "materialOverrideDefinitions") {
           const writenLines = [];
 
-          property.members[0].members.forEach(member => {
+          property.members[0].members.forEach((member) => {
             writenLines.push(
-              `${getSpacing(spacing + 4)}${property.members[0].name} {\r\n`
+              `${getSpacing(spacing + 4)}${property.members[0].name} {\r\n`,
             );
 
-            member.forEach(memb => {
+            member.forEach((memb) => {
               entry = WriteProperty(memb, spacing + 5);
 
-              entry.forEach(e => {
+              entry.forEach((e) => {
                 writenLines.push(e);
               });
             });
@@ -996,11 +998,11 @@ const WriteBin = (bin, defaultFilePath) => {
           if (writenLines.length) {
             propertiesWritten.push(
               `${getSpacing(
-                spacing + 3
-              )}MaterialOverrideDefinitions: list[embed] = {\r\n`
+                spacing + 3,
+              )}MaterialOverrideDefinitions: list[embed] = {\r\n`,
             );
 
-            writenLines.forEach(line => {
+            writenLines.forEach((line) => {
               propertiesWritten.push(line);
             });
 
@@ -1008,13 +1010,13 @@ const WriteBin = (bin, defaultFilePath) => {
           }
         } else if (property.name === "textureMult") {
           propertiesWritten.push(
-            `${getSpacing(spacing + 3)}textureMult: pointer = 0xb097c1bd {\r\n`
+            `${getSpacing(spacing + 3)}textureMult: pointer = 0xb097c1bd {\r\n`,
           );
 
-          property.members.forEach(member => {
+          property.members.forEach((member) => {
             entry = WriteProperty(member, spacing + 4);
 
-            entry.forEach(e => {
+            entry.forEach((e) => {
               propertiesWritten.push(e);
             });
           });
@@ -1022,13 +1024,13 @@ const WriteBin = (bin, defaultFilePath) => {
           propertiesWritten.push(`${getSpacing(spacing + 3)}}\r\n`);
         } else if (property.name === "0xbc022424") {
           propertiesWritten.push(
-            `${getSpacing(spacing + 3)}0xbc022424: pointer = 0x7f70a2b2 {\r\n`
+            `${getSpacing(spacing + 3)}0xbc022424: pointer = 0x7f70a2b2 {\r\n`,
           );
 
-          property.members.forEach(member => {
+          property.members.forEach((member) => {
             entry = WriteProperty(member, spacing + 4);
 
-            entry.forEach(e => {
+            entry.forEach((e) => {
               propertiesWritten.push(e);
             });
           });
@@ -1037,7 +1039,7 @@ const WriteBin = (bin, defaultFilePath) => {
         } else {
           entry = WriteProperty(property, spacing + 3);
 
-          entry.forEach(e => {
+          entry.forEach((e) => {
             propertiesWritten.push(e);
           });
         }
@@ -1046,7 +1048,7 @@ const WriteBin = (bin, defaultFilePath) => {
       if (propertiesWritten.length) {
         result.push(`${getSpacing(spacing + 2)}VfxEmitterDefinitionData {\r\n`);
 
-        propertiesWritten.forEach(emitterLine => {
+        propertiesWritten.forEach((emitterLine) => {
           result.push(emitterLine);
         });
 
@@ -1067,19 +1069,20 @@ const WriteBin = (bin, defaultFilePath) => {
     "version: u32 = 3\r\n",
     "linked: list[string] = {}\r\n",
     "entries: map[hash,embed] = {\r\n",
-    `${getSpacing(spacing)}\"${defaultFilePath}/${ // eslint-disable-line
+    `${getSpacing(spacing)}\"${defaultFilePath}/${
+      // eslint-disable-line
       bin.name
-    }\" = VfxSystemDefinitionData {\r\n` // eslint-disable-line
+    }\" = VfxSystemDefinitionData {\r\n`, // eslint-disable-line
   ];
 
   if (bin.emitters.complex.length) {
     const emitters = writeEmitters(
       bin.emitters.complex,
       "complexEmitterDefinitionData",
-      spacing
+      spacing,
     );
 
-    emitters.forEach(emitterLine => {
+    emitters.forEach((emitterLine) => {
       finalBin.push(emitterLine);
     });
   }
@@ -1088,18 +1091,18 @@ const WriteBin = (bin, defaultFilePath) => {
     const emitters = writeEmitters(
       bin.emitters.simple,
       "simpleEmitterDefinitionData",
-      spacing
+      spacing,
     );
 
-    emitters.forEach(emitterLine => {
+    emitters.forEach((emitterLine) => {
       finalBin.push(emitterLine);
     });
   }
 
-  bin.system.forEach(systemProperty => {
+  bin.system.forEach((systemProperty) => {
     const systemEntry = WriteProperty(systemProperty, spacing + 1);
 
-    systemEntry.forEach(s => {
+    systemEntry.forEach((s) => {
       finalBin.push(s);
     });
   });
@@ -1122,10 +1125,10 @@ const WriteBin = (bin, defaultFilePath) => {
       finalBin.push(
         `\r\n`,
         `\r\n`,
-        `Troygrade was unable to translate the following properties: \r\n`
+        `Troygrade was unable to translate the following properties: \r\n`,
       );
 
-      unknownProperties.forEach(unknownProp => {
+      unknownProperties.forEach((unknownProp) => {
         finalBin.push(`${unknownProp}\r\n`);
       });
     }

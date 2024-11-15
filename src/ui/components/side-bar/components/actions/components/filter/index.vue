@@ -9,6 +9,6 @@ import appState from "../../../../../../../states";
 <template>
   <ToolbarButton
     :class="button({ visual: 'mask', mask: 'filter' })"
-    @click="() => appState.filter.show = !appState.filter.show"
+    @click="() => (appState.filter.show = !appState.filter.show)"
   />
 </template>
