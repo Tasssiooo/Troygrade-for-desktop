@@ -62,6 +62,6 @@ jobs:
           tagName: ${{ github.ref_name }}
           releaseName: "Troygrade for desktop v__VERSION__"
           releaseBody: |
-            See the assets to download this version and install.
+            test.
           releaseDraft: true
           prerelease: false
