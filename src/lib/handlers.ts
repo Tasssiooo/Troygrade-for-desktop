@@ -36,15 +36,18 @@ function handleConvertFile(
       );
 
       if (convertedContent !== null) {
-        appState.files.push({
-          id: uuid(),
-          name: `${entry.name}_Migrated`,
-          content: convertedContent,
-          type: "MIG_BIN",
-        });
+        appState.files = [
+          ...appState.files,
+          {
+            id: uuid(),
+            name: `${entry.name}_Migrated`,
+            content: convertedContent,
+            type: "MIG_BIN",
+          },
+        ];
       }
     } catch (err: any) {
-      toast.error(`Error ${entry.name}`, {
+      toast.error(`Error: ${entry.name}`, {
         description: err.message,
       });
     }
@@ -53,15 +56,18 @@ function handleConvertFile(
       const convertedContent = TroybinConverter(entry.content);
 
       if (convertedContent !== null) {
-        appState.files.push({
-          id: uuid(),
-          name: `${entry.name}_Converted`,
-          content: convertedContent,
-          type: "CONV_TROYBIN",
-        });
+        appState.files = [
+          ...appState.files,
+          {
+            id: uuid(),
+            name: `${entry.name}_Converted`,
+            content: convertedContent,
+            type: "CONV_TROYBIN",
+          },
+        ];
       }
     } catch (err: any) {
-      toast.error(`Error ${entry.name}`, {
+      toast.error(`Error: ${entry.name}`, {
         description: err.message,
       });
     }
@@ -101,7 +107,7 @@ async function handleLoadFiles() {
       let content: ArrayBufferLike | string = file.buffer;
 
       if (ext !== "troybin") {
-        name = name.replace(ext, "");
+        name = name.replace(`.${ext}`, "");
 
         content = new TextDecoder().decode(content);
 
