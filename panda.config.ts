@@ -57,6 +57,10 @@ export default defineConfig({
       flexDir: "row",
       alignItems: "center",
     },
+    // CodeMirror has a default height of 300px;
+    ".CodeMirror": {
+      h: "410px!",
+    },
   },
   globalFontface: {
     beaufortforlolja: [
