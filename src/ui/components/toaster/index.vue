@@ -7,7 +7,6 @@ import MdiError from "../icons/mdi-error.vue";
 
 <template>
   <Toaster
-    expand
     close-button
     :toast-options="{
       unstyled: true,
