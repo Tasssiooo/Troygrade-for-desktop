@@ -3,7 +3,7 @@ import { css } from "../../../../styled-system/css";
 const section = css({
   pos: "relative",
   z: "50",
-  w: "52",
+  minW: "52",
   h: "full",
   bg: "#010a13",
 });
