@@ -14,32 +14,39 @@ import FileItem from "./components/file-item/index.vue";
 
 import appState from "../../../../../states";
 
-const model = ref<{ items: string[] }>({ items: [] });
+const model = ref<string[]>([]);
 
 /* Watches the files state and opens the rosters automatically if there is any file */
-watch(appState.files, (newFiles) => {
-  const areThereTroys = newFiles.find((file) => file.type === "CONV_TROYBIN");
-  const areThereBins = newFiles.find((file) => file.type === "MIG_BIN");
+watch(
+  () => appState.files,
+  (newFiles) => {
+    const areThereTroys = newFiles.find((file) => file.type === "CONV_TROYBIN");
+    const areThereBins = newFiles.find((file) => file.type === "MIG_BIN");
 
-  if (areThereTroys) {
-    model.value.items = !model.value.items.includes("troybins")
-      ? [...model.value.items, "troybins"]
-      : model.value.items;
-  }
-  if (areThereBins) {
-    model.value.items = !model.value.items.includes("bins")
-      ? [...model.value.items, "bins"]
-      : model.value.items;
-  }
-});
+    if (areThereTroys) {
+      model.value = !model.value.includes("troybins")
+        ? [...model.value, "troybins"]
+        : model.value;
+    } else {
+      model.value = areThereBins ? ["bins"] : [];
+    }
+    if (areThereBins) {
+      model.value = !model.value.includes("bins")
+        ? [...model.value, "bins"]
+        : model.value;
+    } else {
+      model.value = areThereTroys ? ["troybins"] : [];
+    }
+  },
+);
 </script>
 
 <template>
   <div :class="roster_area">
     <RosterRoot
       type="multiple"
-      v-model:modelValue="model.items"
-      :onUpdate:modelValue="(v) => (model.items = v as string[])"
+      v-model:modelValue="model"
+      :onUpdate:modelValue="(v) => (model = v as string[])"
     >
       <RosterItem value="troybins">
         <RosterTrigger>Troybins</RosterTrigger>
