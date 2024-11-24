@@ -14,6 +14,7 @@ const content = css({
   translate: "-50% -50%",
   z: "100",
   border: "1px solid transparent",
+  maxW: "512px",
   p: "1.5rem",
   bg: "#010a13",
   borderImage:
