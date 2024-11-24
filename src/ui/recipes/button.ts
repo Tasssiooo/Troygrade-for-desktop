@@ -44,6 +44,23 @@ export const buttonRecipe = defineRecipe({
           outlineStyle: "solid",
         },
       },
+      dialog: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        border: "1px solid",
+        borderBottom: {
+          base: "1px solid #6b5028",
+          _hover: "3px solid #c99c3f",
+          _active: "1px solid",
+        },
+        borderColor: { base: "#a07a30", _active: "#614920" },
+        borderTopColor: { base: "#c7a86b", _hover: "#f0e5d1" },
+        minH: "8",
+        px: "2",
+        color: { base: "#cdbe91", _hover: "#f0e6d2", _active: "#785a28" },
+        bg: { base: "#1e2328", _active: "#1e2328" },
+      },
     },
     mask: {
       close: {
@@ -65,10 +82,13 @@ export const buttonRecipe = defineRecipe({
         w: "30px",
         h: "30px",
         maskImage: "url(assets/images/search_mask.png)",
-        maskSize: "20px",
+        maskSize: "18px",
       },
       batch: {
+        w: "30px",
+        h: "30px",
         maskImage: "url(assets/images/sort_mask.png)",
+        maskSize: "18px",
       },
     },
   },
