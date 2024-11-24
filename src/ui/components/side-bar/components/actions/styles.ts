@@ -13,6 +13,7 @@ const actions_wrapper = css({
 const buttons_wrapper = css({
   display: "flex",
   flexDir: "row",
+  alignItems: "center",
 });
 
 export { actions_wrapper, buttons_wrapper };
