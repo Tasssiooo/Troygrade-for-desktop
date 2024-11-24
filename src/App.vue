@@ -1,15 +1,20 @@
 <script setup lang="ts">
+import { RouterView } from "vue-router";
+
 import ControllersBar from "./ui/components/controllers-bar/index.vue";
-import SideBar from "./ui/components/side-bar/index.vue";
-import CodeEditor from "./ui/components/code-editor/index.vue";
 import Toaster from "./ui/components/toaster/index.vue";
+
+if (!import.meta.env.DEV) {
+  document.oncontextmenu = (event) => {
+    event.preventDefault();
+  };
+}
 </script>
 
 <template>
   <ControllersBar />
   <main>
-    <SideBar />
-    <CodeEditor />
+    <RouterView />
   </main>
   <Toaster />
 </template>
