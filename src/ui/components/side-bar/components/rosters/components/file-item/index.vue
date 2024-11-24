@@ -47,7 +47,7 @@ function handleSelectFile(fid: string) {
   if (appState.selectedFiles.includes(fid)) {
     appState.selectedFiles = appState.selectedFiles.filter((id) => id !== fid);
   } else {
-    appState.selectedFiles.push(fid);
+    appState.selectedFiles = [...appState.selectedFiles, fid];
   }
 }
 </script>
