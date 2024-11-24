@@ -2,18 +2,28 @@
 import { drag_area, controllers_wrapper, controllers_area } from "./styles.ts";
 import { button } from "../../../../styled-system/recipes";
 
-import { getCurrentWindow } from "@tauri-apps/api/window";
+import {
+  getCurrentWebviewWindow,
+  WebviewWindow,
+} from "@tauri-apps/api/webviewWindow";
 
 async function help() {
-  //todo
+  new WebviewWindow("help", {
+    title: "How to use Troygrade",
+    decorations: false,
+    minWidth: 512,
+    width: 1024,
+    minHeight: 256,
+    url: "#/help",
+  });
 }
 
 async function hide() {
-  await getCurrentWindow().minimize();
+  await getCurrentWebviewWindow().minimize();
 }
 
 async function close() {
-  await getCurrentWindow().close();
+  await getCurrentWebviewWindow().close();
 }
 </script>
 
@@ -22,6 +32,7 @@ async function close() {
     <div :class="controllers_wrapper">
       <div :class="controllers_area">
         <button
+          v-if="getCurrentWebviewWindow().label !== 'help'"
           :class="button({ visual: 'mask', mask: 'help' })"
           @click="help"
         ></button>
