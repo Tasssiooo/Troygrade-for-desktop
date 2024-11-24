@@ -3,7 +3,9 @@
   "identifier": "default",
   "description": "Capability for the main window",
   "windows": [
-    "main"
+    "main",
+    "help",
+    "expand"
   ],
   "permissions": [
     "core:default",
@@ -16,6 +18,7 @@
     "core:window:allow-unmaximize",
     "core:window:allow-unminimize",
     "core:window:allow-start-dragging",
+    "core:webview:allow-create-webview-window",
     "core:path:allow-basename",
     "dialog:default",
     "dialog:deny-ask",
@@ -24,7 +27,8 @@
     "dialog:allow-open",
     "dialog:allow-save",
     "fs:default",
-    "fs:allow-read",
+    "fs:allow-read-file",
+    "fs:allow-write-text-file",
     {
       "identifier": "fs:scope",
       "allow": [
