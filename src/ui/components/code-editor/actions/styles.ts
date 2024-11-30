@@ -14,7 +14,7 @@ const container = css({
 });
 
 const filename = css({
-  w: "277px",
+  w: "330px",
   textOverflow: "ellipsis",
   overflow: "hidden",
   whiteSpace: "nowrap",
@@ -26,7 +26,7 @@ const buttons_container = css({
   justifyContent: "end",
   spaceX: "5",
   alignItems: "center",
-  w: "50%",
+  w: "40%",
 });
 
 export { container, filename, buttons_container };
