@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { button } from '../../../../../../../styled-system/recipes';
+import { button } from "../../../../../../../styled-system/recipes";
 
-import appState from '../../../../../../states';
+import appState from "../../../../../../states";
 
-import MdiFileDocumentCheckOutline from '../../../../icons/mdi-file-document-check-outline.vue';
+import MdiFileDocumentCheckOutline from "../../../../icons/mdi-file-document-check-outline.vue";
+
+import Tooltip from "../../../../tooltip/index.vue";
 
 function handleSaveChanges() {
   appState.files = appState.files.map((file) => {
@@ -21,11 +23,13 @@ function handleSaveChanges() {
 </script>
 
 <template>
-  <button
-    :class="button({ visual: 'square' })"
-    :style="{ pointerEvents: appState.activeFile?.name ? 'auto' : 'none' }"
-    @click="handleSaveChanges"
-  >
-    <MdiFileDocumentCheckOutline />
-  </button>
+  <Tooltip content="Save editor changes" side="bottom">
+    <button
+      :class="button({ visual: 'square' })"
+      :style="{ pointerEvents: appState.activeFile?.name ? 'auto' : 'none' }"
+      @click="handleSaveChanges"
+    >
+      <MdiFileDocumentCheckOutline />
+    </button>
+  </Tooltip>
 </template>

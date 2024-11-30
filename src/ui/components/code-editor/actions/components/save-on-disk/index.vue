@@ -10,6 +10,8 @@ import appState from "../../../../../../states";
 
 import MdiContentSaveOutline from "../../../../icons/mdi-content-save-outline.vue";
 
+import Tooltip from "../../../../tooltip/index.vue";
+
 async function handleSaveOnDisk() {
   const outpath = await save({
     title: "Save file as plain text",
@@ -53,11 +55,13 @@ async function handleSaveOnDisk() {
 </script>
 
 <template>
-  <button
-    :class="button({ visual: 'square' })"
-    :style="{ pointerEvents: appState.activeFile?.name ? 'auto' : 'none' }"
-    @click="handleSaveOnDisk"
-  >
-    <MdiContentSaveOutline />
-  </button>
+  <Tooltip content="Save on disk" side="bottom">
+    <button
+      :class="button({ visual: 'square' })"
+      :style="{ pointerEvents: appState.activeFile?.name ? 'auto' : 'none' }"
+      @click="handleSaveOnDisk"
+    >
+      <MdiContentSaveOutline />
+    </button>
+  </Tooltip>
 </template>

@@ -10,9 +10,12 @@ import {
   ModalClose,
 } from "../../../../modal";
 
+import appState from "../../../../../../states";
+
 import MdiDeleteOutline from "../../../../icons/mdi-delete-outline.vue";
 
-import appState from "../../../../../../states";
+
+import Tooltip from "../../../../tooltip/index.vue";
 
 function handleDelete() {
   appState.files = appState.files.filter(
@@ -24,7 +27,8 @@ function handleDelete() {
 
 <template>
   <Modal>
-    <ModalTrigger as-child>
+    <Tooltip content="Delete" side="bottom" :side-offset="5">
+      <ModalTrigger as-child>
       <button
         :class="button({ visual: 'square' })"
         :style="{
@@ -34,6 +38,7 @@ function handleDelete() {
         <MdiDeleteOutline />
       </button>
     </ModalTrigger>
+    </Tooltip>
     <ModalContent>
       <ModalTitle>Are you sure?</ModalTitle>
       <div>

@@ -17,6 +17,8 @@ import appState from "../../../../../../states";
 
 import MdiWrenchOutline from "../../../../icons/mdi-wrench-outline.vue";
 
+import Tooltip from "../../../../tooltip/index.vue";
+
 function handleDefault() {
   handleConvertFile(appState.activeFile!);
 }
@@ -28,14 +30,18 @@ function handleContinue() {
 
 <template>
   <Modal>
-    <ModalTrigger as-child>
-      <button
-        :class="button({ visual: 'square' })"
-        :style="{ pointerEvents: appState.activeFile?.name ? 'auto' : 'none' }"
-      >
-        <MdiWrenchOutline />
-      </button>
-    </ModalTrigger>
+    <Tooltip content="Convert/Fix" side="bottom">
+      <ModalTrigger as-child>
+        <button
+          :class="button({ visual: 'square' })"
+          :style="{
+            pointerEvents: appState.activeFile?.name ? 'auto' : 'none',
+          }"
+        >
+          <MdiWrenchOutline />
+        </button>
+      </ModalTrigger>
+    </Tooltip>
     <ModalContent>
       <ModalTitle>Convert file</ModalTitle>
       <div>
