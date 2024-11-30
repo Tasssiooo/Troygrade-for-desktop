@@ -5,7 +5,7 @@ const drag_area = css({
   pos: "absolute",
   top: "0",
   left: "0",
-  z: "99",
+  zIndex: "99",
   flexDir: "row",
   justifyContent: "end",
   w: "full",
@@ -16,7 +16,7 @@ const controllers_wrapper = css({
   display: "flex",
   pos: "relative",
   top: "1",
-  z: "0",
+  zIndex: "0",
   px: "2.5",
 });
 

@@ -3,7 +3,7 @@ import { css } from "../../../../../../styled-system/css";
 const overlay = css({
   pos: "fixed",
   inset: "0",
-  z: "100",
+  zIndex: "100",
   bg: "black.400",
 });
 
@@ -12,7 +12,7 @@ const content = css({
   top: "50%",
   left: "50%",
   translate: "-50% -50%",
-  z: "100",
+  zIndex: "100",
   border: "1px solid transparent",
   maxW: "512px",
   p: "1.5rem",
@@ -38,7 +38,7 @@ const close_border = css({
   display: "flex",
   pos: "relative",
   top: "0.25rem",
-  z: "20",
+  zIndex: "20",
   justifyContent: "center",
   alignItems: "center",
   rounded: "50%",
@@ -52,7 +52,7 @@ const close_border = css({
 
 const inner_bg = css({
   pos: "relative",
-  z: "30",
+  zIndex: "30",
   rounded: "50%",
   w: "1.5rem",
   h: "1.5rem",
