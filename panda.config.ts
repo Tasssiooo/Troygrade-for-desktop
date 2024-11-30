@@ -61,6 +61,16 @@ export default defineConfig({
     ".CodeMirror": {
       h: "410px!",
     },
+    "*::-webkit-scrollbar": {
+      w: "1.5",
+      h: "1.5",
+    },
+    "*::-webkit-scrollbar-track": {
+      bg: "transparent",
+    },
+    "*::-webkit-scrollbar-thumb": {
+      bg: "#a07a30",
+    },
   },
   globalFontface: {
     beaufortforlolja: [
