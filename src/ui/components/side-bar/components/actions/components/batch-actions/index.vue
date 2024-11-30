@@ -37,10 +37,10 @@ const openDelete = ref(false);
         <DropdownMenuItem @click="() => (openDelete = true)"
           >Delete</DropdownMenuItem
         >
-        <!-- These are dialogs -->
-        <Fix :update-open="(v) => (openFix = v)" :open="openFix" />
-        <Delete :update-open="(v) => (openDelete = v)" :open="openDelete" />
       </DropdownMenuContent>
+      <!-- These are dialogs -->
+      <Fix :update-open="(v) => (openFix = v)" :open="openFix" />
+      <Delete :update-open="(v) => (openDelete = v)" :open="openDelete" />
     </DropdownMenu>
   </Tooltip>
 </template>
