@@ -2,6 +2,7 @@
 import {
   TooltipArrow,
   TooltipContent,
+  TooltipContentProps,
   TooltipPortal,
   TooltipProvider,
   TooltipRoot,
@@ -10,10 +11,7 @@ import {
 
 import { content, arrow } from "./styles";
 
-const props = defineProps<{
-  content: string;
-  side?: "top" | "right" | "bottom" | "left";
-}>();
+const props = defineProps<TooltipContentProps & { content: string }>();
 </script>
 
 <template>
@@ -23,7 +21,10 @@ const props = defineProps<{
         <slot />
       </TooltipTrigger>
       <TooltipPortal>
-        <TooltipContent :class="content" :side="props.side" :side-offset="5">
+        <TooltipContent
+          :class="content"
+          v-bind="{ ...props, sideOffset: props.sideOffset || 5 }"
+        >
           {{ props.content }}
           <TooltipArrow as-child>
             <svg
