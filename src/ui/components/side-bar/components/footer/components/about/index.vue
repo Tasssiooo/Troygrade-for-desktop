@@ -5,18 +5,24 @@ import {
   ModalContent,
   ModalTitle,
 } from "../../../../../modal";
-import MdiInformationSlabCircleOutline from "../../../../../icons/mdi-information-slab-circle-outline.vue";
+
 import { button } from "../../../../../../../../styled-system/recipes";
 import { about_text, anchor, authors } from "./styles.ts";
+
+import MdiInformationSlabCircleOutline from "../../../../../icons/mdi-information-slab-circle-outline.vue";
+
+import Tooltip from "../../../../../tooltip/index.vue";
 </script>
 
 <template>
   <Modal>
-    <ModalTrigger as-child>
-      <button :class="button({ visual: 'square' })">
-        <MdiInformationSlabCircleOutline />
-      </button>
-    </ModalTrigger>
+    <Tooltip content="About">
+      <ModalTrigger as-child>
+        <button :class="button({ visual: 'square' })">
+          <MdiInformationSlabCircleOutline />
+        </button>
+      </ModalTrigger>
+    </Tooltip>
     <ModalContent>
       <ModalTitle>About</ModalTitle>
       <div :class="about_text">
