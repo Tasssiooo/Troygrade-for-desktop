@@ -1,6 +1,5 @@
 <script setup lang="ts">
-//@ts-ignore
-import { useId, computed } from "vue";
+import { computed } from "vue";
 
 import {
   container,
@@ -54,7 +53,7 @@ function handleSelectFile(fid: string) {
 
 <template>
   <ul v-if="files.length">
-    <template v-for="file in filteredFiles" :key="useId()">
+    <template v-for="file in filteredFiles" :key="file.id">
       <li
         @click="appState.activeFile = file"
         :data-state="
