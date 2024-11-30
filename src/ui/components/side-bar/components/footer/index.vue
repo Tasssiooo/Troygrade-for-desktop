@@ -23,7 +23,7 @@ onMounted(async () => {
 <template>
   <div :class="footer">
     <div :class="anchor_wrapper">
-      <Tooltip content="Report an issue">
+      <Tooltip content="Report an issue" align="start">
         <a
           :class="button({ visual: 'square' })"
           href="https://github.com/Tasssiooo/Troygrade-for-desktop/issues"
