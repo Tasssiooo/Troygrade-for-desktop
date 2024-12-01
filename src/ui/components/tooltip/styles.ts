@@ -1,7 +1,7 @@
 import { css } from "../../../../styled-system/css";
 
 const content = css({
-  zIndex: "90",
+  zIndex: "999",
   border: "1px solid transparent",
   p: "1.5",
   fontSize: "sm",
