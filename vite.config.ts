@@ -1,8 +1,11 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import path from "path";
 
-// @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
+
+const isExternal = (id: string) =>
+  !id.startsWith(".") && !path.isAbsolute(id) && !id.startsWith("~/");
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
@@ -27,6 +30,21 @@ export default defineConfig(async () => ({
     watch: {
       // 3. tell vite to ignore watching `src-tauri`
       ignored: ["**/src-tauri/**"],
+    },
+  },
+  resolve: {
+    alias: {
+      "~/assets": path.resolve(__dirname, "./src/assets"),
+      "~/lib": path.resolve(__dirname, "./src/lib"),
+      "~/states": path.resolve(__dirname, "./src/states"),
+      "~/types": path.resolve(__dirname, "./src/types"),
+      "~/ui": path.resolve(__dirname, "./src/ui"),
+      "~/styled-system": path.resolve(__dirname, "./styled-system"),
+    },
+  },
+  build: {
+    rollupOptions: {
+      external: isExternal,
     },
   },
 }));
