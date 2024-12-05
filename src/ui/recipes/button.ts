@@ -56,6 +56,7 @@ export const buttonRecipe = defineRecipe({
         },
         borderColor: { base: "#a07a30", _active: "#614920" },
         borderTopColor: { base: "#c7a86b", _hover: "#f0e5d1" },
+        minW: "70px",
         minH: "8",
         px: "2",
         color: { base: "#cdbe91", _hover: "#f0e6d2", _active: "#785a28" },

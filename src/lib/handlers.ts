@@ -1,4 +1,4 @@
-import { FileType, Entry, Settings } from "../types";
+import { FileType, Entry, Settings } from "~/types/index";
 
 import { open } from "@tauri-apps/plugin-dialog";
 import { readFile, BaseDirectory } from "@tauri-apps/plugin-fs";
@@ -8,10 +8,10 @@ import { v4 as uuid } from "uuid";
 
 import { toast } from "vue-sonner";
 
+import { FileState } from "~/states/index";
+
 import TroybinConverter from "./TroybinConverter/Main";
 import MigrateConvertedTroybin from "./TroybinMigrationTool/Main";
-
-import appState from "../states";
 
 function handleConvertFile(
   entry: Entry,
@@ -36,8 +36,8 @@ function handleConvertFile(
       );
 
       if (convertedContent !== null) {
-        appState.files = [
-          ...appState.files,
+        FileState.files = [
+          ...FileState.files,
           {
             id: uuid(),
             name: `${entry.name}_Migrated`,
@@ -56,8 +56,8 @@ function handleConvertFile(
       const convertedContent = TroybinConverter(entry.content);
 
       if (convertedContent !== null) {
-        appState.files = [
-          ...appState.files,
+        FileState.files = [
+          ...FileState.files,
           {
             id: uuid(),
             name: `${entry.name}_Converted`,
