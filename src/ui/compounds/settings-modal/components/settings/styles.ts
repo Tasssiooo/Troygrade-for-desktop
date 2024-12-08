@@ -16,6 +16,7 @@ const input_area = css({
 const checkbox_area = css({
   display: "flex",
   flexDir: "column",
+  alignItems: "start",
   spaceY: "2",
   fontSize: "sm",
 });
