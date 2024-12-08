@@ -12,7 +12,7 @@ import { choose_container, choose_wrapper, choices } from "./styles";
 
 import { handleConvertFile } from "~/lib/handlers";
 
-import { FileState } from "~/states/index";
+import { fm, mm } from "~/stores/index";
 
 const { updateOpen, open } = defineProps<{
   updateOpen?: (value: boolean) => any;
@@ -20,15 +20,10 @@ const { updateOpen, open } = defineProps<{
 }>();
 
 function handleDefault() {
-  FileState.selectedFiles.forEach((file) => {
-    handleConvertFile(file);
+  fm.selected.forEach((id) => {
+    handleConvertFile(fm.all[id]);
   });
-
-  FileState.selectedFiles = [];
-}
-
-function handleContinue() {
-  //todo
+  fm.emptySelected();
 }
 </script>
 
@@ -37,9 +32,7 @@ function handleContinue() {
     <ModalContent>
       <ModalTitle>Convert files</ModalTitle>
       <div>
-        <p>
-          You are about to convert {{ FileState.selectedFiles.length }} files.
-        </p>
+        <p>You are about to convert {{ fm.selected.length }} files.</p>
         <p>How to proceed?</p>
         <p>Default settings or continue to set up the files yourself.</p>
       </div>
@@ -57,7 +50,7 @@ function handleContinue() {
             <ModalClose as-child>
               <button
                 :class="button({ visual: 'dialog' })"
-                @click="handleContinue"
+                @click="mm.openSettings(true, 'batch')"
               >
                 Continue
               </button>

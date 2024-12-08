@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
 } from "~/ui/primitives/dropdown-menu";
 
-import { FileState } from "~/states/index";
+import {fm} from "~/stores/index";
 
 import Fix from "./components/fix/index.vue";
 import SaveOnDisk from "./components/save-on-disk/index.vue";
@@ -27,7 +27,7 @@ const openDelete = ref(false);
     <DropdownMenu>
       <DropdownMenuTrigger as-child>
         <button
-          v-if="FileState.selectedFiles.length > 1"
+          v-if="fm.selected.length > 1"
           :class="button({ visual: 'mask', mask: 'batch' })"
         />
       </DropdownMenuTrigger>

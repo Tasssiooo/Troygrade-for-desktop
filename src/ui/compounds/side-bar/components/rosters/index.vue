@@ -4,38 +4,40 @@ import {
   RosterItem,
   RosterTrigger,
   RosterContent,
-} from "./components/roster";
+} from "~/ui/primitives/roster";
 
-import { roster_area } from "./styles";
+import { css } from "~/styled-system/css";
+
+import { roster_area, roster_root, roster_item } from "./styles";
 
 import { ref, watch } from "vue";
 
-import { FileState } from "~/states/index";
+import { fm } from "~/stores/index";
 
-import FileItem from "./components/file-item/index.vue";
+import Item from "./components/item/index.vue";
 
-const model = ref<string[]>([]);
+const items = ref<string[]>([]);
 
-/* Watches the files state and opens the rosters automatically if there is any file */
+/* Watches the files state and opens the rosters automatically if there is any file or closes if there is none. */
 watch(
-  () => FileState.files,
-  (newFiles) => {
-    const areThereTroys = newFiles.find((file) => file.type === "CONV_TROYBIN");
-    const areThereBins = newFiles.find((file) => file.type === "MIG_BIN");
+  () => fm.all.length,
+  () => {
+    const areThereTroys = fm.all.find((file) => file.type === "CONV_TROYBIN");
+    const areThereBins = fm.all.find((file) => file.type === "MIG_BIN");
 
     if (areThereTroys) {
-      model.value = !model.value.includes("troybins")
-        ? [...model.value, "troybins"]
-        : model.value;
+      if (!items.value.includes("troybins")) {
+        items.value.push("troybins");
+      }
     } else {
-      model.value = areThereBins ? ["bins"] : [];
+      items.value = areThereBins ? ["bins"] : [];
     }
     if (areThereBins) {
-      model.value = !model.value.includes("bins")
-        ? [...model.value, "bins"]
-        : model.value;
+      if (!items.value.includes("bins")) {
+        items.value.push("bins");
+      }
     } else {
-      model.value = areThereTroys ? ["troybins"] : [];
+      items.value = areThereTroys ? ["troybins"] : [];
     }
   },
 );
@@ -45,19 +47,20 @@ watch(
   <div :class="roster_area">
     <RosterRoot
       type="multiple"
-      v-model:modelValue="model"
-      :onUpdate:modelValue="(v) => (model = v as string[])"
+      v-model:modelValue="items"
+      :onUpdate:modelValue="(v) => (items = v as string[])"
+      :class="roster_root"
     >
-      <RosterItem value="troybins">
+      <RosterItem value="troybins" :class="roster_item">
         <RosterTrigger>Troybins</RosterTrigger>
         <RosterContent>
-          <FileItem type="troybin" />
+          <Item type="troybin" />
         </RosterContent>
       </RosterItem>
-      <RosterItem value="bins">
+      <RosterItem value="bins" :class="roster_item">
         <RosterTrigger>Bins</RosterTrigger>
         <RosterContent>
-          <FileItem type="bin" />
+          <Item type="bin" />
         </RosterContent>
       </RosterItem>
     </RosterRoot>

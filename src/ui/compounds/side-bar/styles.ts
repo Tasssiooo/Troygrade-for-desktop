@@ -1,9 +1,9 @@
 import { css } from "~/styled-system/css";
 
 const section = css({
-  pos: "relative",
   zIndex: "50",
-  minW: "52",
+  pos: "relative",
+  minW: "212px",
   h: "full",
   bg: "#010a13",
 });

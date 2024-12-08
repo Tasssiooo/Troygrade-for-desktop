@@ -6,7 +6,13 @@ import { input, input_wrapper, input_label_wrapper, edit } from "./styles";
 import Tooltip from "~/ui/primitives/tooltip/index.vue";
 import MdiHelpCircle from "~/ui/primitives/icons/mdi-help-circle.vue";
 
-const props = defineProps<{ label: string; help: string }>();
+interface Props {
+  label: string;
+  help: string;
+}
+
+const props = defineProps<Props>();
+const model = defineModel();
 
 const id = useId();
 </script>
@@ -20,7 +26,10 @@ const id = useId();
       </Tooltip>
     </div>
     <div :class="input_wrapper">
-      <input v-bind="{ ...props, id, type: 'text', class: input, }" />
+      <input
+        v-bind="{ ...props, id, type: 'text', class: input }"
+        v-model="model"
+      />
       <label :htmlFor="id" :class="edit" />
     </div>
   </div>

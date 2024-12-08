@@ -1,17 +1,11 @@
 <script setup lang="ts">
 import { filter_area, filter, label } from "./styles";
 
-import { ToolState } from "~/states/index";
-
-import { onUpdated } from "vue";
-
-onUpdated(() => {
-  document.getElementById("filter")?.focus();
-});
+import { tm } from "~/stores/index";
 </script>
 
 <template>
-  <div v-if="ToolState.filter.show" :class="filter_area">
+  <div v-if="tm.filter.show" :class="filter_area">
     <label :class="label" for="filter" />
     <input
       id="filter"
@@ -19,14 +13,12 @@ onUpdated(() => {
       name="filter"
       placeholder="Filter"
       autocomplete="off"
-      v-model="ToolState.filter.value"
+      v-model="tm.filter.value"
       :class="filter"
       @change="
-        /* Delete this (e.target as HTMLTextAreaElement) and make typescript cry. */
-        (e) =>
-          (ToolState.filter.value = (e.target as HTMLTextAreaElement).value)
+        (e) => tm.updateFilterValue((e.target as HTMLTextAreaElement).value)
       "
-      @blur="ToolState.filter.show = false"
+      @blur="tm.showFilter(false)"
     />
   </div>
 </template>

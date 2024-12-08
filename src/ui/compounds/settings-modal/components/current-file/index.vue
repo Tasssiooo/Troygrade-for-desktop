@@ -1,23 +1,40 @@
 <script setup lang="ts">
-import { computed, inject } from "vue";
+import { computed, inject, Ref } from "vue";
 
 import { container, header, info } from "./styles";
 
-import { FileState, ModalState } from "~/states/index";
+import { fm, mm } from "~/stores/index";
 
-const currentEntryId: any = inject("currentEntry");
+const currentIndex =
+  inject<Ref<number | undefined, number | undefined>>("current_index");
+
+const queue = computed(() => {
+  if (mm.settings.method === "single") {
+    if (fm.active) {
+      return [fm.active.id];
+    }
+  } else {
+    return fm.selected;
+  }
+});
 
 const currentEntry = computed(() => {
-  console.log(currentEntryId);
-  return FileState.files.find((file) => file.id === currentEntryId.value)
+  if (
+    currentIndex?.value !== undefined &&
+    queue.value !== undefined &&
+    queue.value[currentIndex.value] !== undefined
+  ) {
+    return fm.all[
+      fm.findEntry(fm.all, queue.value[currentIndex.value], 0, fm.all.length)
+    ];
+  }
 });
 
 const currentPos = computed(() => {
-  if (ModalState.settings.method === "single") {
+  if (mm.settings.method === "single") {
     return "1/1";
-  } else {
-    const cp = FileState.selectedFiles.indexOf(currentEntryId.value) + 1;
-    return `${cp}/${FileState.selectedFiles.length}`;
+  } else if (currentIndex?.value !== undefined) {
+    return `${currentIndex.value + 1}/${fm.selected.length}`;
   }
 });
 </script>

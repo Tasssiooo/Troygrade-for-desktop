@@ -12,7 +12,7 @@ import Tooltip from "~/ui/primitives/tooltip/index.vue";
   <Tooltip content="Add files" side="bottom" :side-offset="-5">
     <ToolbarButton
       :class="button({ visual: 'mask', mask: 'add' })"
-      @click="handleLoadFiles"
+      @click="handleLoadFiles()"
     />
   </Tooltip>
 </template>

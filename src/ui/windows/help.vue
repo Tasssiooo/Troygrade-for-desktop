@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Help from "~/ui/compounds/help/index.vue";
+import HelpSteps from "~/ui/compounds/help-steps/index.vue";
 </script>
 
 <template>
-  <Help />
+  <HelpSteps />
 </template>

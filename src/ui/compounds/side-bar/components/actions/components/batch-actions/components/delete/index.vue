@@ -10,31 +10,12 @@ import { button } from "~/styled-system/recipes";
 
 import { choose_container, choose_wrapper } from "./styles";
 
-import { FileState } from "~/states/index";
+import {fm} from "~/stores/index";
 
 const { updateOpen, open } = defineProps<{
   updateOpen?: (value: boolean) => any;
   open: boolean;
 }>();
-
-function handleDeleteBatch() {
-  let i = 0;
-
-  FileState.files = FileState.files.filter((file) => {
-    if (file.id == FileState.selectedFiles[i].id) {
-      if (FileState.selectedFiles[i].id === FileState.activeFile?.id) {
-        FileState.activeFile = null;
-      }
-
-      ++i;
-
-      return false;
-    }
-    return true;
-  });
-
-  FileState.selectedFiles = [];
-}
 </script>
 
 <template>
@@ -42,16 +23,14 @@ function handleDeleteBatch() {
     <ModalContent>
       <ModalTitle>Are you sure?</ModalTitle>
       <div>
-        <p>
-          You are about to delete {{ FileState.selectedFiles.length }} files.
-        </p>
+        <p>You are about to delete {{ fm.selected.length }} files.</p>
       </div>
       <div :class="choose_container">
         <div :class="choose_wrapper">
           <ModalClose as-child>
             <button
               :class="button({ visual: 'dialog' })"
-              @click="handleDeleteBatch"
+              @click="fm.deleteBatch()"
             >
               Delete
             </button>

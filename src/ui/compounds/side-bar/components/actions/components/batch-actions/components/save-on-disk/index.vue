@@ -6,7 +6,7 @@ import { toast } from "vue-sonner";
 import { open } from "@tauri-apps/plugin-dialog";
 import { BaseDirectory, writeTextFile } from "@tauri-apps/plugin-fs";
 
-import { FileState } from "~/states/index";
+import {fm} from "~/stores/index";
 
 async function handleSaveOnDiskBatch() {
   const outpath = await open({
@@ -15,7 +15,9 @@ async function handleSaveOnDiskBatch() {
   });
 
   if (outpath) {
-    FileState.selectedFiles.forEach(async (file) => {
+    fm.selected.forEach(async (id) => {
+      const file = fm.all[id];
+      
       try {
         await writeTextFile(
           `${outpath}/${file.name}.txt`,
@@ -35,7 +37,7 @@ async function handleSaveOnDiskBatch() {
       }
     });
 
-    FileState.selectedFiles = [];
+    fm.emptySelected();
   }
 }
 </script>
