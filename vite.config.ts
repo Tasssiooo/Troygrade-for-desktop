@@ -36,7 +36,7 @@ export default defineConfig(async () => ({
     alias: {
       "~/assets": path.resolve(__dirname, "./src/assets"),
       "~/lib": path.resolve(__dirname, "./src/lib"),
-      "~/states": path.resolve(__dirname, "./src/states"),
+      "~/stores": path.resolve(__dirname, "./src/stores"),
       "~/types": path.resolve(__dirname, "./src/types"),
       "~/ui": path.resolve(__dirname, "./src/ui"),
       "~/styled-system": path.resolve(__dirname, "./styled-system"),

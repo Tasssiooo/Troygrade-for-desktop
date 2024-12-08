@@ -10,7 +10,7 @@
     "paths": {
       "~/assets/*": ["./src/assets/*"],
       "~/lib/*": ["./src/lib/*"],
-      "~/states/*": ["./src/states/*"],
+      "~/stores/*": ["src/stores/*"],
       "~/types/*": ["./src/types/*"],
       "~/ui/*": ["./src/ui/*"],
       "~/styled-system/*": ["./styled-system/*"]
