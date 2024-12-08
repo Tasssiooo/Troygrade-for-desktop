@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, inject, onMounted, onUnmounted } from "vue";
+import { ref, Ref, inject, onUnmounted } from "vue";
 
 import { container, input_area, checkbox_area, button_area } from "./styles";
 

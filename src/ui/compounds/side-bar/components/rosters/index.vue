@@ -6,8 +6,6 @@ import {
   RosterContent,
 } from "~/ui/primitives/roster";
 
-import { css } from "~/styled-system/css";
-
 import { roster_area, roster_root, roster_item } from "./styles";
 
 import { ref, watch } from "vue";

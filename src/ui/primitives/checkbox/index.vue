@@ -5,7 +5,6 @@ import {
   CheckboxRoot,
   CheckboxIndicator,
   CheckboxRootProps,
-  CheckboxRootEmits,
 } from "radix-vue";
 
 import { wrapper, root, indicator } from "./styles.ts";
