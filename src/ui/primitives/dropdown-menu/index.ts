@@ -1,9 +1,7 @@
 import {
   DropdownMenuGroup,
   DropdownMenuPortal,
-  DropdownMenuRadioGroup,
   DropdownMenuRoot,
-  DropdownMenuSub,
   DropdownMenuTrigger,
 } from "radix-vue";
 
@@ -19,6 +17,4 @@ export {
   DropdownMenuTrigger,
   DropdownMenuGroup,
   DropdownMenuPortal,
-  DropdownMenuSub,
-  DropdownMenuRadioGroup,
 };
