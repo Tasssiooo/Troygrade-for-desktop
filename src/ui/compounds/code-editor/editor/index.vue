@@ -3,7 +3,7 @@ import { watch } from "vue";
 
 import { container } from "./styles";
 
-import { FileState, ToolState } from "~/states/index";
+import {fm, tm } from "~/stores/index";
 
 import CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";
@@ -12,12 +12,12 @@ import "codemirror/mode/toml/toml";
 import "codemirror/mode/python/python";
 
 watch(
-  () => FileState.activeFile,
-  (newFile) => {
-    if (newFile) {
+  () => fm.active,
+  (newActive) => {
+    if (newActive) {
       // Avoid rendering multiple times as it creates multiple instances
-      if (!ToolState.editor) {
-        ToolState.editor = CodeMirror.fromTextArea(
+      if (!tm.editor) {
+        tm.editor = CodeMirror.fromTextArea(
           document.getElementById("editor") as HTMLTextAreaElement,
           {
             lineNumbers: true,
@@ -26,14 +26,14 @@ watch(
         );
       }
 
-      ToolState.editor.setValue(newFile.content as string);
-      ToolState.editor.setOption(
+      tm.editor.setValue(newActive.content as string);
+      tm.editor.setOption(
         "mode",
-        newFile.type === "CONV_TROYBIN" ? "toml" : "python",
+        newActive.type === "CONV_TROYBIN" ? "toml" : "python",
       );
     } else {
-      ToolState.editor?.toTextArea();
-      ToolState.editor = null;
+      tm.editor?.toTextArea();
+      tm.editor = null;
     }
   },
 );

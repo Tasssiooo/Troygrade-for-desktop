@@ -13,18 +13,16 @@ import { choose_container, choose_wrapper, choices } from "./styles";
 
 import { handleConvertFile } from "~/lib/handlers";
 
-import { FileState, ModalState } from "~/states/index";
+import { fm, mm } from "~/stores/index";
 
 import MdiWrenchOutline from "~/ui/primitives/icons/mdi-wrench-outline.vue";
 
 import Tooltip from "~/ui/primitives/tooltip/index.vue";
 
 function handleDefault() {
-  handleConvertFile(FileState.activeFile!);
-}
-
-function handleContinue() {
-  ModalState.settings.open = true
+  if (fm.active) {
+    handleConvertFile(fm.active);
+  }
 }
 </script>
 
@@ -35,7 +33,8 @@ function handleContinue() {
         <button
           :class="button({ visual: 'square' })"
           :style="{
-            pointerEvents: FileState.activeFile?.name ? 'auto' : 'none',
+            pointerEvents:
+              fm.active && fm.active.type === 'CONV_TROYBIN' ? 'auto' : 'none',
           }"
         >
           <MdiWrenchOutline />
@@ -45,7 +44,7 @@ function handleContinue() {
     <ModalContent>
       <ModalTitle>Convert file</ModalTitle>
       <div>
-        <p>You are about to convert "{{ FileState.activeFile?.name }}".</p>
+        <p>You are about to convert "{{ fm.active?.name }}".</p>
         <p>How to proceed?</p>
         <p>Default settings or continue to set up the file yourself.</p>
       </div>
@@ -63,7 +62,7 @@ function handleContinue() {
             <ModalClose as-child>
               <button
                 :class="button({ visual: 'dialog' })"
-                @click="handleContinue"
+                @click="mm.openSettings(true, 'single')"
               >
                 Continue
               </button>

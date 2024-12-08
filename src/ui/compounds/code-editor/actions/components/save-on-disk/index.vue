@@ -6,7 +6,7 @@ import { BaseDirectory, writeTextFile } from "@tauri-apps/plugin-fs";
 
 import { toast } from "vue-sonner";
 
-import { FileState } from "~/states/index";
+import {fm} from "~/stores/index";
 
 import MdiContentSaveOutline from "~/ui/primitives/icons/mdi-content-save-outline.vue";
 
@@ -15,7 +15,7 @@ import Tooltip from "~/ui/primitives/tooltip/index.vue";
 async function handleSaveOnDisk() {
   const outpath = await save({
     title: "Save file as plain text",
-    defaultPath: `${FileState.activeFile?.name}.txt`,
+    defaultPath: `${fm.active?.name}.txt`,
     filters: [
       {
         name: "Text",
@@ -26,7 +26,7 @@ async function handleSaveOnDisk() {
 
   if (outpath) {
     try {
-      await writeTextFile(outpath, FileState.activeFile?.content as string, {
+      await writeTextFile(outpath, fm.active?.content as string, {
         baseDir: BaseDirectory.Home,
       });
 
@@ -58,7 +58,7 @@ async function handleSaveOnDisk() {
   <Tooltip content="Save on disk" side="bottom">
     <button
       :class="button({ visual: 'square' })"
-      :style="{ pointerEvents: FileState.activeFile?.name ? 'auto' : 'none' }"
+      :style="{ pointerEvents: fm.active?.name ? 'auto' : 'none' }"
       @click="handleSaveOnDisk"
     >
       <MdiContentSaveOutline />

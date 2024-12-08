@@ -10,18 +10,11 @@ import {
   ModalClose,
 } from "~/ui/primitives/modal";
 
-import { FileState } from "~/states/index";
+import {fm} from "~/stores/index";
 
 import MdiDeleteOutline from "~/ui/primitives/icons/mdi-delete-outline.vue";
 
 import Tooltip from "~/ui/primitives/tooltip/index.vue";
-
-function handleDelete() {
-  FileState.files = FileState.files.filter(
-    (file) => file.id !== FileState.activeFile?.id,
-  );
-  FileState.activeFile = null;
-}
 </script>
 
 <template>
@@ -31,7 +24,7 @@ function handleDelete() {
         <button
           :class="button({ visual: 'square' })"
           :style="{
-            pointerEvents: FileState.activeFile?.name ? 'auto' : 'none',
+            pointerEvents: fm.active?.name ? 'auto' : 'none',
           }"
         >
           <MdiDeleteOutline />
@@ -41,12 +34,12 @@ function handleDelete() {
     <ModalContent>
       <ModalTitle>Are you sure?</ModalTitle>
       <div>
-        <p>You are about to delete "{{ FileState.activeFile?.name }}".</p>
+        <p>You are about to delete "{{ fm.active?.name }}".</p>
       </div>
       <div :class="choose_container">
         <div :class="choose_wrapper">
           <ModalClose as-child>
-            <button :class="button({ visual: 'dialog' })" @click="handleDelete">
+            <button :class="button({ visual: 'dialog' })" @click="fm.delete()">
               Delete
             </button>
           </ModalClose>
