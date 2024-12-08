@@ -64,4 +64,5 @@ jobs:
           releaseName: "Troygrade for desktop v__VERSION__"
           releaseDraft: true
           prerelease: false
+          includeUpdaterJson: true
           args: ${{ matrix.args }}
