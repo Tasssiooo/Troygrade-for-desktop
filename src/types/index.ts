@@ -7,8 +7,10 @@ type FileType =
   | "TROYBIN"
   | "UNKNOWN_FILE_TYPE";
 
+type Method = "single" | "batch";
+
 interface Entry {
-  id: string;
+  id: number;
   name: string;
   content: ArrayBuffer | Uint8Array | string;
   type: FileType;
@@ -17,31 +19,49 @@ interface Settings {
   assetsPath: string;
   filePath: string;
   namesOnly: boolean;
-  settingsPreset: string;
   updateFileTypes: boolean;
 }
 
-//State interfaces
-interface Files {
-  files: Entry[];
-  activeFile: Entry | null;
-  selectedFiles: Entry[];
+interface FileStore {
+  all: Entry[];
+  active: Entry | null;
+  selected: number[];
+  deleteBatch: () => void;
+  delete: () => void;
+  emptySelected: () => void;
+  findEntry: (
+    data: Entry[],
+    target: number,
+    low: number,
+    high: number,
+  ) => number;
+  saveChanges: () => void;
+  toggleSelectAll: () => void;
+  toggleSelect: (id: number) => void;
+  updateActive: (id: number) => void;
 }
 
-interface Tools {
+interface ToolStore {
   editor: EditorFromTextArea | null;
   filter: {
     show: boolean;
     value: string;
   };
+  updateFilterValue: (value: string) => void;
+  showFilter: (show: boolean) => void;
 }
 
-interface Modals {
+interface ModalStore {
   settings: {
     open: boolean;
-    method: "single" | "batch";
+    method: Method;
   };
-  delete: boolean;
+  delete: {
+    open: boolean;
+    method: Method;
+  };
+  openDelete: (open: boolean, method?: Method) => void;
+  openSettings: (open: boolean, method?: Method) => void;
 }
 
-export type { FileType, Entry, Settings, Files, Tools, Modals };
+export type { FileType, Entry, Settings, FileStore, ToolStore, ModalStore };
