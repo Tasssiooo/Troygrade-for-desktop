@@ -81,12 +81,4 @@ const x_icon = css({
   },
 });
 
-export {
-  overlay,
-  content,
-  body,
-  close,
-  close_border,
-  inner_bg,
-  x_icon,
-};
+export { overlay, content, body, close, close_border, inner_bg, x_icon };

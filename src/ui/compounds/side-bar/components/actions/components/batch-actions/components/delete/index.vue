@@ -10,7 +10,7 @@ import { button } from "~/styled-system/recipes";
 
 import { choose_container, choose_wrapper } from "./styles";
 
-import {fm} from "~/stores/index";
+import { fm } from "~/stores/index";
 
 const { updateOpen, open } = defineProps<{
   updateOpen?: (value: boolean) => any;

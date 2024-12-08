@@ -3,8 +3,8 @@ import { css } from "~/styled-system/css";
 const wrapper = css({
   display: "flex",
   flexDir: "row",
+  justifyContent: "center",
   alignItems: "center",
-  justifyContent: "center"
 });
 
 const root = css({

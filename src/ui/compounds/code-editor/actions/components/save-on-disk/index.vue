@@ -6,7 +6,7 @@ import { BaseDirectory, writeTextFile } from "@tauri-apps/plugin-fs";
 
 import { toast } from "vue-sonner";
 
-import {fm} from "~/stores/index";
+import { fm } from "~/stores/index";
 
 import MdiContentSaveOutline from "~/ui/primitives/icons/mdi-content-save-outline.vue";
 

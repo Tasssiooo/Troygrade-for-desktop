@@ -3,7 +3,7 @@ import { watch } from "vue";
 
 import { container } from "./styles";
 
-import {fm, tm } from "~/stores/index";
+import { fm, tm } from "~/stores/index";
 
 import CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";

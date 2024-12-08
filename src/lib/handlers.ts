@@ -6,7 +6,7 @@ import { basename, extname } from "@tauri-apps/api/path";
 
 import { toast } from "vue-sonner";
 
-import {fm} from "~/stores/index";
+import { fm } from "~/stores/index";
 
 import TroybinConverter from "./TroybinConverter/Main";
 import MigrateConvertedTroybin from "./TroybinMigrationTool/Main";

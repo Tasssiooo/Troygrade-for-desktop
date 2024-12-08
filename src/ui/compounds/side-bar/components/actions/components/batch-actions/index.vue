@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
 } from "~/ui/primitives/dropdown-menu";
 
-import {fm} from "~/stores/index";
+import { fm } from "~/stores/index";
 
 import Fix from "./components/fix/index.vue";
 import SaveOnDisk from "./components/save-on-disk/index.vue";

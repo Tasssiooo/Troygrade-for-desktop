@@ -24,9 +24,9 @@ const buttons_container = css({
   display: "flex",
   flexDir: "row",
   justifyContent: "end",
-  spaceX: "5",
   alignItems: "center",
   w: "40%",
+  spaceX: "5",
 });
 
 export { container, filename, buttons_container };

@@ -5,7 +5,7 @@ import { toggle } from "~/styled-system/recipes/index";
 
 import { group, item } from "./styles.ts";
 
-import {fm} from "~/stores/index";
+import { fm } from "~/stores/index";
 </script>
 
 <template>

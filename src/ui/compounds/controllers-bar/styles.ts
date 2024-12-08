@@ -2,10 +2,10 @@ import { css } from "~/styled-system/css";
 
 const drag_area = css({
   display: "flex",
+  zIndex: "99",
   pos: "absolute",
   top: "0",
   left: "0",
-  zIndex: "99",
   flexDir: "row",
   justifyContent: "end",
   w: "full",
@@ -14,9 +14,9 @@ const drag_area = css({
 
 const controllers_wrapper = css({
   display: "flex",
+  zIndex: "0",
   pos: "relative",
   top: "1",
-  zIndex: "0",
   px: "2.5",
 });
 

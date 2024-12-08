@@ -10,7 +10,7 @@ import {
   ModalClose,
 } from "~/ui/primitives/modal";
 
-import {fm} from "~/stores/index";
+import { fm } from "~/stores/index";
 
 import MdiDeleteOutline from "~/ui/primitives/icons/mdi-delete-outline.vue";
 

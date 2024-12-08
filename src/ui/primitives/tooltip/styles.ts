@@ -3,8 +3,8 @@ import { css } from "~/styled-system/css";
 const content = css({
   zIndex: "999",
   border: "1px solid transparent",
-  p: "1.5",
   maxW: "380px",
+  p: "1.5",
   textAlign: "center",
   fontSize: "sm",
   bg: "#1a1c21",

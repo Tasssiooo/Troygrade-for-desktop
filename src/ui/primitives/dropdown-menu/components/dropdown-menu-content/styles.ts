@@ -1,8 +1,8 @@
 import { css } from "~/styled-system/css";
 
 const content = css({
-  pos: "absolute",
   zIndex: "90",
+  pos: "absolute",
   top: "110px",
   left: "125px",
   border: "1px solid transparent",

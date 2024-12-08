@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { button } from "~/styled-system/recipes";
 
-import {fm} from "~/stores/index";
+import { fm } from "~/stores/index";
 
 import MdiFileDocumentCheckOutline from "~/ui/primitives/icons/mdi-file-document-check-outline.vue";
 import Tooltip from "~/ui/primitives/tooltip/index.vue";
