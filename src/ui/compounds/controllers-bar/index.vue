@@ -7,6 +7,7 @@ import {
   getCurrentWebviewWindow,
   WebviewWindow,
 } from "@tauri-apps/api/webviewWindow";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 
 async function help() {
   new WebviewWindow("help", {
@@ -24,7 +25,7 @@ async function hide() {
 }
 
 async function close() {
-  await getCurrentWebviewWindow().close();
+  await getCurrentWindow().close();
 }
 </script>
 
