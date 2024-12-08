@@ -20,7 +20,6 @@
     "@tauri-apps/plugin-updater": "^2.0.0",
     "codemirror": "^5.65.18",
     "radix-vue": "^1.9.8",
-    "uuid": "^11.0.3",
     "vue": "^3.3.4",
     "vue-router": "^4.4.5",
     "vue-sonner": "^1.2.5"
