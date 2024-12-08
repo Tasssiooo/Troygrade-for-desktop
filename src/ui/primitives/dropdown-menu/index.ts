@@ -1,5 +1,4 @@
 import {
-  DropdownMenuGroup,
   DropdownMenuPortal,
   DropdownMenuRoot,
   DropdownMenuTrigger,
@@ -15,6 +14,5 @@ export {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuGroup,
   DropdownMenuPortal,
 };
