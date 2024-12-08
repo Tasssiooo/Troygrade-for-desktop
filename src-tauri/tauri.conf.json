@@ -43,7 +43,7 @@
   },
   "plugins": {
     "updater": {
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IENBQkMzRTlEQTE4NkI0NTQKUldSVXRJYWhuVDY4eXRsOXl4QlBLN3ZpTVNKN2JwRmgzYkZ0ZjN4VzZqZks1V1QrVVVFZFFzVWgK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDdCNUQ5MkM2N0RCMkY0QzAKUldUQTlMSjl4cEpkZTFGVFpMc0JZOUp2ZFRuQ3VUVUxxOEo5VXhKN0xKUEV0WXpwZldodTVMbWwK",
       "endpoints": [
         "https://gist.githubusercontent.com/Tasssiooo/48f6c4af1a2d4add2e7b176a4e3e6634/raw"
       ]
