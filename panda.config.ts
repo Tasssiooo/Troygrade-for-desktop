@@ -27,6 +27,10 @@ export default defineConfig({
       userSelect: "none",
       cursor: "default",
     },
+    "*:focus": {
+      outline: "none",
+      shadow: "none",
+    },
     html: {
       color: "hsla(0, 0%, 100%, 0.87)",
       fontFamily: "beaufortforlolja",
@@ -62,8 +66,8 @@ export default defineConfig({
       h: "410px!",
     },
     "*::-webkit-scrollbar": {
-      w: "1.5",
-      h: "1.5",
+      w: "0.25rem",
+      h: "0.25rem",
     },
     "*::-webkit-scrollbar-track": {
       bg: "transparent",
