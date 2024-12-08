@@ -61,8 +61,6 @@ jobs:
           # tauri-action replaces \_\_VERSION\_\_ with the app version
           tagName: v__VERSION__
           releaseName: "Troygrade for desktop v__VERSION__"
-          releaseBody: |
-            test.
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
