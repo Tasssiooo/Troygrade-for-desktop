@@ -4,11 +4,9 @@ import { open } from "@tauri-apps/plugin-dialog";
 import { readFile, BaseDirectory } from "@tauri-apps/plugin-fs";
 import { basename, extname } from "@tauri-apps/api/path";
 
-import { v4 as uuid } from "uuid";
-
 import { toast } from "vue-sonner";
 
-import { FileState } from "~/states/index";
+import fm from "~/stores/file";
 
 import TroybinConverter from "./TroybinConverter/Main";
 import MigrateConvertedTroybin from "./TroybinMigrationTool/Main";
@@ -19,13 +17,10 @@ function handleConvertFile(
     assetsPath: "ASSETS/Characters/[character name]/Skins/[skin]/Particles",
     filePath: "Characters/[character name]/Skins/[skin number]/Particles",
     namesOnly: false,
-    settingsPreset: "Default",
     updateFileTypes: true,
   },
 ) {
   if (entry.type === "CONV_TROYBIN") {
-    entry.name = entry.name.replace("_Converted", "");
-
     try {
       const convertedContent = MigrateConvertedTroybin(
         settings.assetsPath,
@@ -36,15 +31,12 @@ function handleConvertFile(
       );
 
       if (convertedContent !== null) {
-        FileState.files = [
-          ...FileState.files,
-          {
-            id: uuid(),
-            name: `${entry.name}_Migrated`,
-            content: convertedContent,
-            type: "MIG_BIN",
-          },
-        ];
+        fm.all.push({
+          id: fm.all.length,
+          name: entry.name.replace("_Converted", "_Migrated"),
+          content: convertedContent,
+          type: "MIG_BIN",
+        });
       }
     } catch (err: any) {
       toast.error(`Error: ${entry.name}`, {
@@ -56,15 +48,12 @@ function handleConvertFile(
       const convertedContent = TroybinConverter(entry.content);
 
       if (convertedContent !== null) {
-        FileState.files = [
-          ...FileState.files,
-          {
-            id: uuid(),
-            name: `${entry.name}_Converted`,
-            content: convertedContent,
-            type: "CONV_TROYBIN",
-          },
-        ];
+        fm.all.push({
+          id: fm.all.length,
+          name: `${entry.name}_Converted`,
+          content: convertedContent,
+          type: "CONV_TROYBIN",
+        });
       }
     } catch (err: any) {
       toast.error(`Error: ${entry.name}`, {
@@ -131,7 +120,7 @@ async function handleLoadFiles() {
 
       if (type !== "UNKNOWN_FILE_TYPE") {
         handleConvertFile({
-          id: uuid(),
+          id: 0,
           name,
           content,
           type,
