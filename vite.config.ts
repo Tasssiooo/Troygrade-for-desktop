@@ -4,9 +4,6 @@ import path from "path";
 
 const host = process.env.TAURI_DEV_HOST;
 
-const isExternal = (id: string) =>
-  !id.startsWith(".") && !path.isAbsolute(id) && !id.startsWith("~/");
-
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
   plugins: [vue()],
@@ -40,11 +37,6 @@ export default defineConfig(async () => ({
       "~/types": path.resolve(__dirname, "./src/types"),
       "~/ui": path.resolve(__dirname, "./src/ui"),
       "~/styled-system": path.resolve(__dirname, "./styled-system"),
-    },
-  },
-  build: {
-    rollupOptions: {
-      external: isExternal,
     },
   },
 }));
